@@ -38,7 +38,7 @@ export default HomePage
 
 ### Dynamic Configuration in React
 
-If you want to use dynamic configuration, use the `SmartCTA` component, which will pull config from `cdn.helpusersvote.com`:
+To dynamically configure CTAs, use the `SmartCTA` component which pulls config from `cdn.helpusersvote.com`:
 
 ```javascript
 import { SmartCTA } from '@helpusersvote/react'
