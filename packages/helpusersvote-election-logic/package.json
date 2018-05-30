@@ -1,0 +1,17 @@
+{
+  "name": "@helpusersvote/election-logic",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "ava test"
+  },
+  "author": "Fouad Matin <m@fouad.org>",
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.6.4"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
+  }
+}

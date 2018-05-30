@@ -1,0 +1,25 @@
+{
+  "name": "@helpusersvote/react",
+  "license": "MIT",
+  "version": "0.0.1-alpha-13QrQ5tWb",
+  "dependencies": {
+    "@babel/core": "7.0.0-beta.44",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "@babel/runtime": "7.0.0-beta.44",
+    "emotion": "^9.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "main": "./lib/index.js",
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}

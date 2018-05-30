@@ -1,0 +1,14 @@
+{
+  "name": "@helpusersvote/election-copy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "ava test"
+  },
+  "author": "Fouad Matin <m@fouad.org>",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.25.0"
+  }
+}
