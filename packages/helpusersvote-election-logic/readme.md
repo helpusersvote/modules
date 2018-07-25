@@ -17,8 +17,15 @@ In your app, import functions from the `@helpusersvote/election-logic` module:
 ```javascript
 import { shouldShowCTA } from '@helpusersvote/election-logic'
 
+// Optional `regions` configuration, defaults to USA
+const regions = [
+  'city:San Francisco',
+  'state:California',
+  'country:USA'
+]
+
 // wherever you want to render the call-to-action
-if (shouldShowCTA()) {
+if (shouldShowCTA({ regions })) {
   // render a custom banner or use `@helpuservote/election-copy`
 }
 ```

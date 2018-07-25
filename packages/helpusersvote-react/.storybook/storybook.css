@@ -1,0 +1,7 @@
+.Pane textarea {
+  background: none;
+  border: 1px solid;
+  padding: 4px 8px;
+  line-height: 20px;
+  box-sizing: border-box;
+}
