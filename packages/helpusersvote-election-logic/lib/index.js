@@ -1,7 +1,8 @@
 const shouldShowCTA = require('./checks/should-show-cta')
-const { getState } = require('./data')
+const { getStates, getState } = require('./data')
 
 module.exports = {
   shouldShowCTA,
+  getStates,
   getState
 }

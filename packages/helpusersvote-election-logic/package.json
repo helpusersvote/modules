@@ -1,12 +1,12 @@
 {
   "name": "@helpusersvote/election-logic",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.2.2",
+  "description": "Simple APIs to help your users vote",
   "main": "lib/index.js",
   "scripts": {
     "test": "ava test"
   },
-  "author": "Fouad Matin <m@fouad.org>",
+  "author": "Help Users Vote <open@helpusersvote.com>",
   "license": "MIT",
   "dependencies": {
     "dayjs": "^1.6.4"

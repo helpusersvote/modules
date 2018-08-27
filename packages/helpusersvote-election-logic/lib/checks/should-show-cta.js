@@ -4,11 +4,10 @@ const { elections } = require('../utils/dates')
 
 function shouldShowCTA(input) {
   try {
-    const config = {
+    const config = Object.assign({
       date: new Date(),
-      regions: ['country:USA'],
-      ...(input || {})
-    }
+      regions: ['country:USA']
+    }, input || {})
     const currentDate = Day(config.date)
 
     const matchedElections = elections.filter(election => {
