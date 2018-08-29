@@ -1,0 +1,15 @@
+{
+  "name": "@helpusersvote/modules",
+  "private": true,
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "lerna": "^3.2.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "version": "lerna version",
+    "patch": "lerna version patch",
+    "minor": "lerna version minor",
+    "test": "lerna run test"
+  }
+}

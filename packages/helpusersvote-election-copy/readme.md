@@ -26,7 +26,7 @@ const {
   ctaText,
   // https://vote.org
   ctaHref
-} = getElectionText({ type: 'countdown', daysLeft: 3 })
+} = getElectionText({ type: 'countdown' })
 
 // Or get the static text directly with `electionCopy`
 

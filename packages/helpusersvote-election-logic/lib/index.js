@@ -1,8 +1,8 @@
-const shouldShowCTA = require('./checks/should-show-cta')
-const { getCountdown } = require('./utils/countdowns')
 const { getStates, getState } = require('./data')
+const { hasRegPassed, shouldShowCTA, getCountdown } = require('./logic')
 
 module.exports = {
+  hasRegPassed,
   shouldShowCTA,
   getCountdown,
   getStates,

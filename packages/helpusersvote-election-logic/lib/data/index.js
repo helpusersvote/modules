@@ -1,11 +1,13 @@
 const stateDeadlines = require('./state-deadlines')
 const stateInfo = require('./state-info')
 const states = require('./states')
+const { keyDates } = require('./dates')
 
 const combineState = (state, deadlines, info) =>
   Object.assign({}, state, deadlines, info)
 
 module.exports = {
+  keyDates,
   stateDeadlines,
   stateInfo,
   states,

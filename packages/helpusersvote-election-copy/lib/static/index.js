@@ -13,9 +13,9 @@ const text = {
 
 const html = {}
 
-html.registration = `<div className="huv--container">
-  <span>${text.registration.title}</span>
-  <a href="${links.registration.default}">${text.registration.title}</a>
+html.registration = ({ text, links }) => `<div className="huv--container">
+  <span>${text.title}</span>
+  <a href="${links.cta}">${text.cta}</a>
 </div>`
 
 module.exports = {

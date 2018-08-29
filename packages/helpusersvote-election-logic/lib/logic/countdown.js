@@ -1,3 +1,5 @@
+const { getState } = require('../data')
+
 module.exports = {
   getCountdown,
   getMsBetweenDates
@@ -10,8 +12,31 @@ const dstCheck = d =>
   // 2018-11-04 02:00
   !(d.getMonth() >= 10 && d.getDate() >= 4 && d.getHours() >= 2)
 
+const emptyCountdown = {
+  days: 0,
+  hours: 0,
+  remainder: 0,
+  error: true
+}
+
 function getCountdown(input) {
-  const { start, end, format } = input
+  let { start, end, state, format } = input
+
+  if (!start) {
+    start = new Date()
+  }
+
+  // If no end date is set, lookup by state
+  if (!end && state) {
+    const foundState = getState(state)
+
+    if (!foundState) {
+      return emptyCountdown
+    }
+
+    end = foundState.reg_deadline
+  }
+
   const diff = getDayDiff(start, end)
 
   return getCountdownOutput(format, diff)

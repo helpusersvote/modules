@@ -53,3 +53,12 @@ test(`check NVRD to Ohio Registration Deadline`, t => {
   t.is(days, 14, 'days should be 14')
   t.is(hours, 15, 'hours should be 15')
 })
+
+test(`check NVRD to Ohio Registration Deadline`, t => {
+  const d = '09/25/2018 08:00'
+
+  const { days, hours } = getCountdown({ start: d, state: 'OH' })
+
+  t.is(days, 14, 'days should be 14')
+  t.is(hours, 15, 'hours should be 15')
+})

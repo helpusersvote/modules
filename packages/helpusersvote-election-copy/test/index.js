@@ -3,8 +3,8 @@ const test = require('ava')
 const { getElectionText } = require('..')
 
 test(`getElectionText: default registration text`, t => {
-  const { titleText, ctaText } = getElectionText()
+  const { title, cta } = getElectionText()
 
-  t.is(titleText, 'Get ready to vote in 2018!')
-  t.is(ctaText, `Check if you're registered today`)
+  t.is(title, 'Get ready to vote in 2018!')
+  t.is(cta, `Check if you're registered today`)
 })
