@@ -20,7 +20,10 @@ function getElectionText(input) {
     // use default registration text
   }
 
-  return { title, cta }
+  // Generate https://go.helpusersvote.com URL
+  const ctaHref = 'https://vote.org'
+
+  return { titleText: title, ctaText: cta, ctaHref }
 }
 
 function getElectionHTML() {

@@ -73,19 +73,18 @@ const { getElectionText } = require('@helpusersvote/election-copy')
 
 module.exports = function getHome(req, res) {
   const { titleText, ctaText, ctaHref } = getElectionText({
-    type: 'countdown',
-    daysLeft: 3
+    type: 'countdown'
   })
 
   return res.render('index', {
-    electionCTA: {
+    electionCTA: shouldShowCTA() ? {
       // Election day is in 3 days!
       titleText,
       // Get ready to vote
       ctaText,
       // https://vote.org
       ctaHref
-    }
+    } : {}
   }) 
 }
 ```
