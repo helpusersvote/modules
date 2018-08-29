@@ -1,6 +1,6 @@
 {
   "name": "@helpusersvote/election-logic",
-  "version": "0.3.1",
+  "version": "0.2.3",
   "description": "Simple APIs to help your users vote",
   "main": "lib/index.js",
   "scripts": {
