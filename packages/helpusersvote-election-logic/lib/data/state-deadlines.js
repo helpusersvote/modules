@@ -148,7 +148,7 @@ module.exports = {
     no_reg_req: 'checked'
   },
   OH: {
-    reg_deadline: '10/9/2018 12:00am',
+    reg_deadline: '10/9/2018 23:59',
     no_reg_req: ''
   },
   OK: {
