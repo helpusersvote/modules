@@ -1,4 +1,6 @@
-# Help Users Vote Modules
+<h1>
+  Help Users Vote Modules <a href="https://travis-ci.org/helpusersvote/modules"><img src="https://travis-ci.org/helpusersvote/modules.svg?branch=master" /></a>
+</h1>
 
 [Help Users Vote](https://helpusersvote.com) makes it easy for companies to help their users vote.
 
@@ -6,7 +8,7 @@ This is our monorepo of [npm](https://npmjs.com) modules to use in your applicat
 
 **Framework-specific Components**
 
-- [@helpusersvote/react](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-react) [Storybook](https://storybook.helpusersvote.com)
+- [@helpusersvote/react](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-react) with [Storybook →](https://storybook.helpusersvote.com)
 
 **Native JavaScript Functions**
 
