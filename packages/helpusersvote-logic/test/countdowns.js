@@ -2,6 +2,18 @@ const test = require('ava')
 
 const { getCountdown, getState } = require('..')
 
+test(`check empty object`, t => {
+  getCountdown({})
+
+  t.pass()
+})
+
+test(`check string input`, t => {
+  getCountdown('CA')
+
+  t.pass()
+})
+
 test(`check same date`, t => {
   const d = '1/1/2018'
   const { days, hours } = getCountdown({ start: d, end: d })

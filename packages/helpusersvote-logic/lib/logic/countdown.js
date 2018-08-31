@@ -20,21 +20,34 @@ const emptyCountdown = {
 }
 
 function getCountdown(input) {
+  if (typeof input !== 'object') {
+    // if input is a string, assume it's a state
+    if (typeof input === 'string') {
+      input = { state: input }
+    }
+  }
+
   let { start, end, state } = input
 
   if (!start) {
     start = new Date()
   }
 
-  // If no end date is set, lookup by state
-  if (!end && state) {
-    const foundState = getState(state)
+  // If no end date is set
+  if (!end) {
+    // lookup by state
+    if (state) {
+      const foundState = getState(state)
 
-    if (!foundState) {
-      return emptyCountdown
+      if (!foundState) {
+        return emptyCountdown
+      }
+
+      end = foundState.reg_deadline
+    } else {
+      // otherwise, assume election day
+      end = '11/06/2018'
     }
-
-    end = foundState.reg_deadline
   }
 
   const diff = getDayDiff(start, end)
