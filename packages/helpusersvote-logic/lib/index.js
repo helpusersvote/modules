@@ -1,8 +1,8 @@
 const { getStates, getState } = require('./data')
-const { hasRegPassed, shouldShowCTA, getCountdown } = require('./logic')
+const { hasDeadlinePassed, shouldShowCTA, getCountdown } = require('./logic')
 
 module.exports = {
-  hasRegPassed,
+  hasDeadlinePassed,
   shouldShowCTA,
   getCountdown,
   getStates,

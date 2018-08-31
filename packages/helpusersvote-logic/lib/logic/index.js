@@ -1,8 +1,8 @@
-const { hasRegPassed, shouldShowCTA } = require('./call-to-action')
+const { hasDeadlinePassed, shouldShowCTA } = require('./call-to-action')
 const { getCountdown } = require('./countdown')
 
 module.exports = {
-  hasRegPassed,
+  hasDeadlinePassed,
   shouldShowCTA,
   getCountdown
 }

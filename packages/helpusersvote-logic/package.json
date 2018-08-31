@@ -1,6 +1,6 @@
 {
   "name": "@helpusersvote/logic",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple JavaScript APIs to help your users vote",
   "main": "lib/index.js",
   "scripts": {
