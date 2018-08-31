@@ -12,8 +12,8 @@ This is our monorepo of [npm](https://npmjs.com) modules to use in your applicat
 
 **Native JavaScript Functions**
 
-- [@helpusersvote/election-logic](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-election-logic)
-- [@helpusersvote/election-copy](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-election-copy)
+- [@helpusersvote/logic](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-logic)
+- [@helpusersvote/copy](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-copy)
 
 ## Usage
 
@@ -64,14 +64,14 @@ We don't set any cookies on these requests — this is a configuration CDN to ch
 If you just want to check if there should be a call-to-action and place nonpartisan copy with an existing component, install our JavaScript libraries:
 
 ```bash
-npm install --save @helpusersvote/election-logic @helpusersvote/election-copy
+npm install --save @helpusersvote/logic @helpusersvote/copy
 ```
 
 Then in your application (client-side or server-side):
 
 ```javascript
-const { shouldShowCTA } = require('@helpusersvote/election-logic')
-const { getElectionText } = require('@helpusersvote/election-copy')
+const { shouldShowCTA } = require('@helpusersvote/logic')
+const { getElectionText } = require('@helpusersvote/copy')
 
 module.exports = function getHome(req, res) {
   const { titleText, ctaText, ctaHref } = getElectionText({

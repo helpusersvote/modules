@@ -1,4 +1,4 @@
-# @helpusersvote/election-logic
+# @helpusersvote/logic
 
 JavaScript functions to check if a call-to-action should be rendered
 
@@ -7,15 +7,15 @@ JavaScript functions to check if a call-to-action should be rendered
 First, add the module to your codebase:
 
 ```bash
-npm install --save @helpusersvote/election-logic
+npm install --save @helpusersvote/logic
 ```
 
 ## Usage
 
-In your app, import functions from the `@helpusersvote/election-logic` module:
+In your app, import functions from the `@helpusersvote/logic` module:
 
 ```javascript
-import { shouldShowCTA } from '@helpusersvote/election-logic'
+import { shouldShowCTA } from '@helpusersvote/logic'
 
 // Optional `regions` configuration, defaults to USA
 const regions = [
@@ -26,7 +26,7 @@ const regions = [
 
 // wherever you want to render the call-to-action
 if (shouldShowCTA({ regions })) {
-  // render a custom banner or use `@helpuservote/election-copy`
+  // render a custom banner or use `@helpuservote/copy`
 }
 ```
 

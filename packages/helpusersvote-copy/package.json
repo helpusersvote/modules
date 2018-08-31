@@ -1,0 +1,14 @@
+{
+  "name": "@helpusersvote/copy",
+  "version": "1.0.1",
+  "description": "JavaScript functions to render election-related CTAs",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "ava test"
+  },
+  "author": "UserMirror <open@usermirror.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.25.0"
+  }
+}

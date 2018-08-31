@@ -1,4 +1,4 @@
-# @helpusersvote/election-copy
+# @helpusersvote/copy
 
 JavaScript functions to render election-related CTAs
 
@@ -7,15 +7,15 @@ JavaScript functions to render election-related CTAs
 First, add the module to your codebase:
 
 ```bash
-npm install --save @helpusersvote/election-copy
+npm install --save @helpusersvote/copy
 ```
 
 ## Usage
 
-In your app, import functions and text from the `@helpusersvote/election-copy` module:
+In your app, import functions and text from the `@helpusersvote/copy` module:
 
 ```javascript
-import { getElectionText, electionCopy } from '@helpusersvote/election-copy'
+import { getElectionText, electionCopy } from '@helpusersvote/copy'
 
 // Pass in optional configuration to `getElectionText()`
 

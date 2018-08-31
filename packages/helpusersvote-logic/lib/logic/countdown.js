@@ -20,7 +20,7 @@ const emptyCountdown = {
 }
 
 function getCountdown(input) {
-  let { start, end, state, format } = input
+  let { start, end, state } = input
 
   if (!start) {
     start = new Date()
@@ -39,7 +39,7 @@ function getCountdown(input) {
 
   const diff = getDayDiff(start, end)
 
-  return getCountdownOutput(format, diff)
+  return diff
 }
 
 function getDayDiff(start, end) {
@@ -55,16 +55,6 @@ function getDayDiff(start, end) {
     days,
     hours: hours > 0 ? hours : 0,
     remainder
-  }
-}
-
-function getCountdownOutput(format, diff) {
-  if (format === 'hours') {
-    return diff.days * 24 + diff.hours
-  } else if (format === 'string') {
-    return [diff.days, diff.remainder].join('.')
-  } else {
-    return diff
   }
 }
 
