@@ -1,6 +1,8 @@
 {
   "name": "@helpusersvote/copy",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "repository": "helpusersvote/modules",
+  "homepage": "https://helpusersvote.com/docs/api?library=javascript",
   "description": "JavaScript functions to render election-related CTAs",
   "main": "lib/index.js",
   "scripts": {

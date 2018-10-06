@@ -5,6 +5,7 @@ import Logo from './common/logo'
 
 export function Banner({
   didError,
+  font,
   color,
   titleText,
   ctaHref,
@@ -20,81 +21,76 @@ export function Banner({
 
   return (
     <div>
-      <div className="banner">
-        <div className="container">
-          <div className="line">
-            <Logo className="logo" /> {titleText}
+      <div className="huv-banner">
+        <div className="huv-container">
+          <div className="huv-line huv-line1">
+            <Logo className="huv-logo" /> {titleText}
           </div>
-          <div className="line">
-            <a href={ctaHref} target="_blank">
+          <div className="huv-line huv-line2">
+            <a className="huv-link" href={ctaHref} target="_blank">
               {ctaText} &rarr;
             </a>
           </div>
         </div>
       </div>
       <style>{`
-        body, html {
-          margin: 0;
-          font-family: SF UI Display, -apple-system, BlinkMacSystemFont,
-            Segoe UI, Roboto, Helvetica, Arial, sans-serif,
-            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-        }
-        .banner {
+        .huv-banner {
           width: 100%;
           height: ${height}px;
           background: ${background};
+          font-family: ${font};
           border-bottom: 1px solid ${borderColor};
           color: #092744;
           box-sizing: border-box;
         }
-        .container {
+        .huv-container {
           display: flex;
           width: 80%;
           max-width: 800px;
           margin: 0 auto;
           justify-content: space-between;
         }
-        .line {
+        .huv-line {
           display: flex;
           height: ${height}px;
           align-items: center;
           color: ${color};
         }
-        .logo {
+        .huv-logo {
           width: 16px;
           height: 16px;
           margin-right: 4px;
         }
-        a {
+        a.huv-link {
           color: ${ctaColor};
           text-decoration: none;
           outline: none;
         }
-        a:hover,
-        a:focus {
+        a.huv-link:hover,
+        a.huv-link:focus {
           opacity: 0.6;
         }
         @media (max-width: 720px) {
-          .container {
+          .huv-container {
             width: 90%;
           }
-          .banner {
+          .huv-banner {
             font-size: 13px;
           }
         }
         @media (max-width: 460px) {
-          .logo {
+          .huv-logo {
             height: 11px;
           }
-          .banner {
+          .huv-banner {
             font-size: 12px;
           }
         }
         @media (max-width: 410px) {
-          .logo {
+          .huv-logo {
             height: 11px;
           }
-          .banner {
+          .huv-banner {
             font-size: 9px;
           }
         }
@@ -103,6 +99,8 @@ export function Banner({
   )
 }
 
+const defaultFont = `SF UI Display, -apple-system, BlinkMacSystemFont,Segoe UI, Roboto, Helvetica, Arial, sans-serif,Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol`
+
 Banner.defaultProps = {
   didError: false,
   titleText: 'Get ready to vote in 2018!',
@@ -110,6 +108,7 @@ Banner.defaultProps = {
   ctaText: "Check if you're registered today",
   ctaColor: colors.blue['400'],
   height: 40,
+  font: defaultFont,
   background: colors.neutral['10'],
   borderColor: colors.neutral['20'],
   color: colors.neutral['800']

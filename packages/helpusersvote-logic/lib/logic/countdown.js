@@ -24,6 +24,8 @@ function getCountdown(input) {
     // if input is a string, assume it's a state
     if (typeof input === 'string') {
       input = { state: input }
+    } else if (!input) {
+      input = {}
     }
   }
 
@@ -62,7 +64,7 @@ function getDayDiff(start, end) {
   const totalDays = diff / (MS * HOUR * 24)
   const days = Math.floor(totalDays)
   const hours = Math.floor((diffInHours - days * 24) % 24) - (spansDST ? 2 : 0)
-  const remainder = Math.floor((diff - days) * 10000000)
+  const remainder = Math.floor((totalDays - Math.floor(totalDays)) * 10000000)
 
   return {
     days,

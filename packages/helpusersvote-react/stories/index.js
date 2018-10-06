@@ -4,6 +4,8 @@ import { withKnobsOptions, text, number, boolean } from '@storybook/addon-knobs'
 import { withNotes } from '@storybook/addon-notes'
 import Banner from '../src/components/banner'
 import Modal from '../src/components/modal'
+import Countdown from '../src/components/countdown'
+import ShouldShowCTA from '../src/components/should-show-cta'
 
 const withKnobs = withKnobsOptions({ escapeHTML: false })
 
@@ -12,7 +14,7 @@ const knobForType = prop => {
     case 'number':
       return number
     case 'boolean':
-      return () => {}
+      return boolean
     case 'string':
     default:
       return text
@@ -104,5 +106,61 @@ storiesOf('Modal', module)
           logoUrl: `https://logo.clearbit.com/${domain}`
         }}
       />
+    )
+  })
+
+storiesOf('Countdown', module)
+  .addDecorator(withKnobs)
+  .addDecorator(withNotes)
+  .add('Default Countdown', () => (
+    <div style={{ padding: 16 }}>
+      There are <Countdown /> left to election day!
+    </div>
+  ))
+  .add('Running Countdown', () => (
+    <div style={{ padding: 16 }}>
+      <h2 style={{ margin: 0 }}>
+        <Countdown format="running" />
+      </h2>{' '}
+      <h4 style={{ margin: 0, color: 'gray' }}>days left</h4>
+    </div>
+  ))
+
+storiesOf('Should Show CTA', module)
+  .addDecorator(withKnobs)
+  .addDecorator(withNotes)
+  .add('Simple', () => {
+    const visible = boolean('Always show banner?')
+
+    return (
+      <div style={{ padding: 16 }}>
+        <ShouldShowCTA visible={visible}>
+          <Banner />
+        </ShouldShowCTA>
+        <ShouldShowCTA visible={visible} opposite>
+          <code>
+            Note: Today is not Election Day or National Voter Registration Day.
+            This won't show up in production.
+          </code>
+        </ShouldShowCTA>
+      </div>
+    )
+  })
+  .add('Based on state', () => {
+    const state = text('State', 'California')
+
+    return (
+      <div style={{ padding: 16 }}>
+        <ShouldShowCTA state={state}>
+          <Banner />
+        </ShouldShowCTA>
+        <ShouldShowCTA state={state} opposite>
+          <code>
+            Note: Today is not Election Day, National Voter Registration Day or{' '}
+            {state} voter registration deadline. This won't show up in
+            production.
+          </code>
+        </ShouldShowCTA>
+      </div>
     )
   })

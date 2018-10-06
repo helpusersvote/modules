@@ -1,8 +1,0 @@
-{
-  "name": "huv-react-storybook",
-  "public": true,
-  "ready_url": "https://storybook.helpusersvote.com",
-  "options": {
-    "port": 80
-  }
-}

@@ -1,6 +1,8 @@
 {
   "name": "@helpusersvote/logic",
-  "version": "1.0.3",
+  "version": "1.0.6",
+  "repository": "helpusersvote/modules",
+  "homepage": "https://helpusersvote.com/docs/api?library=javascript",
   "description": "Simple JavaScript APIs to help your users vote",
   "main": "lib/index.js",
   "scripts": {
