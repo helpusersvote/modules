@@ -2,7 +2,7 @@
   "name": "@helpusersvote/react",
   "main": "./lib/index.js",
   "license": "MIT",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": "helpusersvote/modules",
   "homepage": "https://helpusersvote.com/docs/api?library=react",
   "scripts": {

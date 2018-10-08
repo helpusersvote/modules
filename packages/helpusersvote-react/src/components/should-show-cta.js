@@ -41,4 +41,6 @@ ShouldShowCTA.defaultProps = {
 
 ShouldShowCTA.displayName = 'ShouldShowCTA'
 
+export const ShouldShowCta = ShouldShowCTA
+
 export default ShouldShowCTA

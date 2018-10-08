@@ -1,8 +1,6 @@
 import React from 'react'
 import { getCountdown } from '@helpusersvote/logic'
 
-import colors from '../utils/colors'
-
 const formatters = {
   default: ({ days, hours }) => {
     if (days < 1) {
