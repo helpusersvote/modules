@@ -1,4 +1,4 @@
-module.exports = [
+const states = [
   {
     name: 'Alabama',
     metaphones: ['ALBM'],
@@ -693,3 +693,5 @@ module.exports = [
     time_zones: ['America/Denver']
   }
 ]
+
+export default states

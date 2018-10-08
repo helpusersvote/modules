@@ -2,8 +2,6 @@ import components from './components'
 
 export * from './components'
 
-const HUV = {
+export default {
   ...components
 }
-
-export default HUV

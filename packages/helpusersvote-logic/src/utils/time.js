@@ -1,13 +1,13 @@
-module.exports = { checkTimeFactory }
+export default { checkTimeFactory }
 
-function defaultTimeCheck(currentDate, keyDate) {
+export function defaultTimeCheck(currentDate, keyDate) {
   return (
     currentDate.month() === keyDate.month() &&
     currentDate.date() === keyDate.date()
   )
 }
 
-function checkTimeFactory(check) {
+export function checkTimeFactory(check) {
   if (check) {
     const checkParts = check.split(' ')
     const checkVar = checkParts[0]

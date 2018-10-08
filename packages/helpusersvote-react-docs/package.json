@@ -1,0 +1,37 @@
+{
+  "name": "@helpusersvote/react-docs",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "version": "1.0.5",
+  "repository": "helpusersvote/modules",
+  "homepage": "https://helpusersvote.com/docs/api?library=react",
+  "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook -c .storybook -o dist",
+    "bs": "npm run build-storybook",
+    "sb": "npm run storybook"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "@helpusersvote/react": "^1.0.11",
+    "babel-core": "^7.0.0-bridge.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@storybook/addon-knobs": "^4.0.0-alpha.14",
+    "@storybook/addon-notes": "^4.0.0-alpha.14",
+    "@storybook/addon-options": "^3.4.8",
+    "@storybook/addons": "^4.0.0-alpha.24",
+    "@storybook/react": "^4.0.0-alpha.23",
+    "babel-loader": "^8.0.4",
+    "moment": "^2.22.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}

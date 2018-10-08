@@ -52,7 +52,7 @@ function ModalCTAs() {
   )
 }
 
-function Modal({ ctaColor, ctaText, ctaHref, logoProps }) {
+export function Modal({ ctaColor, ctaText, ctaHref, logoProps }) {
   return (
     <div>
       <div className="overlay-shadow" />

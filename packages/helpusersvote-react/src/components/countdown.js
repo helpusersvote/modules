@@ -12,7 +12,7 @@ const formatters = {
   running: ({ days, remainder }) => [days, remainder].join('.')
 }
 
-export function Countdown({ didError, diff, format }) {
+function StatelessCountdown({ didError, diff, format }) {
   if (didError) {
     return <span />
   }
@@ -34,7 +34,7 @@ export function Countdown({ didError, diff, format }) {
   )
 }
 
-Countdown.defaultProps = {
+StatelessCountdown.defaultProps = {
   didError: false,
   format: 'default'
 }
@@ -80,4 +80,6 @@ function withCountdown(Component) {
   return hoc
 }
 
-export default withCountdown(Countdown)
+export const Countdown = withCountdown(StatelessCountdown)
+
+export default Countdown

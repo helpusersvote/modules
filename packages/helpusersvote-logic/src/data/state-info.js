@@ -1,4 +1,4 @@
-module.exports = {
+const statesInfo = {
   AL: {
     fbid: '104037882965264',
     wording: {
@@ -1685,3 +1685,5 @@ module.exports = {
     }
   }
 }
+
+export default statesInfo

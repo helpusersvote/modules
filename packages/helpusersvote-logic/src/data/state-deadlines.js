@@ -1,4 +1,4 @@
-module.exports = {
+const states = {
   AL: {
     reg_deadline: '10/22/2018 12:00am',
     no_reg_req: ''
@@ -220,3 +220,5 @@ module.exports = {
     no_reg_req: ''
   }
 }
+
+export default states

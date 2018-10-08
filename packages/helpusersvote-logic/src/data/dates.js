@@ -1,4 +1,4 @@
-const Day = require('dayjs')
+import Day from 'dayjs'
 
 // Election Day
 const electionDay = {
@@ -12,11 +12,11 @@ const nvrDay = {
   regions: ['country:USA']
 }
 
-const keyDates = [electionDay, nvrDay]
+export const keyDates = [electionDay, nvrDay]
 
-const registrationDeadlines = []
+export const registrationDeadlines = []
 
-module.exports = {
+export default {
   keyDates,
   registrationDeadlines
 }

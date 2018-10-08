@@ -8,6 +8,6 @@ setOptions({
   downPanelInRight: true
 })
 
-const loadStories = () => require('../stories')
+const loadStories = () => require('../index')
 
 react.configure(loadStories, module)

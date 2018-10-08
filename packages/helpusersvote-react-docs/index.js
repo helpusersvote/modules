@@ -1,11 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withKnobsOptions, text, number, boolean } from '@storybook/addon-knobs'
 import { withNotes } from '@storybook/addon-notes'
-import Banner from '../src/components/banner'
-import Modal from '../src/components/modal'
-import Countdown from '../src/components/countdown'
-import ShouldShowCTA from '../src/components/should-show-cta'
+import { withKnobsOptions, text, number, boolean } from '@storybook/addon-knobs'
+import { Banner, Modal, Countdown, ShouldShowCTA } from '@helpusersvote/react'
 
 const withKnobs = withKnobsOptions({ escapeHTML: false })
 

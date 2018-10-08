@@ -1,6 +1,6 @@
-const { getState } = require('../data')
+import { getState } from './data'
 
-module.exports = {
+export default {
   getCountdown,
   getMsBetweenDates
 }
@@ -19,7 +19,7 @@ const emptyCountdown = {
   error: true
 }
 
-function getCountdown(input) {
+export function getCountdown(input) {
   if (typeof input !== 'object') {
     // if input is a string, assume it's a state
     if (typeof input === 'string') {
@@ -73,7 +73,7 @@ function getDayDiff(start, end) {
   }
 }
 
-function getMsBetweenDates(d1, d2) {
+export function getMsBetweenDates(d1, d2) {
   const date1 = createDate(d1)
   const date2 = createDate(d2)
 
