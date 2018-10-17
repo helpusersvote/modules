@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
 import { getState, shouldShowCTA } from '@helpusersvote/logic'
-// import PollingPlacePlan from './polling-place-plan'
 import EARLY_VOTING_DATA from './data/early-voting.json'
 import POLLING_PLACE_DATA from './data/polls.json'
 import { getMapImages, toAddr } from './utils'
@@ -57,7 +56,7 @@ export function PollingPlaceDirections({
 
   return (
     <div className="mt3 w-100">
-      <div className="mt1 ph2 mw6 center tc">
+      <div className="mt1">
         You can vote here {votingDate} from{' '}
         <span className="dib">
           <span className="b">
@@ -74,9 +73,16 @@ export function PollingPlaceDirections({
         earlyVoting &&
         earlyLocations &&
         earlyLocations.length > 0 && (
-          <div className="mt2 f5-ns f6 center tc gray">
+          <div className="mt2 f5-ns f6 gray">
             In {state.name}, you can also vote <i>before</i> Election Day — find
-            your early voting information <a href="/apps/early">here</a>.
+            your early voting information{' '}
+            <a
+              className="fw5 link blue underline-hover pointer"
+              href="https://www.vote.org/early-voting-calendar/"
+            >
+              here
+            </a>
+            .
           </div>
         )}
 

@@ -20,7 +20,7 @@ class AddressForm extends Component {
           <h1 className="heading">{title}</h1>
         </div>
         <div className="address-form-content">
-          <div className="mt1 mb3 f6 f5-ns">{description}</div>
+          <div className="mt1 mb3 f5 f4-ns">{description}</div>
           <div className="flex flex-wrap">
             {addressFields.map((field, index) => (
               <div
@@ -35,7 +35,7 @@ class AddressForm extends Component {
                   name={field}
                   value={state[field]}
                   onChange={onChange(field)}
-                  className="mw-100 w-100  f5 input-reset ba b--black-20 pa2 border-box br1"
+                  className="mw-100 w-100 f4-ns f5 input-reset ba b--black-20 pa2 border-box br1"
                   placeholder={FIELD_PLACEHOLDERS[field]}
                 />
               </div>
@@ -78,7 +78,6 @@ class AddressForm extends Component {
       Object.values(address).filter(s => !s || s.length < 2).length > 0 // Confirm the input value is real
 
     if (invalid) {
-      // display notice
       return
     }
 

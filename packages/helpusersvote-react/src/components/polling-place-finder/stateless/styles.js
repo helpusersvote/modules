@@ -2,6 +2,7 @@ import React from 'react'
 
 const styles = `
 .huv-container {
+  padding: 0 2px;
   font-family: SF UI Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 .huv-button {
@@ -19,6 +20,7 @@ const styles = `
   font-weight: 500;
   line-height: 32px;
   height: 32px;
+  padding: 0;
   min-width: 80px;
   border-radius: 3px;
   font-size: 12px;
@@ -84,8 +86,7 @@ const styles = `
 .directions {
   position: relative;
   overflow: hidden;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  box-shadow: rgba(67, 90, 111, 0.416) 0px 0px 1px, rgba(67, 90, 111, 0.3) 0px 2px 4px -2px;
   font-size: 16px;
   border-radius: 4px;
 }

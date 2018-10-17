@@ -1,0 +1,24 @@
+{
+  "name": "helpusersvote-bundle",
+  "version": "1.0.13",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "expose-loader": "^0.7.4",
+    "uglifyjs-webpack-plugin": "^1.1.5",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "test": "npm run build",
+    "watch": "webpack --watch",
+    "build": "NODE_ENV=production webpack"
+  },
+  "dependencies": {
+    "@helpusersvote/react": "^1.0.14",
+    "domready": "^1.0.8",
+    "glob": "^7.1.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  }
+}
