@@ -12,11 +12,12 @@ import { ElectionDayNotice } from './stateless/election-day'
 import { DirectionsDate, DirectionsHours } from './stateless/directions'
 
 export function PollingPlaceDirections({
-  address,
+  address: backupAddress,
   voterInfo,
   queryParams,
   onChangeAddress
 }) {
+  const address = voterInfo.address || backupAddress
   const state = getState(address.state)
   const earlyVoting = EARLY_VOTING_DATA[state.abbr] || {}
   const pollingPlace = POLLING_PLACE_DATA[state.abbr] || {}
