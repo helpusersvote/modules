@@ -1,10 +1,15 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withNotes } from '@storybook/addon-notes'
-import { withKnobsOptions, text, number, boolean } from '@storybook/addon-knobs'
-import { Banner, Modal, Countdown, ShouldShowCTA } from '@helpusersvote/react'
-
-const withKnobs = withKnobsOptions({ escapeHTML: false })
+import { withOptions } from '@storybook/addon-options'
+import { withKnobs, text, number, boolean } from '@storybook/addon-knobs'
+import {
+  Banner,
+  Modal,
+  Countdown,
+  ShouldShowCTA,
+  PollingPlaceFinder
+} from '@helpusersvote/react'
 
 const knobForType = prop => {
   switch (typeof prop) {
@@ -66,7 +71,12 @@ const bannerOptions = {
 }
 
 storiesOf('Banner', module)
-  .addDecorator(withKnobs)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: true
+    })
+  )
+  .addDecorator(withKnobs({ escapeHTML: false }))
   .addDecorator(withNotes)
   .add(
     'Default Banner',
@@ -91,6 +101,11 @@ storiesOf('Banner', module)
   )
 
 storiesOf('Modal', module)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: true
+    })
+  )
   .addDecorator(withKnobs)
   .addDecorator(withNotes)
   .add('Default Modal', () => <Modal />)
@@ -107,6 +122,11 @@ storiesOf('Modal', module)
   })
 
 storiesOf('Countdown', module)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: true
+    })
+  )
   .addDecorator(withKnobs)
   .addDecorator(withNotes)
   .add('Default Countdown', () => (
@@ -124,6 +144,11 @@ storiesOf('Countdown', module)
   ))
 
 storiesOf('Should Show CTA', module)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: true
+    })
+  )
   .addDecorator(withKnobs)
   .addDecorator(withNotes)
   .add('Simple', () => {
@@ -161,3 +186,22 @@ storiesOf('Should Show CTA', module)
       </div>
     )
   })
+
+storiesOf('Polling Place Finder', module)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: false
+    })
+  )
+  .add('Default', () => (
+    <div className="ph6 center">
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder />
+    </div>
+  ))
+  .add('Early Voting', () => (
+    <div className="ph6 center">
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder type="early" />
+    </div>
+  ))

@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
+import autoExternal from 'rollup-plugin-auto-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
 import url from 'rollup-plugin-url'
@@ -23,15 +24,16 @@ export default {
     }
   ],
   plugins: [
+    autoExternal(),
     external(),
     url(),
     json(),
     babel({
-      exclude: 'node_modules/**',
-      plugins: ['external-helpers']
+      exclude: 'node_modules/**'
     }),
     resolve({
-      preferBuiltins: false
+      preferBuiltins: false,
+      browser: true
     }),
     commonjs()
   ],
