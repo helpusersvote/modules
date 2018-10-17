@@ -7,11 +7,12 @@ import { getMapImages, toAddr } from './utils'
 Day.extend(relativeTime)
 
 export function EarlyVotingDirections({
-  address,
+  address: backgroundAdress,
   voterInfo,
   className,
   onChangeAddress
 }) {
+  const address = voterInfo.address || backupAddress
   const { earlyLocations: locations } = voterInfo
   const location = locations[0]
 

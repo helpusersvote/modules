@@ -2,9 +2,9 @@ import _ from 'lodash'
 import Day from 'dayjs'
 import to from 'to-case'
 import time from 'time-js'
-import EARLY_VOTING from '../data/early-voting.json'
-import { getStates } from '@helpusersvote/logic'
 import naturalCompare from 'string-natural-compare'
+import EARLY_VOTING from '../data/early-voting.json'
+import { getState, getStates } from '@helpusersvote/logic'
 
 /**
  * The "main" parties that people know, that should be emphasized first in cases
@@ -231,8 +231,9 @@ function normalizeOffice(office) {
   // Try to match a state abbreviation at the start of the string.
   var match = office.match(STATE_PREFIX_MATCHER)
   var abbr = match ? match[1] : null
-  var state = abbr ? states[abbr] : null
+  var state = abbr ? getState(abbr) : null
   var name = state ? state.name : null
+
   if (name) office = name + office.slice(2)
 
   return office
