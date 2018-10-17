@@ -1,6 +1,6 @@
 import Day from 'dayjs'
 import inUS from 'in-us'
-import { get } from 'axios'
+import axios from 'axios'
 import { keyDates, getState } from './data'
 import { checkTimeFactory } from './utils/time'
 
@@ -42,7 +42,8 @@ export function shouldShowCTA(input) {
             return false
           }
 
-          return get('https://us.helpusersvote.com/v1/check')
+          return axios
+            .get('https://us.helpusersvote.com/v1/check')
             .then(r => {
               return r.data
             })

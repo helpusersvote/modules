@@ -7,7 +7,9 @@ notifications:
 node_js:
   - '10'
 
-script: lerna run test
+script:
+  - date
+  - lerna run test
 
 branches:
   except:

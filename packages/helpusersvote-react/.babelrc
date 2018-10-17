@@ -1,12 +1,18 @@
 {
+  "only": "./src",
   "presets": [
     [
       "env",
       {
-        "modules": false
+        "targets": {
+          "browsers": ["last 2 versions"]
+        },
+        "modules": false,
+        "useBuiltIns": true
       }
     ],
     "stage-0",
     "react"
-  ]
+  ],
+  "plugins": ["external-helpers", "transform-regenerator"]
 }
