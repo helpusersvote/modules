@@ -18,7 +18,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.1.2",
-    "@helpusersvote/react": "^1.0.12",
+    "@helpusersvote/react": "^1.0.13",
     "babel-core": "^7.0.0-bridge.0"
   },
   "devDependencies": {
