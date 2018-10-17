@@ -1,7 +1,7 @@
 import _ from 'lodash'
+import Day from 'dayjs'
 import to from 'to-case'
 import time from 'time-js'
-import moment from 'moment'
 import EARLY_VOTING from '../data/early-voting.json'
 import { getStates } from '@helpusersvote/logic'
 import naturalCompare from 'string-natural-compare'
@@ -123,8 +123,8 @@ export function normalizeVoterInfo(info) {
     var ends_at = earlyVoting.ends_at.slice(0, 10)
     data.earlyVotingEndDate = ends_at
     // Assume polls close at 5pm
-    var ends = moment(ends_at)
-    if (ends.get('hour') == 0) {
+    var ends = Day(ends_at)
+    if (ends.hour() == 0) {
       ends = ends.set('hour', earlyVoting.ends_at_time || 17)
     }
     data.earlyVotingEndDateTime = ends
@@ -471,17 +471,16 @@ function parseHours(hours) {
           var format = 'h: PM'
           start = time(start).format(format)
           end = time(end).format(format)
-          var startHours = moment(start, ['h:m a']).hours()
-          var endHours = moment(end, ['h:m a']).hours()
-          var isoLocalDate = moment(
-            new Date(month + ' ' + date + ', 2018')
-          ).format()
-          var startDateTime = moment(new Date(month + ' ' + date + ', 2018'))
-            .set('hours', startHours)
-            .format()
-          var endDateTime = moment(new Date(month + ' ' + date + ', 2018'))
-            .set('hours', endHours)
-            .format()
+          var startHours = Day(start, ['h:m a']).hour()
+          var endHours = Day(end, ['h:m a']).hour()
+          var isoLocalDate = Day(month + ' ' + date + ', 2018').format()
+          var startDate = Day(`${month} ${date}, 2018`)
+          startDate.set('hour', startHours)
+          var startDateTime = startDate.format()
+          var endDate = Day(`${month} ${date}, 2018`)
+          endDate.set('hour', endHours)
+          var endDateTime = endDate.format()
+
           return {
             day,
             start,
@@ -497,15 +496,16 @@ function parseHours(hours) {
           var format = 'h: PM'
           start = time(start).format(format)
           end = time(end).format(format)
-          var startHours = moment(start, ['h:m a']).hours()
-          var endHours = moment(end, ['h:m a']).hours()
-          var isoLocalDate = moment(date).format()
-          var startDateTime = moment(date)
-            .set('hours', startHours)
-            .format()
-          var endDateTime = moment(date)
-            .set('hours', endHours)
-            .format()
+          var startHours = Day(start, ['h:m a']).hour()
+          var endHours = Day(end, ['h:m a']).hour()
+          var isoLocalDate = Day(date).format()
+          var startDate = Day(`${month} ${date}, 2018`)
+          startDate.set('hour', startHours)
+          var startDateTime = startDate.format()
+          var endDate = Day(`${month} ${date}, 2018`)
+          endDate.set('hour', endHours)
+          var endDateTime = endDate.format()
+
           return {
             day,
             start,
@@ -526,15 +526,14 @@ function parseHours(hours) {
 
 function futureHours(hours) {
   return _.filter(hours, function(h) {
-    return moment() < moment(h.isoLocalDate).add(1, 'days')
+    return Day() < Day(h.isoLocalDate).add(1, 'day')
   })
 }
 
 function getHoursToday(hours) {
   var today = _.filter(hours, function(h) {
     return (
-      moment() < moment(h.isoLocalDate).add(1, 'days') &&
-      moment() > moment(h.isoLocalDate)
+      Day() < Day(h.isoLocalDate).add(1, 'day') && Day() > Day(h.isoLocalDate)
     )
   })
   return today.length ? today[0] : null
@@ -543,8 +542,8 @@ function getHoursToday(hours) {
 function getHoursTomorrow(hours) {
   var tmrw = _.filter(hours, function(h) {
     return (
-      moment() < moment(h.isoLocalDate).add(2, 'days') &&
-      moment() > moment(h.isoLocalDate).add(1, 'days')
+      Day() < Day(h.isoLocalDate).add(2, 'day') &&
+      Day() > Day(h.isoLocalDate).add(1, 'day')
     )
   })
   return tmrw.length ? tmrw[0] : null
@@ -552,8 +551,8 @@ function getHoursTomorrow(hours) {
 
 function normalizeDateRange(hours) {
   _.each(hours, function(h) {
-    h.startDateFormatted = moment(h.startDate).format('ddd, MMM D')
-    h.endDateFormatted = moment(h.endDate).format('ddd, MMM D')
+    h.startDateFormatted = Day(h.startDate).format('ddd, MMM D')
+    h.endDateFormatted = Day(h.endDate).format('ddd, MMM D')
   })
   return hours
 }
@@ -571,7 +570,7 @@ function groupHoursByDate(hours) {
       lastHour.end == h.end &&
       lastHour.start == h.start &&
       // check if subsequent days, while begin/end of daylight savings
-      moment(h.isoLocalDate) - moment(lastHour.isoLocalDate) < 1.2 * 86400000
+      Day(h.isoLocalDate) - Day(lastHour.isoLocalDate) < 1.2 * 86400000
     ) {
       groups[groups.length - 1].endDate = h.isoLocalDate
     } else {
@@ -589,7 +588,7 @@ function groupHoursByDate(hours) {
 }
 
 /**
- * Format a `date` with a Moment.js `format` string.
+ * Format a `date` with a Day.js `format` string.
  *
  * @param {Date} date
  * @param {String} format
@@ -597,7 +596,7 @@ function groupHoursByDate(hours) {
  */
 
 function formatDate(date, format) {
-  return moment.utc(date).format(format)
+  return Day.utc(date).format(format)
 }
 
 /**

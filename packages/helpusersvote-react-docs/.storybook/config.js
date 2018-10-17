@@ -5,7 +5,7 @@ import { setOptions } from '@storybook/addon-options'
 setOptions({
   name: 'Help Users Vote',
   url: 'https://helpusersvote.com/add/website',
-  downPanelInRight: true
+  addonPanelInRight: true
 })
 
 const loadStories = () => require('../index')

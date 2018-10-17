@@ -1,7 +1,10 @@
 import React from 'react'
-import moment from 'moment'
+import Day from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import GoogleReportForm from './stateless/google-report-form'
 import { getMapImages, toAddr } from './utils'
+
+Day.extend(relativeTime)
 
 export function EarlyVotingDirections({
   address,
@@ -12,7 +15,7 @@ export function EarlyVotingDirections({
   const { earlyLocations: locations } = voterInfo
   const location = locations[0]
 
-  const earlyVotingTimeLeft = moment(voterInfo.earlyVotingEndDateTime).fromNow(
+  const earlyVotingTimeLeft = Day(voterInfo.earlyVotingEndDateTime).fromNow(
     true
   )
 

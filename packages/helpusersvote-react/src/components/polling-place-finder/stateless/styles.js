@@ -18,9 +18,11 @@ const styles = `
   color: white;
   font-weight: 500;
   line-height: 32px;
+  height: 32px;
   min-width: 80px;
   border-radius: 3px;
   font-size: 12px;
+  box-sizing: border-box;
   background-image: -webkit-linear-gradient(to top, #0165c7, #0173df);
   background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
   background-image: linear-gradient(to top, #0165c7, #0173df);
