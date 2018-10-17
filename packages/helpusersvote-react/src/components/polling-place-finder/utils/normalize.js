@@ -18,7 +18,6 @@ const MAIN_PARTIES = [
   'Green Party',
   'Libertarian Party',
   'Republican Party',
-  // A few edge cases where the parties are named differently in some states.
   'Democratic-NPL Party',
   'Democratic-Farmer-Labor Party'
 ]

@@ -34,20 +34,14 @@ export function EarlyVotingDirections({
     pollAddr
   })
 
-  // const isElectionDay = queryParams.election || shouldShowCTA()
-
   return (
     <div className={`mt3 w-100 ${className || ''}`}>
-      <div className="mt1 ph2 mw6 center tc">
+      <div className="mt1">
         Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
-        vote early!
-        <br />
-        <div className="mt1 lh-title">
-          You can vote early and skip the lines on Election Day:
-        </div>
+        vote early! You can vote early and skip the lines on Election Day:
       </div>
 
-      <div className="mt2 f5-ns f6 center tc gray">
+      <div className="mt2 f5-ns f6 gray">
         Or vote on Election Day — find your polling place{' '}
         <a
           className="fw5 link blue underline-hover pointer"
