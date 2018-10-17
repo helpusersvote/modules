@@ -1,0 +1,270 @@
+{
+  "AL": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://myinfo.alabamavotes.gov/VoterView/PollingPlaceSearch.do",
+    "same_day_reg": false
+  },
+  "AK": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://myvoterinformation.alaska.gov/",
+    "same_day_reg": false
+  },
+  "AZ": {
+    "hours": "6AM – 7PM",
+    "polling_place_state_site": "https://voter.azsos.gov/VoterView/PollingPlaceSearch.do",
+    "same_day_reg": false
+  },
+  "AR": {
+    "hours": "7:30AM – 7:30PM",
+    "polling_place_state_site": "https://www.voterview.ar-nova.org/VoterView/PollingPlaceSearch.do",
+    "same_day_reg": false
+  },
+  "CA": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "http://www.sos.ca.gov/elections/polling-place/",
+    "same_day_reg": false
+  },
+  "CO": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": null,
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide your Colorado driver's license or ID card number, or if you don't have one, the last 4 digits of your Social Security number. You can still register if you don't have any of the above."
+  },
+  "CT": {
+    "hours": "6AM – 8PM",
+    "polling_place_state_site": "http://www.sots.ct.gov/sots/cwp/view.asp?a=3172&q=512796",
+    "same_day_reg": true,
+    "same_day_reg_note": "Election Day Registration is not available at your polling place, but is available at a [designated Election Day location in each town](https://docs.google.com/spreadsheets/d/1-Wf7Zlt9wJY2TdHX4DY6CHFwJy-Ih4SIwS9RBoPiMi4/edit?usp=sharing), from 6 am to 8 pm.  Please plan to arrive early in the day as there may be long lines. You must be registered by 8 pm in order to vote. You will need to provide proof of identity and residency, as well as your Connecticut driver’s license number or last 4 digits of your Social Security number, if you have them."
+  },
+  "DC": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://www.dcboee.org/election_info/pollplaces/",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide your DMV-issued ID number or if you don't have one, the last 4 digits of your Social Security number. You can still register without these.\n\nAlso bring with you one of the following documents, which must have your name and address:\n\n  * a government-issued photo ID\n  * current utility bill, bank statement, government check or a paycheck"
+  },
+  "DE": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://ivote.de.gov/voterlogin.aspx",
+    "same_day_reg": false
+  },
+  "FL": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": null,
+    "same_day_reg": false
+  },
+  "GA": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://www.mvp.sos.ga.gov/MVP/mvp.do",
+    "same_day_reg": false
+  },
+  "HI": {
+    "hours": "7AM – 6PM",
+    "polling_place_state_site": "http://elections.hawaii.gov/voters/polling-places/",
+    "same_day_reg": false
+  },
+  "ID": {
+    "hours": "8AM – 8PM",
+    "polling_place_state_site": "http://www.idahovotes.gov/YourPollingPlace/WhereDoIVote.aspx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register at your polling place on November 8! You'll need to provide your driver’s license number if you have one, or the last 4 digits of your Social Security number. Even if you have neither, you can still register!\n\nYou'll also need to bring one of the following IDs:\n\n* an Idaho driver's license\n* an Idaho state ID card\n* any document with your current address along with another ID that has your photo, or\n* a current, valid student photo ID card from a postsecondary school in Idaho and a current fee statement with your valid address"
+  },
+  "IL": {
+    "hours": "6AM – 7PM",
+    "polling_place_state_site": "https://www.elections.il.gov/DistrictLocator/DistrictOfficialSearchByAddress.aspx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote on Election Day, but not at your polling place! Contact your [County Clerk or Board of Election Commissioners](http://www.elections.il.gov/ElectionAuthorities/ElecAuthorityList.aspx) to see where you can register in person on Election Day, and whether you'll need to bring additional ID. You'll need to provide your driver’s license number or state ID card number, if you have one, or the last 4 digits of your Social Security number. Even if you have none of the above, you can still register!"
+  },
+  "IN": {
+    "hours": "6AM – 6PM",
+    "polling_place_state_site": "https://indianavoters.in.gov/PublicSite/Public/FT1/PublicLookupMain.aspx?Link=Polling",
+    "same_day_reg": false
+  },
+  "IA": {
+    "hours": "7AM – 9PM",
+    "polling_place_state_site": "https://sos.iowa.gov/elections/voterreg/pollingplace/search.aspx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register at your polling place on Election Day! You'll need to provide your Iowa driver's license number or if you don't have one, the last 4 digits of your social security number. Even if you don't have these, you can still register!\n\nYou must also bring one of the following:\n\n* Iowa driver's license\n* Iowa non-operator's ID card\n* U.S. Passport\n* U.S. military ID card\n* ID card issued by an employer or\n* A student ID card issued by an Iowa high school or an Iowa college\n\nIf your photo ID doesn't have your current address, you'll also need another document that shows your name and current address."
+  },
+  "KS": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://myvoteinfo.voteks.org/VoterView/PollingPlaceSearch.do",
+    "same_day_reg": false
+  },
+  "KY": {
+    "hours": "6AM – 6PM",
+    "polling_place_state_site": "https://vrsws.sos.ky.gov/vic/",
+    "same_day_reg": false
+  },
+  "LA": {
+    "hours": "6AM – 8PM",
+    "polling_place_state_site": "https://voterportal.sos.la.gov/Home/VoterLogin",
+    "same_day_reg": false
+  },
+  "ME": {
+    "hours": "10AM – 8PM",
+    "polling_place_state_site": "http://www.maine.gov/portal/government/edemocracy/voter_lookup.php",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote on Election Day, but not necessarily at your polling place! You'll need to go to your local [registrar](http://www.maine.gov/sos/cec/elec/munic.html).\n\nYou'll need to show proof of identity and residency when registering in person.\n\nTo prove identity you can provide a:\n\n* Driver’s license or state ID\n* Current US passport\n* Government-issued photo ID\n* Other government document that shows name and address\n\nTo prove residency, bring a document providing proof of your residential address, like a Maine Driver’s license showing your current residential address or [one of the documents on this list](http://www.maine.gov/sos/bmv/licenses/residency.html)."
+  },
+  "MD": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://voterservices.elections.maryland.gov/PollingPlaceSearch",
+    "same_day_reg": false
+  },
+  "MA": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "http://wheredoivotema.com/bal/MyElectionInfo.aspx",
+    "same_day_reg": false
+  },
+  "MI": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://webapps.sos.state.mi.us/MVIC/votersearch.aspx",
+    "same_day_reg": false
+  },
+  "MN": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "http://pollfinder.sos.state.mn.us/",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election day! You'll need to bring a document that proves your residence, for example a current Minnesota driver's that shows your current address, or another option on [this list](http://www.sos.state.mn.us/elections-voting/register-to-vote/register-on-election-day/)."
+  },
+  "MS": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "http://www.sos.ms.gov/pollingplace/pages/default.aspx",
+    "same_day_reg": false
+  },
+  "MO": {
+    "hours": "6AM – 7PM",
+    "polling_place_state_site": "https://s1.sos.mo.gov/elections/pollingplacelookup/",
+    "same_day_reg": false
+  },
+  "MT": {
+    "hours": "? – 8PM",
+    "polling_place_state_site": "http://sos.mt.gov/elections/Polling-Place-Locations-and-Satellite-Office-Schedule.xlsx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide your Montana driver's license or ID card number, or if you don't have one, the last 4 digits of your Social Security number.\n\nIf you don't have any of the above, bring a photocopy of an ID or document that shows your name and current address, such as a paycheck stub, utility bill, bank statement, or other government document."
+  },
+  "NE": {
+    "hours": "8AM – 8PM",
+    "polling_place_state_site": "https://www.votercheck.necvr.ne.gov/VoterView/PollingPlaceSearch.do",
+    "same_day_reg": false
+  },
+  "NV": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://nvsos.gov/votersearch/index.aspx",
+    "same_day_reg": false
+  },
+  "NH": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://app.sos.nh.gov/Public/PollingPlaceSearch.aspx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide proof of identity, age, citizenship, and domicile. You can also sign an affidavit instead of providing documentation."
+  },
+  "NJ": {
+    "hours": "6AM – 8PM",
+    "polling_place_state_site": null,
+    "same_day_reg": false
+  },
+  "NM": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "http://pollingmap.sos.state.nm.us/",
+    "same_day_reg": false
+  },
+  "NY": {
+    "hours": "6AM – 9PM",
+    "polling_place_state_site": "https://voterlookup.elections.state.ny.us/votersearch.aspx",
+    "same_day_reg": false
+  },
+  "NC": {
+    "hours": "6:30AM – 7:30PM",
+    "polling_place_state_site": "https://enr.ncsbe.gov/pollingplace_search/",
+    "same_day_reg": false
+  },
+  "ND": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://vip.sos.nd.gov/WhereToVote.aspx?tab=AddressandVotingTimes",
+    "same_day_reg": true,
+    "same_day_reg_note": "You don't need to register to vote in North Dakota. Instead, make sure you meet all the voting requirements, and provide ID to vote on Election Day, Nov 8."
+  },
+  "OH": {
+    "hours": "6:30AM – 7:30PM",
+    "polling_place_state_site": "http://voterlookup.sos.state.oh.us/voterlookup.aspx",
+    "same_day_reg": false
+  },
+  "OK": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://services.okelections.us/voterSearch.aspx",
+    "same_day_reg": false
+  },
+  "OR": {
+    "hours": "8AM – 8PM",
+    "polling_place_state_site": null,
+    "same_day_reg": false
+  },
+  "PA": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx",
+    "same_day_reg": false
+  },
+  "RI": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://vote.sos.ri.gov/",
+    "same_day_reg": false
+  },
+  "SC": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://info.scvotes.sc.gov/eng/voterinquiry/VoterInformationRequest.aspx?PageMode=VoterInfo",
+    "same_day_reg": false
+  },
+  "SD": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://sos.sd.gov/Elections/VIPLogin.aspx",
+    "same_day_reg": false
+  },
+  "TN": {
+    "hours": "10AM – 6PM",
+    "polling_place_state_site": "http://tnsos.org/elections/election_commissions.php",
+    "same_day_reg": false
+  },
+  "TX": {
+    "hours": "7AM – 7PM",
+    "polling_place_state_site": "https://teamrv-mvp.sos.texas.gov/MVP/mvp.do",
+    "same_day_reg": false
+  },
+  "UT": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://vote.utah.gov/vote/menu/index",
+    "same_day_reg": false
+  },
+  "VT": {
+    "hours": "10AM – 7PM",
+    "polling_place_state_site": "https://www.sec.state.vt.us/media/765446/2016-vt-primary-general-polling-places.xls",
+    "same_day_reg": false
+  },
+  "VA": {
+    "hours": "6AM – 7PM",
+    "polling_place_state_site": "https://vote.elections.virginia.gov/VoterInformation/PollingPlaceLookup",
+    "same_day_reg": false
+  },
+  "WA": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": null,
+    "same_day_reg": false
+  },
+  "WV": {
+    "hours": "6:30AM – 7:30PM",
+    "polling_place_state_site": "https://services.sos.wv.gov/Elections/Voter/FindMyPollingPlace",
+    "same_day_reg": false
+  },
+  "WI": {
+    "hours": "7AM – 8PM",
+    "polling_place_state_site": "https://myvote.wi.gov/en-us/FindMyPollingPlace",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide your Wisconsin driver’s license number or your Wisconsin Department of Transportation-issued ID number, or if you don't have one, the last 4 numbers of your Social Security number. You can still register if you don't have any of these documents.\n\nMake sure to bring [a proof of residence](http://elections.wi.gov/sites/default/files/publication/154/proof_of_residence_guide_pdf_56590.pdf) with you as well!"
+  },
+  "WY": {
+    "hours": "? – 7PM",
+    "polling_place_state_site": "http://soswy.state.wy.us/Elections/PollPlace/Default.aspx",
+    "same_day_reg": true,
+    "same_day_reg_note": "You can register to vote at your polling place on Election Day! You'll need to provide your Wyoming driver’s license number, or if you don't have you, the last 4 digits of your Social Security number. You can still register if you have none of the above."
+  }
+}

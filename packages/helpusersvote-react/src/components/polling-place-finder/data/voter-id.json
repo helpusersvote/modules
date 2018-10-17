@@ -1,0 +1,347 @@
+{
+  "AK": {
+    "alternative": "An election official may waive the ID requirement if Election Day official can vouch for your identity. A voter who cannot exhibit a required form of identification shall be allowed to vote a questioned ballot.",
+    "officialSite": "https://www.elections.alaska.gov/vi_hv_vote_polls.php",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Alaska, you **must bring ID** with you! It can be one of:\n\n- A driver's license\n- A state ID card\n- A U.S. military ID card\n- A U.S. passport\n- [Another form of ID…](https://www.elections.alaska.gov/vi_hv_vote_polls.php)"
+  },
+  "AL": {
+    "alternative": "You can vote a provisional ballot, or if two election officials can identify you as an eligible voter on the poll list, vote a regular ballot.",
+    "officialSite": "https://www.alabamavotes.gov/VoterID.aspx?m=voters",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Alabama, you **must bring ID** with you! It can be one of:\n\n- A driver's license or non-driver photo ID card\n- A state or federal issued ID card\n- A U.S. military ID card\n- A U.S. passport\n- [Another form of ID…](https://www.alabamavotes.gov/VoterID.aspx?m=voters)"
+  },
+  "AR": {
+    "officialSite": "http://www.sos.arkansas.gov/elections/Pages/votingInArkansas.aspx",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "If you've voted in Arkansas before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Arkansas, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A state ID card\n- A U.S. passport\n- [Another form of ID…](http://www.sos.arkansas.gov/elections/Pages/votingInArkansas.aspx)"
+  },
+  "AZ": {
+    "alternative": "You can vote a provisional ballot, but it will only be counted if you provide identification to the county recorder by 5 pm on Tuesday, November 15.",
+    "officialSite": "http://www.azsos.gov/elections/voting-election",
+    "idType": "non-photo",
+    "idLevel": "strict",
+    "requiredId": "In Arizona, you **must bring ID** with you! It can be one of:\n\n- An Arizona driver's license\n- An Arizona state ID card\n- A government-issued ID card\n- [Another form of ID…](http://www.azsos.gov/elections/voting-election)"
+  },
+  "CA": {
+    "officialSite": "http://www.sos.ca.gov/elections/voting-resources/voting-california/what-bring/",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in California before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in California, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A state ID card\n- A student, military or employer ID card\n- A U.S. passport\n- [Another form of ID…](http://www.sos.ca.gov/elections/voting-resources/voting-california/what-bring/)"
+  },
+  "CO": {
+    "alternative": "You can cast a provisional ballot. An election official will then attempt to verify that you're eligible to vote, and only upon verification will your vote be counted.",
+    "officialSite": "https://www.sos.state.co.us/pubs/elections/vote/acceptableFormsOfID.html",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Colorado, you **must bring ID** with you. All the forms of ID that show your address must be a Colorado address in order for the form of ID to qualify. It can be one of:\n\n  - A Colorado driver's license\n  - A Colorado personal ID card\n  - A U.S. military, Colorado student, or Colorado employer ID card\n  - A U.S. passport\n  - [Another form of ID…](https://www.sos.state.co.us/pubs/elections/vote/acceptableFormsOfID.html)"
+  },
+  "CT": {
+    "alternative": "If you cannot present an ID, you'll be required to sign a brief statement confirming your identity.",
+    "officialSite": "http://www.ct.gov/sots/LIB/sots/ElectionServices/HAVA/HavaPDF/IDRequirements.pdf",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Connecticut, you **must bring one of the following IDs** with you from this list:\n\n- A Social Security card\n- Any pre-printed form of ID that shows your name and address, name and signature, or name and photo\n\nIf you're a first-time voter in Connecticut, and registered by mail without including an ID number or photocopy, you **must also** bring one of the following:\n\n- A copy of a current photo ID that shows your name and address\n- A copy of a current utility bill, bank statement, government check, paycheck, or other government document that shows your name and address\n- [Another form of ID…](http://www.ct.gov/sots/LIB/sots/ElectionServices/HAVA/HavaPDF/IDRequirements.pdf)"
+  },
+  "DC": {
+    "officialSite": "https://www.dcboee.org/faq/election_day.asp#6",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in D.C. before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, as some polling places require ID to enter the facility.\n\nIf you're a first-time voter in DC, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A government-issued ID card\n- A U.S. passport\n- [Another form of ID…](https://www.dcboee.org/faq/election_day.asp#6)"
+  },
+  "DE": {
+    "alternative": "You'll need to fill out a form at the polling station before you can vote.",
+    "officialSite": "http://electionsncc.delaware.gov/faqs/voting.shtml",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Delaware, you **should bring ID** with you! It can be one of:\n  - A current photo ID, such as a driver's license, state ID, or U.S. passport\n  - A copy of a current utility bill, bank statement, government check, paycheck, or other government document that shows your name and address.\n  - [Another form of ID…](http://electionsncc.delaware.gov/faqs/voting.shtml)"
+  },
+  "FL": {
+    "alternative": "You can vote a provisional ballot. If the elections officials determine that your signature on the provisional ballot envelope matches that in the voter registration records, you're entitled to vote in the precinct where the ballot was cast, and that you did not cast another ballot in the election, the ballot is counted.",
+    "officialSite": "http://dos.myflorida.com/elections/for-voters/voting/election-day-voting/",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Florida, you **must bring ID** with you! It can be one of:\n\n- A Florida driver's license\n- A Florida state ID card\n- A credit or debit card\n- A student or military ID card\n- A U.S. passport\n- [Another form of ID…](http://dos.myflorida.com/elections/for-voters/voting/election-day-voting/)"
+  },
+  "GA": {
+    "alternative": "You can vote on a provisional ballot, and will then have up to three days to present an appropriate photo ID at the county registrar's office in order for the ballot to be counted.",
+    "officialSite": "http://sos.ga.gov/index.php/elections/georgia_voter_identification_requirements2",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Georgia, you **must bring photo ID** with you! It can be one of:\n\n- A Georgia driver's license, even if expired\n- A Goergia-issued or federal photo ID card\n- A U.S. military or tribal photo ID\n- A U.S. passport\n- [Another form of ID…](http://sos.ga.gov/index.php/elections/georgia_voter_identification_requirements2)"
+  },
+  "HI": {
+    "alternative": "You'll be asked to recite your date of birth and residence address to make sure it matches the information provided in the poll book.",
+    "officialSite": "http://elections.hawaii.gov/frequently-asked-questions/election-day-information/#jump-3",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "If you've voted in Hawaii before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Hawaii, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A state ID card\n- A U.S. passport\n- [Another form of ID…](http://elections.hawaii.gov/frequently-asked-questions/election-day-information/#jump-3)"
+  },
+  "IA": {
+    "officialSite": "https://sos.iowa.gov/elections/pdf/forms/idposter.pdf",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Iowa before, you **don't** need to bring ID! We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Iowa, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A state-issued ID card\n- An Iowa student ID\n- A U.S. passport\n- [Another form of ID…](https://sos.iowa.gov/elections/pdf/forms/idposter.pdf)"
+  },
+  "ID": {
+    "alternative": "You'll need to sign a sworn statement at the polling place swearing to your identity in order to vote.",
+    "officialSite": "http://www.idahovotes.gov/voter_id.htm",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Idaho, you **must bring photo ID** with you! It can be one of:\n\n- An Idaho driver's license or Idaho photo ID card\n- A federal photo ID\n- A current student photo ID card issued by an Idaho high school or postsecondary school\n- A tribal photo ID\n- A U.S. passport\n- [Another form of ID…](http://www.idahovotes.gov/voter_id.htm)"
+  },
+  "IL": {
+    "officialSite": "https://www.elections.il.gov/InfoForVoters.aspx",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Illinois before, you **don't** need to bring ID! We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Illinois, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license\n- A state-issued ID card\n- A U.S. passport\n- [Another form of ID…](https://www.elections.il.gov/InfoForVoters.aspx)"
+  },
+  "IN": {
+    "alternative": "You can vote a provisional ballot. The ballot is counted if you have not been challenged or required to vote a provisional ballot for any other reason, and you return to the election board by noon on the Monday after the election and do one of the following:\n- Produce proof of identification; or\n- Execute an affidavit stating that you cannot obtain proof of identification, because you're indigent or have a religious objection to being photographed",
+    "officialSite": "http://www.in.gov/sos/elections/2401.htm",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Indiana, you **must bring photo ID** with you! It can be one of:\n\n- An Indiana driver's license\n- An Indiana ID card\n- A U.S. military ID\n- A U.S. passport\n- [Another form of ID…](http://www.in.gov/sos/elections/2401.htm)"
+  },
+  "KS": {
+    "alternative": "You can vote a provisional ballot. The ballot will be counted if you provide a valid form of identification to the county election officer in person or provide a copy by mail or electronic means before the meeting of the county board of canvassers (varies by county, some as early as November 14 or earlier).",
+    "officialSite": "http://www.gotvoterid.com/valid-photo-ids.html",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Kansas, you **must bring photo ID** with you! If you're under 65, the ID must be unexpired. If you're 65 or older, the ID can be expired.\n\nIt can be one of:\n\n- A driver's IDlicense or state-issued photo ID\n- A government employee badge\n- A tribal, military, government employee, or Kansas student photo ID card\n- A U.S. passport\n- [Another form of ID…](http://www.gotvoterid.com/valid-photo-ids.html)"
+  },
+  "KY": {
+    "alternative": "You can sign a written oath that you're qualified to vote.",
+    "officialSite": "http://elect.ky.gov/SiteCollectionDocuments/Voter%20Information/SBE%201000%20-%20Voter%20Information%20Guide%20(BQ)(LZ).pdf",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Kentucky, you **must bring ID** with you! It can be one of:\n\n- A driver's license\n- A Social Security card\n- An ID issued by the U.S. government\n- An ID issued by the Kentucky government with your picture and signature\n- Any ID with your picture and signature\n- [Another form of ID…](http://elect.ky.gov/SiteCollectionDocuments/Voter%20Information/SBE%201000%20-%20Voter%20Information%20Guide%20(BQ)(LZ).pdf)"
+  },
+  "LA": {
+    "alternative": "You can complete a sworn statement claiming that with your date of birth and your mother's maiden name.",
+    "officialSite": "http://www.sos.la.gov/electionsandvoting/vote/voteonelectionday/Pages/default.aspx",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Louisiana, you **must bring ID** with you! It can be one of:\n\n- A driver's license\n- A state-issued ID card\n- A U.S. passport\n- [Another form of ID…](http://www.sos.la.gov/ElectionsAndVoting/Vote/FrequentlyAskedQuestions/Pages/VotingOnElectionDay.aspx?OwnershipName=VotingOnElectionDay&faqid=0)\n\nIf you're a first-time voter in Louisiana, and registered by mail without including an ID number or photocopy, you **must also** bring one of the following that shows your name and address:\n\n- A photo ID, such as a driver's license, state ID, or U.S. passport\n- A utility bill\n- A bank statement\n- Another government document that shows your name and address\n- [Another form of ID…](http://www.sos.la.gov/electionsandvoting/vote/voteonelectionday/Pages/default.aspx)"
+  },
+  "MA": {
+    "officialSite": "http://www.sec.state.ma.us/ele/eleidreq/idrequirementsidx.htm",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "In Massachusetts, you **should bring ID** with you! If it's your first time voting in Massachusetts, or your registration has become inactive due to not voting recently, you **must bring ID**. All voters *should* bring an ID in case you need to submit a provisional ballot, or a poll worker has a reasonable suspicion.\n\nBring one of the following:\n\n- A Massachusetts driver's license\n- A Massachusetts-issued ID\n- A recent utility bill\n- A signed lease\n- A rent receipt\n- Any other document showing your name and address\n-[Another form of ID…](http://www.sec.state.ma.us/ele/eleidreq/idrequirementsidx.htm)"
+  },
+  "MD": {
+    "officialSite": "http://www.elections.state.md.us/voting/election_day_questions.html",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Maryland before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nFirst time voters in Maryland need to bring one of the following:\n\n- A driver's license\n- A state ID card\n- A student or military ID card\n- A U.S. passport\n- [Another form of ID…](http://www.elections.state.md.us/voting/election_day_questions.html)"
+  },
+  "ME": {
+    "officialSite": "http://www.maine.gov/sos/cec/elec/voter-info/right.html",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Maine before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Maine, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A Maine driver's license or state ID card\n- A current utility bill, bank statement, government check, paycheck, or government document that shows your name and address\n- [Another form of ID…](http://www.maine.gov/sos/cec/elec/voter-info/right.html)"
+  },
+  "MI": {
+    "alternative": "You may sign a sworn statement that you don't have a picture ID card when you go vote.",
+    "officialSite": "http://www.michigan.gov/sos/0,4670,7-127-1633_8716-178123--,00.html",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Michigan, you **must bring ID** with you! It can be one of:\n\n- A driver's license or state ID card\n- Federal or state government-issued photo ID\n- Military photo ID\n- Student photo ID from a high school or accredited institution of higher education\n- Tribal photo ID\n- A U.S. passport\n\nIf you're a first-time voter in Michigan, and registered by mail, you **must** bring one of the following that shows your name and current address:\n\n- A Michigan ID\n- A utility bill\n- A government document that shows your name and current address.\n- [Another form of ID…](http://www.michigan.gov/sos/0,4670,7-127-1633_8716-178123--,00.html)"
+  },
+  "MN": {
+    "officialSite": "http://www.sos.state.mn.us/elections-voting/register-to-vote/register-on-election-day/",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you're already registered to vote in Minnesota, and you've voted in the past four years in Minnesota, you **don't** need to bring an ID! We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Minnesota, you're registering at the polls, or your registration is inactive, you **must** bring one of the following:\n\n- A Minnesota driver's license\n- A Minnesota personal ID card\n- [Another form of ID…](http://www.sos.state.mn.us/elections-voting/register-to-vote/register-on-election-day/)"
+  },
+  "MO": {
+    "alternative": "You may vote if two (2) supervising election judges, one from each major political party, attest that they know you.",
+    "officialSite": "https://www.sos.mo.gov/elections/goVoteMissouri/howtovote#Forms",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Missouri, you **must bring ID** with you! It can be one of:\n\n- A driver's license or state ID card\n- A Missouri- or federal-issued ID\n- A Missouri college ID\n- A U.S. passport\n- [Another form of ID…](https://www.sos.mo.gov/elections/goVoteMissouri/howtovote#Forms)"
+  },
+  "MS": {
+    "alternative": "You can cast an affidavit ballot, which will be counted if you return to the appropriate circuit clerk by Sunday, November 13, and do one of the following:\n- Show a government-issued photo ID\n- Sign an affidavit that you have religious objection to being photographed",
+    "alternativeLink": "http://www.msvoterid.ms.gov/Pages/Forms/What%20if%20I%20don't%20have.pdf",
+    "officialSite": "http://www.msvoterid.ms.gov/Pages/VoterIDAcceptID.htm",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Mississippi, you **must bring ID** with you! It can be one of:\n\n- A driver's license\n- A Mississippi photo ID card\n- [A Mississippi college ID](http://www.msvoterid.ms.gov/Pages/forms/Authorized%20College%20and%20University%20List.pdf)\n- A U.S. military ID\n- A U.S. passport\n- [Another form of ID…](http://www.msvoterid.ms.gov/Pages/VoterIDAcceptID.htm)"
+  },
+  "MT": {
+    "alternative": "You can sign the precinct register and cast a provisional ballot. If your signature on the provisional ballot matches the signature on the your registration record, the ballot is counted.\n\nIf you've voted in Montana before, you can also [vote early](https://www.voteplz.org/vote/early/) in person without an ID.",
+    "officialSite": "http://sos.mt.gov/elections/Vote/index.asp)",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "earlyVoteRequiredId": "If you've voted in Montana before, no ID is required to vote early in person (though it is to vote on Election Day). We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're voting for the first time in Montana and didn't provide your driver's license number, last 4 digits of your Social Security number, or a copy of ID when you registered to vote, bring one of the following:\n\n- A photo ID that shows your name, including a driver's license, school ID card or tribal photo ID\n- A document such as a utility bill, bank statement, pay statement, confirmation of voter registration, government check, or other government document that that shows your name and current address",
+    "requiredId": "In Montana, to vote on Election Day, you **must bring ID** with you! It can be one of:\n\n- A driver's license\n- A state-issued ID card\n- A U.S. passport\n- [Another form of ID…](http://sos.mt.gov/elections/Vote/index.asp)\n\nIf you're voting for the first time in Montana and didn't provide your driver's license number, last 4 digits of your Social Security number, or a copy of ID when you registered to vote, bring one of the following:\n\n- A photo ID that shows your name, including a driver's license, school ID card or tribal photo ID\n- A document such as a utility bill, bank statement, pay statement, confirmation of voter registration, government check, or other government document that that shows your name and current address"
+  },
+  "NC": {
+    "alternative": "You can apply for an mail-in absentee ballot, which does not require a photo ID.\n\nIf you're unable to get an acceptable photo ID due to a reasonable impediment, you can vote a provisional ballot if you also sign a declaration describing the impediment and provide your birthday and last four digits of your social security number, or an acceptable document bearing your name and address (i.e. a current utility bill, bank statement, paycheck or other government-issued document). The ballot will be counted when the information on the declaration is verified and all other elibility requirements are met.\n\nYou can then also go in person to the County Board of Elections no later than noon on November 17 to make sure your ballot will be counted, by doing one of the following:\n  - Present a photo ID that bears a reasonable resemblance to you\n  - Show a HAVA document and sign a declaration of your religious objection.",
+    "officialSite": "http://ncsbe2.azurewebsites.net/Voting",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in North Carolina before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in North Carolina, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license or state ID\n- An employee ID\n- A student ID\n- A U.S. military ID\n- A utility bill, bank statement, government check, paycheck or other government document that shows your name and current address\n- A U.S. Passport\n- [Another form of ID…](http://ncsbe2.azurewebsites.net/Voting)"
+  },
+  "NE": {
+    "officialSite": "http://www.sos.ne.gov/elec/voter_info.html",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Nebraska before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Nebraska, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A current photo ID, such as a driver's license, state ID, or U.S. passport\n- A current utility bill, bank statement, government check, paycheck, or other government document that shows your name and address\n- [Another form of ID…](http://www.sos.ne.gov/elec/voter_info.html)"
+  },
+  "ND": {
+    "alternative": "A member of Election Day board or a poll clerk that knows you can simply vouch for you, or you can execute an affidavit swearing under penalty of perjury that he or she was a qualified elector in the precinct.",
+    "officialSite": "https://vip.sos.nd.gov/idrequirements.aspx",
+    "idType": "non-photo",
+    "idLevel": "strict",
+    "requiredId": "In North Dakota, you **must bring ID** with you! Your ID (or a combination of IDs) must show your North Dakota address and your birthdate.\n\n- A North Dakota driver's license\n- A North Dakota non-driver's ID card\n- A U.S. military ID\n- A U.S. Passport\n- [Another form of ID…](https://vip.sos.nd.gov/idrequirements.aspx)"
+  },
+  "NH": {
+    "alternative": "You can have your identity verified by a voting official at your voting location, or be photographed by a voting official at your voting location before you vote (if you object to being photographed for religious reasons, you can sign a sworn statement instead).\n\nIf you've voted in New Hampshire before, you can [vote early](https://www.voteplz.org/vote/early/) in person without an ID.",
+    "officialSite": "http://sos.nh.gov/WorkArea/DownloadAsset.aspx?id=8589950550",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In New Hampshire, you **must bring ID** with you to vote on Election Day (November 8). Bring one of the following:\n\n- A driver's license, regardless of expiration date\n- A state-issued non-driver ID card\n- A New Hampshire Voter ID card issued under R.S. 260:21\n- A U.S. military ID\n- A New Hampshire student ID\n- A U.S. passport, regardless of expiration date\n- [Another form of ID…](http://sos.nh.gov/WorkArea/DownloadAsset.aspx?id=8589950550)\n\nID is not required when you vote early.",
+    "earlyVoteRequiredId": "In you've voted in New Hampshire before, no ID is required to vote early in person (though it is to vote on Election Day). We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're voting for the first time in New Hampshire and didn't provide your driver's license number, last 4 digits of your Social Security number, or a copy of ID when you registered to vote, bring one of the following:\n\n- A photo ID that shows your name, including a driver's license, school ID card or tribal photo ID\n- A document such as a utility bill, bank statement, pay statement, confirmation of voter registration, government check, or other government document that that shows your name and current address"
+  },
+  "NJ": {
+    "officialSite": "http://www.njelections.org/voting-information-voting.html",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in New Jersey before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter your county, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A New Jersey driver's license\n- A U.S. military or other government ID\n- A student or job ID\n- A current utility bill, bank statement, pay statement, government check, or other government document that shows your name and address\n- A U.S. passport\n- [Another form of ID…](http://www.njelections.org/voting-information-voting.html)"
+  },
+  "NM": {
+    "officialSite": "http://sos.mt.gov/elections/vote/index.asp",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in New Mexico before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in New Mexico, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A photo ID, such as a driver's license, state ID, or U.S. passport\n- A utility bill\n- A bank statement\n- A government check\n- A paycheck\n- A student ID card\n- An ID issued by an Indian nation, tribe or pueblo\n- Any other government document that shows your name and current address\n-[Another form of ID…](http://sos.mt.gov/elections/vote/index.asp)"
+  },
+  "NV": {
+    "officialSite": "http://b.3cdn.net/advancement/4683c27dcddddf627c_t7m6iyxnh.pdf",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "Some Nevada polling stations ask for ID at the polls, so bring one of these IDs if possible:\n\n- A Nevada driver's license\n- A Nevada ID card\n- A student, government or military ID card\n- A U.S. passport\n- [Another form of ID…](http://b.3cdn.net/advancement/4683c27dcddddf627c_t7m6iyxnh.pdf)\n\nIf you're a first-time voter in Nevada, and registered by mail or online without including an ID number or photocopy, you **must** bring one of the following:\n\n- A current photo ID that shows your address\n- A copy of a current utility bill, bank statement, paycheck, or other government document that shows your name and address (however, a voter registration ID is not accepted)"
+  },
+  "NY": {
+    "officialSite": null,
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in New York before, you **don't** need to bring an ID! We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in New York, and registered by mail without including an ID photocopy that shows your name and address, you **must** bring one of the following:\n\n- A New York driver's license\n- A state ID card\n- A current utility bill, bank statement, government check, paycheck, or government document that shows your name and address when you registered"
+  },
+  "OH": {
+    "alternative": "If you have ID, but decline to provide it, you can cast a provisional ballot upon providing the last four digits of your social security number. If you don't have ID nor a social security number, you can sign an affidavit and vote a provisional ballot. Even if you decline to sign the affidavit, you can still vote a provisional ballot.\n\nIf you cast a provisional ballot because you didn't provide acceptable proof of identify, you must appear in person at the board of elections to provide such proof by Friday, November 18.",
+    "officialSite": "http://www.sos.state.oh.us/SOS/elections/Voters/ID.aspx",
+    "idType": "non-photo",
+    "idLevel": "strict",
+    "requiredId": "In Ohio, you **must bring ID** with you! It can be one of:\n\n- An unexpired Ohio driver's license\n- An unexpired Ohio state ID card\n- A government or military ID card\n- [Another form of ID…](http://www.sos.state.oh.us/SOS/elections/Voters/ID.aspx)"
+  },
+  "OK": {
+    "alternative": "You can cast a provisional ballot if you're unable or unwilling to produce proof of identity. The ballot will be founted if your name, residence address, date of birth, and driver's license number or last four digits of social security number match what is in the registration database.",
+    "officialSite": "https://www.ok.gov/elections/faqs.html#c247",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Oklahoma, you **must bring ID** with you! It can be one of:\n\n- A current Oklahoma driver's license\n- A current Oklahoma ID card\n- A U.S. military ID card\n- A U.S. passport\n- [Another form of ID…](https://www.ok.gov/elections/faqs.html#c247)"
+  },
+  "OR": {
+    "officialSite": null,
+    "idType": null,
+    "idLevel": null,
+    "earlyVoteRequiredId": "Nothing, just mail in your ballot!",
+    "requiredId": "If you've voted in Oregon before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're voting for the first time in Oregon, registered to vote by mail, and didn't provide ID when you registered, you **must bring an ID** from this list:\n\n- Valid photo ID, such as a driver's license or state ID card\n- A copy of a current utility bill, bank statement, paycheck, government check, or other government document that shows your name and address"
+  },
+  "PA": {
+    "officialSite": "http://www.votespa.com/en-us/Pages/First-Time-Voter.aspx",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted at your voting location before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're voting for the first time at your voting location, bring one of the following photo IDs with you:\n\n- A photo ID issued by any Pennsylvania agency or the U.S. government\n- A U.S. passport\n- [Another form of ID…](http://www.votespa.com/en-us/Pages/First-Time-Voter.aspx)"
+  },
+  "RI": {
+    "alternative": "You can cast a provisional ballot. If the signature on the provisional ballot matches the one on your voter registration, the provisional ballot will be counted.",
+    "officialSite": "http://sos.ri.gov/divisions/elections/Voters/voter-id",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Rhode Island, you **must bring ID** with you! It can be one of:\n\n- A Rhode Island driver's license\n- A Rhode Island voter ID card\n- An ID card issued by a U.S. educational institution\n- A U.S. military ID card\n- An ID card issued by the U.S. government or state of Rhode Island\n- A Government-issued medical card\n- A U.S. passport\n- [Another form of ID…](http://sos.ri.gov/divisions/elections/Voters/voter-id)"
+  },
+  "SC": {
+    "alternative": "Bring your non-photo voter registration card with you to the polling place. You may vote a provisional ballot after signing an affidavit stating you have a reasonable impediment to obtaining Photo ID. A reasonable impediment is any valid reason, beyond your control, which created an obstacle to obtaining Photo ID.",
+    "officialSite": "http://www.scvotes.org/2012/09/24/photo_id_requirements",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In South Carolina, you **must bring ID** with you! It can be one of:\n\n- A South Carolina driver's license or non-driver's photo ID card\n- A U.S. military photo ID card\n- A South Carolina voter registration card with a photo\n- A U.S. passport\n- [Another form of ID…](http://www.scvotes.org/2012/09/24/photo_id_requirements)"
+  },
+  "SD": {
+    "alternative": "You can provide information affirming your identity and have your form verified by a notary",
+    "officialSite": "https://sdsos.gov/elections-voting/voting/default.aspx",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In South Dakota, you **must bring ID** with you! It can be one of:\n\n- A South Dakota driver's license\n- A South Dakota student ID\n- A government or military ID card\n- A U.S. passport\n- [Another form of ID…](https://sdsos.gov/elections-voting/voting/default.aspx)"
+  },
+  "TN": {
+    "alternative": "You can vote via provisional ballot. The ballot will only be counted if you provide identification to the administrator of elections or the administrator's designee by the close of business on Thursday, November 10.\n\nIf you're indigent and unable to obtain proof of identification without payment of a fee, or you have a religious objection to being photographed, you can sign an affidavit of identity and then be allowed to vote.",
+    "officialSite": "http://sos.tn.gov/products/elections/what-id-required-when-voting",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Tennessee, you **must bring ID** with you! It can be one of:\n\n- A Tennessee driver's license\n- A Tennessee ID card\n- A government or military ID\n- A U.S. passport\n- [Another form of ID…](http://sos.tn.gov/products/elections/what-id-required-when-voting)"
+  },
+  "TX": {
+    "alternative": "You'll need to sign a sworn statement that there is a reason why you don't have any of the IDs listed above, and bring one of the following:\n\n- A valid voter registration certificate\n- A certified birth certificate\n- A current utility bill\n- A Government check\n- A paystub or bank statement that includes your name and address\n- A copy of or original government document with your name and an address (original required if it contains a photograph).",
+    "officialSite": "http://www.votetexas.gov/register-to-vote/need-id/",
+    "idType": "photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Texas, you **must bring a photo ID** with you! It must be current and valid (no more than 60 days expired). It can be one of:\n\n- A Texas driver's license\n- A Texas personal ID card\n- A U.S. military ID card\n- A U.S. passport\n- [Another form of ID…](http://www.votetexas.gov/register-to-vote/need-id/)"
+  },
+  "UT": {
+    "alternative": "You can cast a provisional ballot. A county clerk can then verify your identity and residence if you cannot provide ID by other means.",
+    "officialSite": "https://vote.utah.gov/vote/menu/requirements.html",
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "In Utah, you **must bring ID** with you! It can be one of:\n\n- A current and valid Utah driver's license\n- A current and valid ID card issued by the state or federal government\n- A concealed weapon permit\n- A U.S. passport\n- A current and valid U.S. military ID card\n- A Bureau of Indian Affairs card\n- A tribal treaty card\n- A tribal ID card\n- Any two forms of ID that bear your name and provide evidence that you reside in the precinct\n- [Another form of ID…](https://vote.utah.gov/vote/menu/requirements.html)"
+  },
+  "VA": {
+    "alternative": "You can cast a provisional ballot.\n\nYou'll then have to submit a copy of one of the forms of identification to the electoral board by fax, email, in-person submission, or physical mail, to be received by the electoral board no later than noon on November 11.",
+    "officialSite": "http://www.elections.virginia.gov/casting-a-ballot/in-person-voting/index.html",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Virginia, you **must bring a photo ID** with you! Bring one of the following forms of current and valid photo ID:\n\n- A Virginia voter registration card\n- A Virginia driver's license\n- Any other photo ID card issued by a government agency of the Commonwealth, one of its political subdivisions, or the United States\n- Any valid student photo ID card issued by any institution of higher education located in Virginia\n- An employee photo ID card\n- A U.S. passport\n- [Another form of ID…](http://www.elections.virginia.gov/casting-a-ballot/in-person-voting/index.html)"
+  },
+  "VT": {
+    "officialSite": "https://www.sec.state.vt.us/elections/frequently-asked-questions/voting-information.aspx",
+    "idType": null,
+    "idLevel": null,
+    "earlyVoteRequiredId": "If you've voted in Vermont before, no ID is required to vote early in person (though it is to vote on Election Day). We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Vermont, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A photo ID that shows your name, including a driver's license, school ID card or tribal photo ID\n- A document such as a utility bill, bank statement, pay statement, confirmation of voter registration, government check, or other government document that that shows your name and current address",
+    "alternative": "If you've voted in Vermont before, you can [vote early](https://www.voteplz.org/vote/early/) in person without an ID.",
+    "requiredId": "If you're voting on Election Day for the first time in Vermont, registered to vote by mail, and didn't provide ID when you registered, you **must bring an ID** from this list:\n\n- A valid photo ID, such as a driver's license or state ID card\n- A copy of a current utility bill, bank statement, paycheck, government check, or other government document that shows your name and address\n- [Another form of ID…](https://www.sec.state.vt.us/elections/frequently-asked-questions/voting-information.aspx)"
+  },
+  "WA": {
+    "alternative": "You'll have to vote a provisional ballot. Your ballot will count if the signature on your ballot declaration matches the signature on your voter registration record.",
+    "officialSite": null,
+    "idType": "non-photo",
+    "idLevel": "non-strict",
+    "requiredId": "Most Washington voters vote by mail. Only those who wish to vote in person are subject to ID requirements.\n\nIn Washington, you **must bring a valid photo ID** when you vote in person. It can be one of:\n\n- A state driver's license\n- A state ID card\n- A student ID card\n- A tribal ID card\n- An employer ID card"
+  },
+  "WI": {
+    "alternative": "You can still vote in the 2016 general election by signing an affidavit at your polling place swearing your identity.",
+    "officialSite": "http://www.bringitwisconsin.com/do-i-have-right-photo-id",
+    "idType": "photo",
+    "idLevel": "strict",
+    "requiredId": "In Wisconsin, you **must bring ID** with you! Bring one of the following forms of current and valid photo ID:\n\n- A Wisconsin driver's license\n- A Wisconsin ID card\n- A U.S. passport\n- [Another form of ID…](http://www.bringitwisconsin.com/do-i-have-right-photo-id)"
+  },
+  "WV": {
+    "alternative": "You can cast a provisional ballot after executing an affidavit confirming your identity. The ballot will be counted if the signature on the ballot matches the one on file from your voter registration.",
+    "officialSite": "http://www.sos.wv.gov/elections/current/Pages/VoterFAQs.aspx#anchor_1405101514704",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in West Virginia before, you **don't** need to bring an ID with you. We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in West Virginia, and registered by mail without including an ID number or photocopy, you **must** bring one of the following:\n\n- A driver's license, state-issued ID, or U.S. passport\n- A copy of a current utility bill\n- A copy of a current bank statement\n- A copy of a current paycheck\n- A copy of a current government check\n- A copy of other current government document that shows your name and address\n- [Another form of ID…](http://www.sos.wv.gov/elections/current/Pages/VoterFAQs.aspx#anchor_1405101514704)"
+  },
+  "WY": {
+    "officialSite": "http://soswy.state.wy.us/Forms/Elections/General/VoterRegistrationForm.pdf",
+    "idType": null,
+    "idLevel": null,
+    "requiredId": "If you've voted in Wyoming before, you **don't** need to bring an ID! We still strongly recommend bringing your driver's license, passport, or other photo ID with you, if possible.\n\nIf you're a first-time voter in Wyoming, and registered by mail, you **must** bring one of the following:\n\n- A Wyoming driver's license\n- A Wyoming state ID card\n- A current utility bill, bank statement, government check, paycheck, or government document that shows your name and address when you vote"
+  }
+}
