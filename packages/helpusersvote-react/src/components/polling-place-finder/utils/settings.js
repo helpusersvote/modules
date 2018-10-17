@@ -1,11 +1,13 @@
 function get(key) {
   if (typeof process !== 'undefined' && process.env) {
-    return process.env[key]
-  } else if (typeof window !== 'undefined') {
-    return window[key]
-  } else {
-    return ''
+    if (process.env[key]) return process.env[key]
   }
+
+  if (typeof window !== 'undefined') {
+    if (window[key]) return window[key]
+  }
+
+  return ''
 }
 
 export const CIVIC_INFO_API_KEY = get('CIVIC_INFO_API_KEY')
