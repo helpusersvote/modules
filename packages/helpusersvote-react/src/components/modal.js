@@ -1,5 +1,4 @@
 import React from 'react'
-
 import colors from '../utils/colors'
 
 function LogoAddition({ logoUrl, logoAlt, logoHref }) {
