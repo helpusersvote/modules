@@ -8,7 +8,7 @@ This is our monorepo of [npm](https://npmjs.com) modules to use in your applicat
 
 **Framework-specific Components**
 
-- [@helpusersvote/react](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-react) with [Storybook →](https://storybook.helpusersvote.com)
+- [@helpusersvote/react](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-react) with [Storybook demo →](https://helpusersvote.github.io/modules)
 
 **Native JavaScript Functions**
 
@@ -38,19 +38,44 @@ const HomePage = props => (
 export default HomePage
 ```
 
-### Dynamic Configuration in React
+### Polling Place Finder in HTML
 
-To dynamically configure CTAs, use the `SmartCTA` component which pulls config from `cdn.helpusersvote.com`:
+Adding the polling place finder to your website is as simple as dropping in our `<script>` tag and adding your [Google Civic Information](https://developers.google.com/civic-information/) and [Maps](https://developers.google.com/maps/documentation/) API keys:
+
+```html
+<html>
+<body>
+  <!-- Help Users Vote - Polling Place Finder -->
+  <script>
+    window.CIVIC_INFO_API_KEY = 'REPLACE_WITH_CIVIC_API_KEY'
+    window.GMAPS_API_KEY = 'REPLACE_WITH_GMAPS_API_KEY'
+  </script>
+  <script src="https://js-cdn.helpusersvote.net/polling-place-finder.js"  defer async></script>
+  <div id="huv-root" />
+</body>
+</html>
+```
+
+### Polling Place Finder in React
+
+You can easily add the polling place finder into your React app by importing the component and passing in the necessary API keys:
 
 ```javascript
-import { SmartCTA } from '@helpusersvote/react'
+import { PollingPlaceFinder } from '@helpusersvote/react'
 import Home from '../components/home'
+
+const apiKeys = {
+  CIVIC_INFO_API_KEY: '',
+  GMAPS_API_KEY: '',
+  // If you're on Google Maps Premium Plan
+  GMAPS_API_SIGNATURE_SECRET: ''
+}
 
 // namespaceId = partner id for your team
 // id = lookup key for call-to-action, e.g. where it's rendered
 const HomePage = props => (
   <Home>
-    <SmartCTA namespaceId="<partner-id>" id="home-page">
+    <PollingPlaceFinder apiKeys={apiKeys}>
   </Home>
 )
 
@@ -58,38 +83,6 @@ export default HomePage
 ```
 
 We don't set any cookies on these requests — this is a configuration CDN to check if a banner versus a popup should be rendered or if the link should be purple versus pink.
-
-### Javascript-only
-
-If you just want to check if there should be a call-to-action and place nonpartisan copy with an existing component, install our JavaScript libraries:
-
-```bash
-npm install --save @helpusersvote/logic @helpusersvote/copy
-```
-
-Then in your application (client-side or server-side):
-
-```javascript
-const { shouldShowCTA } = require('@helpusersvote/logic')
-const { getElectionText } = require('@helpusersvote/copy')
-
-module.exports = function getHome(req, res) {
-  const { titleText, ctaText, ctaHref } = getElectionText({
-    type: 'countdown'
-  })
-
-  return res.render('index', {
-    electionCTA: shouldShowCTA() ? {
-      // Election day is in 3 days!
-      titleText,
-      // Get ready to vote
-      ctaText,
-      // https://vote.org
-      ctaHref
-    } : {}
-  }) 
-}
-```
 
 ## License
 

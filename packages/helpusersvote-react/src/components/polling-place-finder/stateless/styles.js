@@ -53,7 +53,10 @@ const styles = `
   background-image: -moz-linear-gradient(to top, #0055b0, #004ca3);
   background-image: linear-gradient(to top, #0055b0, #004ca3);
 }
-.address-form {
+.huv-shadow {
+  box-shadow: rgba(67, 90, 111, 0.416) 0px 0px 1px, rgba(67, 90, 111, 0.3) 0px 2px 4px -2px;
+}
+.huv-address-form {
   background: white;
   color: #303E50;
   overflow: hidden;
@@ -61,11 +64,9 @@ const styles = `
   font-size: 16px;
   border-radius: 4px;
 }
-
-.address-form-content {
+.huv-address-form-content {
   padding: 16px;
 }
-
 .report-error {
   background: none;
   border: none;
@@ -74,15 +75,39 @@ const styles = `
   margin: 8px 16px;
   color: #898989;
 }
-
 .report-error:hover, .report-error:focus {
   text-decoration: underline;
 }
-
+.huv-address-form input {
+  transition: 0.125s ease-out box-shadow;
+}
+.huv-address-form input:not([disabled]):not([data-disabled]):focus,
+.huv-address-form input:not([disabled]):not([data-disabled]):focus {
+  outline: none;
+  z-index: 2;
+  border: 1px solid #579ad9;
+  box-shadow: 0 0 0 3px rgba(1,108,209,0.301);
+}
 /**
-* Directions.
-*/
-
+ * Autocomplete
+ */
+.huv-autocomplete-option:last-of-type {
+  border-bottom: 0;
+}
+.huv-autocomplete-option:hover {
+  background: rgba(67, 90, 111, 0.04);
+}
+.huv-autocomplete-option:active {
+  background: rgba(16, 112, 202, 0.06);
+}
+.huv-autocomplete-option--active,
+.huv-autocomplete-option--active:hover,
+.huv-autocomplete-option--active:active {
+  background: rgba(16, 112, 202, 0.06);
+}
+/**
+ * Directions.
+ */
 .directions {
   position: relative;
   overflow: hidden;

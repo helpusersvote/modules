@@ -12,4 +12,33 @@ export function toAddr(address) {
   return [addr, zip].filter(Boolean).join(' ')
 }
 
-export default { toAddr }
+/**
+ * Convert Google Maps `Place` object to an address object
+ *
+ * @param {Object} place
+ * @return {Object}
+ */
+
+export function placeToAddress(place) {
+  const address = {}
+  const formattedPlace = place.structured_formatting || {}
+
+  address.line1 = formattedPlace.main_text || ''
+
+  const restOfAddress = formattedPlace.secondary_text || ''
+  const restParts = restOfAddress.split(', ').filter(t => t !== 'USA')
+
+  // Examples:
+  // - Santa Cruz, CA, USA
+  restParts.forEach(value => {
+    if (!address.city) {
+      address.city = value
+    } else if (!address.state) {
+      address.state = value
+    }
+  })
+
+  return address
+}
+
+export default { toAddr, placeToAddress }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AddressAutocomplete from './address-auto-complete'
 import Button from './button'
 
 const addressFields = ['line1', 'city', 'state', 'zip']
@@ -11,36 +12,46 @@ const FIELD_PLACEHOLDERS = {
 
 class AddressForm extends Component {
   render() {
-    const { onSubmit, onChange, state, props } = this
+    const { state, props } = this
     const { title, description } = props
+    const { useAutocomplete } = state
+    const content = useAutocomplete ? (
+      <AddressAutocomplete
+        onToggleAutocomplete={this.onToggleAutocomplete}
+        onChange={this.onAutocompleteChange}
+      />
+    ) : (
+      addressFields.map((field, index) => (
+        <div
+          key={field}
+          className={`w-100 w-50-ns ${
+            index % 2 === 0 ? 'pr3-ns' : ''
+          } pb3 border-box`}
+        >
+          <input
+            required
+            type="text"
+            name={field}
+            value={state[field]}
+            onChange={this.onInputChange(field)}
+            className="mw-100 w-100 f4-ns f5 input-reset ba b--black-20 pa2 border-box br1"
+            placeholder={FIELD_PLACEHOLDERS[field]}
+          />
+        </div>
+      ))
+    )
 
     return (
-      <form onSubmit={onSubmit} className="address-form w-100 mt3 mt4-ns">
+      <form
+        onSubmit={this.onSubmit}
+        className="huv-address-form w-100 mt3 mt4-ns"
+      >
         <div className="heading-container">
           <h1 className="heading">{title}</h1>
         </div>
-        <div className="address-form-content">
+        <div className="huv-address-form-content">
           <div className="mt1 mb3 f5 f4-ns">{description}</div>
-          <div className="flex flex-wrap">
-            {addressFields.map((field, index) => (
-              <div
-                key={field}
-                className={`w-100 w-50-ns ${
-                  index % 2 === 0 ? 'pr3-ns' : ''
-                } pb3 border-box`}
-              >
-                <input
-                  required
-                  type="text"
-                  name={field}
-                  value={state[field]}
-                  onChange={onChange(field)}
-                  className="mw-100 w-100 f4-ns f5 input-reset ba b--black-20 pa2 border-box br1"
-                  placeholder={FIELD_PLACEHOLDERS[field]}
-                />
-              </div>
-            ))}
-          </div>
+          <div className="flex flex-wrap">{content}</div>
           <div className="mt3 flex justify-center">
             <Button
               is="button"
@@ -48,7 +59,7 @@ class AddressForm extends Component {
               display="block"
               textAlign="center"
               appearance="blue"
-              onClick={onSubmit}
+              onClick={this.onSubmit}
             >
               Go!
             </Button>
@@ -65,7 +76,29 @@ class AddressForm extends Component {
     zip: ''
   }
 
-  onChange = key => e => this.setState({ [key]: e.target.value })
+  constructor(props) {
+    super(props)
+
+    if (props.useAutocomplete) {
+      this.state.useAutocomplete = true
+    }
+  }
+
+  onToggleAutocomplete = () => {
+    this.setState({
+      useAutocomplete: !this.state.useAutocomplete
+    })
+  }
+
+  onAutocompleteChange = address => {
+    this.setState({
+      ...address
+    })
+
+    this.props.onSelectAddress(address)
+  }
+
+  onInputChange = key => e => this.setState({ [key]: e.target.value })
 
   onSubmit = e => {
     if (e.preventDefault) e.preventDefault()
