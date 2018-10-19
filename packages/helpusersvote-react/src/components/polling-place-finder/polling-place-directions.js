@@ -5,11 +5,12 @@ import EARLY_VOTING_DATA from './data/early-voting.json'
 import POLLING_PLACE_DATA from './data/polls.json'
 import { getMapImages, toAddr } from './utils'
 
-import GoogleReportForm from './stateless/google-report-form'
-import LocationAddress from './stateless/location-address'
+import EarlyVotingCTA from './stateless/early-voting-cta'
 import PollingPlaceNotFound from './stateless/not-found'
-import { ElectionDayNotice } from './stateless/election-day'
+import LocationAddress from './stateless/location-address'
+import GoogleReportForm from './stateless/google-report-form'
 import { DirectionsDate, DirectionsHours } from './stateless/directions'
+import { ElectionDayNotice } from './stateless/election-day'
 
 export function PollingPlaceDirections({
   address: backupAddress,
@@ -21,7 +22,7 @@ export function PollingPlaceDirections({
   const state = getState(address.state)
   const earlyVoting = EARLY_VOTING_DATA[state.abbr] || {}
   const pollingPlace = POLLING_PLACE_DATA[state.abbr] || {}
-  const { earlyLocations, locations = [] } = voterInfo
+  const { earlyVotingTimeLeft, earlyLocations, locations = [] } = voterInfo
 
   if (locations && locations.length === 0) {
     return (
@@ -111,7 +112,11 @@ export function PollingPlaceDirections({
                   location={location}
                   pollingPlace={pollingPlace}
                 />
-                <ElectionDayNotice />
+                <EarlyVotingCTA
+                  isElectionDay={isElectionDay}
+                  timeLeft={earlyVotingTimeLeft}
+                />
+                <ElectionDayNotice isElectionDay={isElectionDay} />
               </div>
             </div>
             <div className="mt3 dn db-ns">

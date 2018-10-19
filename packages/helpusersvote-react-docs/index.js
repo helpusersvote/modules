@@ -187,6 +187,8 @@ storiesOf('Should Show CTA', module)
     )
   })
 
+const POLLING_PLACE_FINDER_CLASSES = 'ph5-ns ph2 center'
+
 storiesOf('Polling Place Finder', module)
   .addDecorator(
     withOptions({
@@ -194,19 +196,25 @@ storiesOf('Polling Place Finder', module)
     })
   )
   .add('Default', () => (
-    <div className="ph6 center">
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
       <PollingPlaceFinder />
     </div>
   ))
   .add('Early Voting', () => (
-    <div className="ph6 center">
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
       <PollingPlaceFinder type="early" />
     </div>
   ))
+  .add('Election Day', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder electionDay />
+    </div>
+  ))
   .add('Error Preview', () => (
-    <div className="ph6 center">
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
       <PollingPlaceFinder>
         <FakeError />

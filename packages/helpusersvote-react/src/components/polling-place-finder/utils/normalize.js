@@ -147,6 +147,10 @@ export function normalizeVoterInfo(info) {
       : null
   }
 
+  if (data.earlyVotingEndDateTime) {
+    data.earlyVotingTimeLeft = Day(data.earlyVotingEndDateTime).fromNow(true)
+  }
+
   if (info.pollingLocations) {
     data.locations = info.pollingLocations.map(normalizeLocation)
   }

@@ -13,12 +13,8 @@ export function EarlyVotingDirections({
   onChangeAddress
 }) {
   const address = voterInfo.address || backupAddress
-  const { earlyLocations: locations } = voterInfo
+  const { earlyVotingTimeLeft, earlyLocations: locations } = voterInfo
   const location = locations[0]
-
-  const earlyVotingTimeLeft = Day(voterInfo.earlyVotingEndDateTime).fromNow(
-    true
-  )
 
   const userAddr = toAddr(address)
   const pollAddr = toAddr(location.address)
