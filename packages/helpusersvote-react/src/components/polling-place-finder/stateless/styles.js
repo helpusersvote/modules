@@ -5,6 +5,10 @@ const styles = `
   padding: 0 2px;
   font-family: SF UI Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
+.huv-container .gray,
+.huv-container .light-gray {
+  color: #69778b;
+}
 .huv-button {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -73,7 +77,7 @@ const styles = `
   cursor: pointer;
   padding: 0;
   margin: 8px 16px;
-  color: #898989;
+  color: #69778b;
 }
 .report-error:hover, .report-error:focus {
   text-decoration: underline;
@@ -137,7 +141,7 @@ const styles = `
   line-height: 19px;
   text-transform: uppercase;
   font-weight: bold;
-  color: #A7B0BD;
+  color: #69778b;
 }
 
 .directions-address-line1 {
