@@ -35,17 +35,21 @@ export function getMapImages(opts = {}) {
   }
 }
 
-const GMAPS_SCRIPT_TIMEOUT = 2000 // 2 seconds
+const GMAPS_SCRIPT_TIMEOUT = 10000 // 10 seconds
+const timeoutSeconds = GMAPS_SCRIPT_TIMEOUT / 1000
 
 export function loadGmaps() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error('huv.loadGmaps: script took longer than 2s'))
+      reject(
+        new Error(`huv.loadGmaps: script took longer than ${timeoutSeconds}s`)
+      )
     }, GMAPS_SCRIPT_TIMEOUT)
 
     // Check if google maps has already been loaded on the page
-    if (document.getElementById('#huv-gmaps')) {
-      return Promise.resolve({ ok: true, alreadyLoaded: true })
+    if (document.getElementById('huv-gmaps')) {
+      resolve({ ok: true, alreadyLoaded: true })
+      return
     }
 
     // now load the Google Maps API by shoving it in a script node

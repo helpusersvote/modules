@@ -62,9 +62,13 @@ export class AddressAutoComplete extends Component {
         this.onClear()
         return false
       case 'Enter':
-        if (activeIndex >= 0) {
-          e.preventDefault()
-          this.onSelect(places[activeIndex])
+        e.preventDefault()
+        if (places[activeIndex]) {
+          if (places[activeIndex].onClick) {
+            places[activeIndex].onClick()
+          } else {
+            this.onSelect(places[activeIndex])
+          }
         }
         break
       case 'ArrowUp':
