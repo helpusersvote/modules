@@ -123,7 +123,7 @@ class PollingPlaceFinder extends Component {
     try {
       const s = new URLSearchParams(window.location.search)
       const queryParams = {
-        election: s.get('election') !== null
+        election: this.props.electionDay || s.get('election') !== null
       }
 
       this.setState({

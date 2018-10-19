@@ -8,8 +8,8 @@ export function ElectionDayNotice({ isElectionDay }) {
       If you are in line before closing time, you <em>must</em> be allowed to
       vote.
       <strong className="db mv3">Head over soon!</strong>
-      <a href={LEARN_MORE_HREF} className="link underline-hover">
-        Learn about your rights here &rarr;
+      <a href={LEARN_MORE_HREF} className="link blue underline-hover">
+        Learn about your rights
       </a>
     </div>
   ) : null
