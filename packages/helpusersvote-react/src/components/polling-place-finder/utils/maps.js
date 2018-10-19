@@ -1,4 +1,5 @@
 // import CryptoJS from 'crypto-js'
+import _ from 'lodash'
 import { GMAPS_API_KEY, GMAPS_API_SIGNATURE_SECRET } from './settings'
 
 // const { HmacSHA1, enc } = CryptoJS
@@ -34,6 +35,75 @@ export function getMapImages(opts = {}) {
   }
 }
 
+const GMAPS_SCRIPT_TIMEOUT = 2000 // 2 seconds
+
+export function loadGmaps() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('huv.loadGmaps: script took longer than 2s'))
+    }, GMAPS_SCRIPT_TIMEOUT)
+
+    // Check if google maps has already been loaded on the page
+    if (document.getElementById('#huv-gmaps')) {
+      return Promise.resolve({ ok: true, alreadyLoaded: true })
+    }
+
+    // now load the Google Maps API by shoving it in a script node
+    const head = document.getElementsByTagName('head')[0]
+    const scriptElement = document.createElement('script')
+
+    scriptElement.id = 'huv-gmaps'
+    scriptElement.onload = () => resolve({ ok: true })
+    scriptElement.onerror = err => reject(err)
+    scriptElement.type = 'text/javascript'
+    scriptElement.src = `https://maps.googleapis.com/maps/api/js?language=en&libraries=places&key=${GMAPS_API_KEY}`
+
+    head.appendChild(scriptElement)
+  })
+}
+
+export function fetchAutocompletePlaces(opts = {}) {
+  const { input = '' } = opts
+  const gclient = getGoogleClient()
+  const AutocompleteService = _.get(gclient, 'maps.places.AutocompleteService')
+
+  if (!AutocompleteService) {
+    console.error(
+      new Error('huv.gmaps: no autocomplete service found'),
+      gclient
+    )
+  }
+
+  if (!input) {
+    return Promise.resolve([])
+  }
+
+  const svc = new AutocompleteService()
+  const req = {
+    input,
+    componentRestrictions: { country: 'us' }
+  }
+
+  return new Promise((resolve, reject) => {
+    svc.getPlacePredictions(req, (results, status) => {
+      if (status !== 'OK' && status !== 'ZERO_RESULTS') {
+        return reject(
+          new Error(`huv.gmaps.getPlacePredictions: ${status} status`)
+        )
+      }
+
+      resolve(results || [])
+    })
+  })
+}
+
+export function getGoogleClient() {
+  return global.google
+}
+
 export default {
-  getMapImages
+  fetchAutocompletePlaces,
+  getGoogleClient,
+  getMapImages,
+  loadGmaps
 }

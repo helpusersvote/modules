@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import PollingPlaceFinderError from './stateless/polling-place-finder-error'
 import PollingPlaceDirections from './polling-place-directions'
 import EarlyVotingDirections from './early-voting-directions'
 import AddressForm from './stateless/address-form'
 import {
+  loadGmaps,
   fetchVoterInfo,
   normalizeVoterInfo,
   getEncryptedAddress,
@@ -14,17 +16,37 @@ import {
 class PollingPlaceFinder extends Component {
   render() {
     const { onSelectAddress, onChangeAddress } = this
-    const { ready, address, voterInfo, queryParams } = this.state
+    const {
+      ready,
+      address,
+      voterInfo,
+      queryParams,
+      didError,
+      shouldUseAutocomplete
+    } = this.state
     const { type } = this.props
 
     if (!ready) {
       return <div className="huv-container" />
     }
 
+    if (didError) {
+      return (
+        <div className="huv-container">
+          <PollingPlaceFinderError />
+        </div>
+      )
+    }
+
     let content
 
     if (!(address && address.line1 && voterInfo && voterInfo.locations)) {
-      content = <AddressForm onSelectAddress={onSelectAddress} />
+      content = (
+        <AddressForm
+          useAutocomplete={shouldUseAutocomplete}
+          onSelectAddress={onSelectAddress}
+        />
+      )
     } else {
       if (type === 'early') {
         content = (
@@ -56,16 +78,40 @@ class PollingPlaceFinder extends Component {
     address: {}
   }
 
+  componentDidCatch(error, info) {
+    console.error('e', error, info)
+    this.setState({ didError: true })
+  }
+
   async componentDidMount() {
+    try {
+      await this.prepareState()
+    } catch (err) {
+      console.error(err)
+      this.setState({ didError: true })
+    }
+  }
+
+  prepareState = async () => {
     const address = await getEncryptedAddress()
     const voterInfo = await this.getVoterInfo({ address })
 
-    if (address && !voterInfo) {
+    if (address && !(voterInfo && voterInfo.normalizedInput)) {
       console.log('polls.componentDidMount: found address but no voter info')
+      this.setState({ address, ready: true })
     }
 
     if (window.localStorage.debug) {
       console.log('v', voterInfo)
+    }
+
+    let shouldUseAutocomplete = true
+
+    try {
+      await loadGmaps()
+    } catch (err) {
+      console.error(err)
+      shouldUseAutocomplete = false
     }
 
     try {
@@ -74,11 +120,19 @@ class PollingPlaceFinder extends Component {
         election: s.get('election') !== null
       }
 
-      this.setState({ address, voterInfo, queryParams, ready: true })
+      this.setState({
+        address,
+        voterInfo,
+        queryParams,
+        shouldUseAutocomplete,
+        ready: true
+      })
     } catch (err) {
-      console.error('e', err)
-      this.setState({ address, voterInfo, ready: true })
+      console.error(err)
+      this.setState({ address, voterInfo, shouldUseAutocomplete, ready: true })
     }
+
+    return
   }
 
   async getVoterInfo({ address }) {
@@ -86,10 +140,10 @@ class PollingPlaceFinder extends Component {
       return null
     }
 
-    const { alwaysUseNetwork = false } = this.props
+    const { alwaysUseNetwork = true } = this.props
 
     if (alwaysUseNetwork) {
-      return await this.loadVoterInfo({ address })
+      return await this.loadVoterInfo(address)
     }
 
     return await getEncryptedVoterInfo()
