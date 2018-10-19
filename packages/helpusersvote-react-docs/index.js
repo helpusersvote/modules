@@ -205,3 +205,15 @@ storiesOf('Polling Place Finder', module)
       <PollingPlaceFinder type="early" />
     </div>
   ))
+  .add('Error Preview', () => (
+    <div className="ph6 center">
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder>
+        <FakeError />
+      </PollingPlaceFinder>
+    </div>
+  ))
+
+function FakeError() {
+  throw new Error('simulated fake error for Storybook')
+}
