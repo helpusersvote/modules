@@ -16,6 +16,7 @@ import {
 class PollingPlaceFinder extends Component {
   render() {
     const { onSelectAddress, onChangeAddress } = this
+    const { type, children } = this.props
     const {
       ready,
       address,
@@ -24,7 +25,6 @@ class PollingPlaceFinder extends Component {
       didError,
       shouldUseAutocomplete
     } = this.state
-    const { type } = this.props
 
     if (!ready) {
       return <div className="huv-container" />
@@ -69,7 +69,12 @@ class PollingPlaceFinder extends Component {
       }
     }
 
-    return <div className="huv-container">{content}</div>
+    return (
+      <div className="huv-container">
+        {content}
+        {children}
+      </div>
+    )
   }
 
   state = {
@@ -79,7 +84,8 @@ class PollingPlaceFinder extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.error('e', error, info)
+    // Report to Sentry
+    console.log('huv.componentDidCatch', { error, info })
     this.setState({ didError: true })
   }
 
