@@ -76,13 +76,12 @@ export function PollingPlaceDirections({
         earlyLocations &&
         earlyLocations.length > 0 && (
           <div className="mt2 f5-ns f6 gray">
-            In {state.name}, you can also vote <i>before</i> Election Day — find
-            your early voting information{' '}
+            In {state.name}, you can also vote <i>before</i> Election Day —{' '}
             <a
-              className="fw5 link blue underline-hover pointer"
+              className="link blue underline-hover pointer"
               href="https://www.vote.org/early-voting-calendar/"
             >
-              here
+              find your early voting information
             </a>
             .
           </div>
