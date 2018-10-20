@@ -39,12 +39,12 @@ export function EarlyVotingDirections({
       </div>
 
       <div className="mt2 f5-ns f6 gray">
-        Or vote on Election Day — find your polling place{' '}
+        Or vote on Election Day —{' '}
         <a
-          className="fw5 link blue underline-hover pointer"
+          className="link blue underline-hover pointer"
           href="https://www.vote.org/polling-place-locator/"
         >
-          here
+          find your polling place
         </a>
         .
       </div>
