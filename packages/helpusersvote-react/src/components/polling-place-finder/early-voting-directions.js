@@ -35,7 +35,7 @@ export function EarlyVotingDirections({
     <div className={`mt3 w-100 ${className || ''}`}>
       <div className="mt1">
         Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
-        vote early! You can vote early and skip the lines on Election Day:
+        vote early, you can vote early and skip the lines on Election Day:
       </div>
 
       <div className="mt2 f5-ns f6 gray">

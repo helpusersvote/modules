@@ -7,6 +7,7 @@
   "repository": "helpusersvote/modules",
   "homepage": "https://helpusersvote.com/docs/api?library=react",
   "scripts": {
+    "start": "npm run storybook",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o dist",
     "bs": "npm run build-storybook",

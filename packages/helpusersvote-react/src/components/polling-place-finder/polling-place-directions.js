@@ -66,7 +66,7 @@ export function PollingPlaceDirections({
               ? location.hours
               : pollingPlace.hours}
           </span>
-          !
+          .
         </span>
         <br />
       </div>
