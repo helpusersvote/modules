@@ -123,7 +123,7 @@ AddressForm.defaultProps = {
     console.warn('Missing `onSubmit` for `<AddressForm />`'),
   title: 'Find your polling place',
   description:
-    'We’ll find your polling place and hours, so you can go vote on Election Day!'
+    'We’ll find your polling place and hours, so you can go vote on Election Day.'
 }
 
 export default AddressForm

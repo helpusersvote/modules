@@ -12,9 +12,8 @@ export function PollingPlaceFinderError() {
             <div className="flex-auto-ns">
               <div className="directions-label">There was an error</div>
               <p className="lh-copy">
-                Our engineers are looking into why this issue occurred. In the
-                meantime, you can contact your local election office to find
-                your polling place.
+                Our engineers are looking into why this issue occurred. You can
+                contact your local election office to find your polling place.
               </p>
               <a
                 className="huv-button huv-button--blue tc dib"
