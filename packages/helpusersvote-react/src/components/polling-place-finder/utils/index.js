@@ -1,19 +1,22 @@
-import * as maps from './maps'
+import * as analytics from './analytics'
+import * as normalize from './normalize'
 import * as address from './address'
 import * as network from './network'
-import * as normalize from './normalize'
 import * as storage from './storage'
+import * as maps from './maps'
 
-export * from './maps'
+export * from './analytics'
+export * from './normalize'
 export * from './address'
 export * from './network'
-export * from './normalize'
 export * from './storage'
+export * from './maps'
 
 export default {
-  ...maps,
+  ...analytics,
+  ...normalize,
   ...address,
   ...network,
-  ...normalize,
-  ...storage
+  ...storage,
+  ...maps
 }
