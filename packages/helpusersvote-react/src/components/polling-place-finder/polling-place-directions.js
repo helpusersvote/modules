@@ -16,7 +16,8 @@ export function PollingPlaceDirections({
   address: backupAddress,
   voterInfo,
   queryParams,
-  onChangeAddress
+  onChangeAddress,
+  onClickDirections
 }) {
   const address = voterInfo.address || backupAddress
   const state = getState(address.state)
@@ -131,7 +132,10 @@ export function PollingPlaceDirections({
               <LocationAddress address={address} />
             </div>
           </div>
-          <div className="directions-container relative flex-auto-ns">
+          <div
+            onClick={onClickDirections}
+            className="directions-container relative flex-auto-ns"
+          >
             <a
               className="directions-map dn db-ns"
               href={directionsURL}

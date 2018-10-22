@@ -10,6 +10,22 @@ export function fetchVoterInfo({ address }) {
   return req
 }
 
+const eventsApiHost = 'https://events-api.helpusersvote.com'
+
+export function sendEvents(events) {
+  if (!events || events.length === 0) {
+    return Promise.resolve()
+  }
+
+  return fetch(`${eventsApiHost}/v1/track`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ events })
+  })
+}
+
 function getDefaultInfoApiRequest() {
   return fetch('/api/info/find', {
     method: 'POST',

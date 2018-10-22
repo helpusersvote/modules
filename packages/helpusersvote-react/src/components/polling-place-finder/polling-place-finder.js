@@ -5,7 +5,11 @@ import EarlyVotingDirections from './early-voting-directions'
 import AddressForm from './stateless/address-form'
 import {
   loadGmaps,
+  trackEvent,
+  reportError,
+  trackPageview,
   fetchVoterInfo,
+  listenForEvents,
   normalizeVoterInfo,
   getEncryptedAddress,
   setEncryptedAddress,
@@ -15,14 +19,14 @@ import {
 
 class PollingPlaceFinder extends Component {
   render() {
-    const { onSelectAddress, onChangeAddress } = this
+    const { onSelectAddress, onChangeAddress, onClickDirections } = this
     const { type, children } = this.props
     const {
       ready,
       address,
+      didError,
       voterInfo,
       queryParams,
-      didError,
       shouldUseAutocomplete
     } = this.state
 
@@ -55,6 +59,7 @@ class PollingPlaceFinder extends Component {
             voterInfo={voterInfo}
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
+            onClickDirections={onClickDirections}
           />
         )
       } else {
@@ -64,6 +69,7 @@ class PollingPlaceFinder extends Component {
             voterInfo={voterInfo}
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
+            onClickDirections={onClickDirections}
           />
         )
       }
@@ -84,25 +90,58 @@ class PollingPlaceFinder extends Component {
   }
 
   componentDidCatch(error, info) {
-    // Report to Sentry
-    console.log('huv.componentDidCatch', { error, info })
     this.setState({ didError: true })
+
+    // Report to sentry
+    reportError(error, info)
   }
 
   async componentDidMount() {
     try {
       await this.prepareState()
+
+      // defer analytics to next cycle
+      setTimeout(() => this.startAnalytics(), 0)
     } catch (err) {
-      console.error(err)
       this.setState({ didError: true })
+      reportError(err)
     }
+  }
+
+  startAnalytics = () => {
+    const { address } = this.state
+    const { type } = this.props
+    const name =
+      type === 'early' ? 'Early Voting Finder' : 'Polling Place Finder'
+    const pageview = { name }
+
+    if (address && address.state) {
+      pageview.properties = {
+        state: address.state
+      }
+    }
+
+    trackPageview(pageview)
+    listenForEvents()
+  }
+
+  onClickDirections = () => {
+    const { address } = this.state
+    const { state } = address
+
+    trackEvent({
+      name: 'Directions Clicked',
+      properties: {
+        state
+      }
+    })
   }
 
   prepareState = async () => {
     const address = await getEncryptedAddress()
     const voterInfo = await this.getVoterInfo({ address })
 
-    if (address && !(voterInfo && voterInfo.normalizedInput)) {
+    if (address && !(voterInfo && voterInfo.address)) {
       console.log('polls.componentDidMount: found address but no voter info')
       this.setState({ address, ready: true })
     }
@@ -116,8 +155,8 @@ class PollingPlaceFinder extends Component {
     try {
       await loadGmaps()
     } catch (err) {
-      console.error(err)
       shouldUseAutocomplete = false
+      reportError(err)
     }
 
     try {
@@ -134,8 +173,8 @@ class PollingPlaceFinder extends Component {
         ready: true
       })
     } catch (err) {
-      console.error(err)
       this.setState({ address, voterInfo, shouldUseAutocomplete, ready: true })
+      reportError(err)
     }
 
     return
@@ -173,6 +212,12 @@ class PollingPlaceFinder extends Component {
 
     setEncryptedVoterInfo(voterInfo)
     this.setState({ address, voterInfo })
+
+    const properties = {
+      state: address.state
+    }
+
+    trackEvent({ name: 'Address Selected', properties })
   }
 
   onChangeAddress = () => {
@@ -183,6 +228,8 @@ class PollingPlaceFinder extends Component {
 
     setEncryptedAddress(address)
     setEncryptedVoterInfo(voterInfo)
+
+    trackEvent({ name: 'Address Changed' })
   }
 }
 
