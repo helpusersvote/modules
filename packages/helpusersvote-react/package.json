@@ -31,7 +31,8 @@
     "react-select": "^2.1.0",
     "string-natural-compare": "^2.0.3",
     "time-js": "0.0.5",
-    "to-case": "^2.0.0"
+    "to-case": "^2.0.0",
+    "url-search-params-polyfill": "^5.0.0"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0 || ^16.0.0",
