@@ -101,11 +101,42 @@ export function fetchAutocompletePlaces(opts = {}) {
   })
 }
 
+export function fetchGeocoding(opts = {}) {
+  const { address = {} } = opts
+  const gclient = getGoogleClient()
+  const Geocoder = _.get(gclient, 'maps.Geocoder')
+
+  if (!Geocoder) {
+    console.error(new Error('huv.gmaps: no geocoder service found'), gclient)
+    return Promise.resolve([])
+  }
+
+  if (!address) {
+    return Promise.resolve([])
+  }
+
+  const svc = new Geocoder()
+  const req = {
+    address
+  }
+
+  return new Promise((resolve, reject) => {
+    svc.geocode(req, (results, status) => {
+      if (status !== 'OK' && status !== 'ZERO_RESULTS') {
+        return reject(new Error(`huv.geocode: ${status} status`))
+      }
+
+      resolve(results || [])
+    })
+  })
+}
+
 export function getGoogleClient() {
   return global.google
 }
 
 export default {
+  fetchGeocoding,
   fetchAutocompletePlaces,
   getGoogleClient,
   getMapImages,
