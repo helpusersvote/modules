@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stop on the first error
+set -e 
+
 S3_CACHE_MS=${S3_CACHE_MS:-"120000"}
 
 if [ -z "$(echo $S3_BUCKET)" ]; then
@@ -9,9 +12,17 @@ fi
 
 echo "Deploying to s3://$S3_BUCKET$S3_PREFIX"
 
+echo "Bootstrapping modules..."
+npm install \
+	&& npm run install-pkgs \
+	&& npm run bootstrap
+
+echo "Building Help Users Vote React components..."
+cd packages/helpusersvote-react/ \
+	&& npm run build
+
 echo "Building Help Users Vote bundle..."
-cd packages/helpusersvote-bundle/ \
-	&& npm install  \
+cd ../helpusersvote-bundle/ \
 	&& npm run build
 
 # Don't have `aws` installed? Try this:

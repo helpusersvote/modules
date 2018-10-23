@@ -1,12 +1,14 @@
 const glob = require('glob')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const plugins = []
+const minimizer = []
 const isProd = process.env.NODE_ENV === 'production'
 
 if (isProd) {
-  plugins.push(new UglifyJsPlugin())
+  minimizer.push(new UglifyJsPlugin())
 }
+
+const mode = isProd ? 'production' : 'development'
 
 const entry = glob
   .sync('./src/*.js')
@@ -22,6 +24,7 @@ const entry = glob
   }, {})
 
 module.exports = {
+  mode,
   entry,
   output: {
     filename: '[name].js',
@@ -30,5 +33,7 @@ module.exports = {
   resolve: {
     modules: ['node_modules']
   },
-  plugins
+  optimization: {
+    minimizer
+  }
 }
