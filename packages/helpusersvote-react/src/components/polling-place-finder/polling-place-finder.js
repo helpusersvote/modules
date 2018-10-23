@@ -45,12 +45,20 @@ class PollingPlaceFinder extends Component {
     let content
 
     if (!(address && address.line1 && voterInfo && voterInfo.locations)) {
-      content = (
-        <AddressForm
-          useAutocomplete={shouldUseAutocomplete}
-          onSelectAddress={onSelectAddress}
-        />
-      )
+      content =
+        type === 'early' ? (
+          <AddressForm
+            title="Find your early voting location"
+            description="We’ll find where you can go vote early, so you can skip Election Day lines."
+            useAutocomplete={shouldUseAutocomplete}
+            onSelectAddress={onSelectAddress}
+          />
+        ) : (
+          <AddressForm
+            useAutocomplete={shouldUseAutocomplete}
+            onSelectAddress={onSelectAddress}
+          />
+        )
     } else {
       if (type === 'early') {
         content = (
@@ -147,7 +155,7 @@ class PollingPlaceFinder extends Component {
     }
 
     if (window.localStorage.debug) {
-      console.log('v', voterInfo)
+      console.log('foundVoterInfo', voterInfo)
     }
 
     let shouldUseAutocomplete = true
@@ -199,7 +207,7 @@ class PollingPlaceFinder extends Component {
     const voterInfo = normalizeVoterInfo(voterInfoData)
 
     if (window.localStorage.debug) {
-      console.log('v', voterInfo)
+      console.log('loadedVoterInfo', voterInfo)
     }
 
     return voterInfo
