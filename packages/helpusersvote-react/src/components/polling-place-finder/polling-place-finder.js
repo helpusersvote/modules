@@ -1,3 +1,5 @@
+import 'url-search-params-polyfill'
+
 import React, { Component } from 'react'
 import PollingPlaceFinderError from './stateless/polling-place-finder-error'
 import PollingPlaceDirections from './polling-place-directions'
