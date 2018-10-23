@@ -9,6 +9,7 @@ import {
   reportError,
   trackPageview,
   fetchVoterInfo,
+  getQueryAddress,
   listenForEvents,
   normalizeVoterInfo,
   getEncryptedAddress,
@@ -146,7 +147,7 @@ class PollingPlaceFinder extends Component {
   }
 
   prepareState = async () => {
-    const address = await getEncryptedAddress()
+    const address = getQueryAddress() || await getEncryptedAddress()
     const voterInfo = await this.getVoterInfo({ address })
 
     if (address && !(voterInfo && voterInfo.address)) {

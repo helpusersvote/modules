@@ -62,4 +62,31 @@ export function fromAddr(str = '') {
   }
 }
 
-export default { fromAddr, toAddr, placeToAddress }
+/**
+ * Parse query string for address.
+ *
+ * @param {String}
+ * @return {Object}
+ */
+
+export function getQueryAddress() {
+  const s = new URLSearchParams(window.location.search)
+
+  const line1 = s.get('street_address')
+  const city = s.get('city')
+  const state = s.get('state_abbr')
+  const zip = s.get('zip_5')
+
+  if(line1 && city && state && zip){
+    return {
+      line1,
+      city,
+      state,
+      zip
+    }
+  }
+
+  return null
+}
+
+export default { fromAddr, toAddr, placeToAddress, getQueryAddress }
