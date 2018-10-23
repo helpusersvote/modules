@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import { toAddr } from './address'
+import { CIVIC_INFO_API_KEY } from './settings'
 
 export function fetchVoterInfo({ address }) {
   const shouldUseGoogleApi = true
@@ -39,15 +40,13 @@ function getDefaultInfoApiRequest() {
 }
 
 const electionId = 6000 // 2018 U.S. Midterms
-const googleApiKey =
-  process.env.CIVIC_INFO_API_KEY || 'AIzaSyBq-ezGmXRaCYBUaUhBuxpXu-k_7uPkk_E'
 const googleCivicInfoApiHost =
   process.env.CIVIC_INFO_API_HOST ||
   'https://content.googleapis.com/civicinfo/v2/voterinfo'
 
 function getCivicInfoApiRequest({ address }) {
   const addr = toAddr(address)
-  const url = `${googleCivicInfoApiHost}?key=${googleApiKey}&address=${addr}&electionId=${electionId}&returnAllAvailableData=true`
+  const url = `${googleCivicInfoApiHost}?key=${CIVIC_INFO_API_KEY}&address=${addr}&electionId=${electionId}&returnAllAvailableData=true`
 
   return fetch(url).then(r => r.json())
 }

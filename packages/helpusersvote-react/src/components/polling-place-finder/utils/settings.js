@@ -1,10 +1,10 @@
 function get(key) {
-  if (typeof process !== 'undefined' && process.env) {
-    if (process.env[key]) return process.env[key]
-  }
-
   if (typeof window !== 'undefined') {
     if (window[key]) return window[key]
+  }
+
+  if (typeof process !== 'undefined' && process.env) {
+    if (process.env[key]) return process.env[key]
   }
 
   return ''
