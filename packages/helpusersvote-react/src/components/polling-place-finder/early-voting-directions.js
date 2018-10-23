@@ -2,22 +2,35 @@ import React from 'react'
 import Day from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import GoogleReportForm from './stateless/google-report-form'
+import PollingPlaceNotFound from './stateless/not-found'
 import { getMapImages, toAddr } from './utils'
 
 Day.extend(relativeTime)
 
 export function EarlyVotingDirections({
-  address: backgroundAdress,
+  address: backupAddress,
   voterInfo,
   className,
+  queryParams,
   onChangeAddress
 }) {
   const address = voterInfo.address || backupAddress
   const { earlyVotingTimeLeft, earlyLocations: locations } = voterInfo
-  const location = locations[0]
 
+  if (locations && locations.length === 0) {
+    return (
+      <PollingPlaceNotFound
+        address={address}
+        voterInfo={voterInfo}
+        queryParams={queryParams}
+        onChangeAddress={onChangeAddress}
+      />
+    )
+  }
+
+  const location = locations[0] || {}
   const userAddr = toAddr(address)
-  const pollAddr = toAddr(location.address)
+  const pollAddr = toAddr(location.address || {})
 
   const directionsURL = [
     'https://maps.google.com?saddr=',
