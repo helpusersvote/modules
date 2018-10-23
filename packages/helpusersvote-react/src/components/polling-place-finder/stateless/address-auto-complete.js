@@ -1,7 +1,13 @@
 import _ from 'lodash'
 import cx from 'classnames'
 import React, { Component } from 'react'
-import { fetchAutocompletePlaces, placeToAddress, toAddr } from '../utils'
+import {
+  fetchAutocompletePlaces,
+  fetchGeocoding,
+  placeToAddress,
+  fromAddr,
+  toAddr
+} from '../utils'
 
 export class AddressAutoComplete extends Component {
   state = { activeIndex: -1, inputValue: '', places: [] }
@@ -11,17 +17,25 @@ export class AddressAutoComplete extends Component {
 
     this.setState({ inputValue })
 
+    const notFoundState = {
+      activeIndex: 0,
+      places: [
+        {
+          onClick: this.props.onToggleAutocomplete,
+          description: 'Address not found. Switch to simple address form →'
+        }
+      ]
+    }
+
+    if (!inputValue || inputValue.length < 3) {
+      this.setState(notFoundState)
+
+      return inputValue
+    }
+
     fetchAutocompletePlaces({ input: inputValue }).then(places => {
       if (!places || places.length === 0) {
-        this.setState({
-          activeIndex: 0,
-          places: [
-            {
-              onClick: this.props.onToggleAutocomplete,
-              description: 'No addresses found. Switch to simple address form →'
-            }
-          ]
-        })
+        this.setState(notFoundState)
 
         return
       }
@@ -36,14 +50,19 @@ export class AddressAutoComplete extends Component {
   }
 
   onSelect = place => {
-    const address = placeToAddress(place)
-    const inputValue = toAddr(address)
+    const inputAddress = placeToAddress(place)
+    const inputValue = toAddr(inputAddress)
 
     this.setState({ inputValue, places: [] })
 
-    if (this.props.onChange) {
-      this.props.onChange(address)
-    }
+    fetchGeocoding({ address: inputValue }).then(results => {
+      const result = results[0] || {}
+      const address = fromAddr(result.formatted_address || '')
+
+      if (this.props.onChange) {
+        this.props.onChange(address)
+      }
+    })
   }
 
   onClear = () => this.setState({ places: [] })

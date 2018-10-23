@@ -41,4 +41,25 @@ export function placeToAddress(place) {
   return address
 }
 
-export default { toAddr, placeToAddress }
+/**
+ * Parse single-line address string.
+ *
+ * @param {String}
+ * @return {Object}
+ */
+
+export function fromAddr(str = '') {
+  const parts = str.replace(', USA', '').split(', ')
+  const lastPart = parts.splice(parts.length - 1, 1) || ['']
+  const lastParts = lastPart[0].split(' ')
+  const [state, zip] = lastParts
+
+  return {
+    line1: parts[0] || '',
+    city: parts[1] || '',
+    state,
+    zip
+  }
+}
+
+export default { fromAddr, toAddr, placeToAddress }

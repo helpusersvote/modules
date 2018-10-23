@@ -15,9 +15,9 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "test": "npm run build",
     "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "test": "npm run build"
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@helpusersvote/logic": "^1.0.14",
