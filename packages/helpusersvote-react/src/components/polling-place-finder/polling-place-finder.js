@@ -21,8 +21,14 @@ import {
 
 class PollingPlaceFinder extends Component {
   render() {
-    const { onSelectAddress, onChangeAddress, onClickDirections } = this
-    const { type, notFound, children } = this.props
+    const {
+      onSelectAddress,
+      onChangeAddress,
+      onClickDirections,
+      onSwitchToEarlyVoting,
+      onSwitchToPollingPlace
+    } = this
+    const { notFound, children } = this.props
     const {
       ready,
       address,
@@ -31,6 +37,8 @@ class PollingPlaceFinder extends Component {
       queryParams,
       shouldUseAutocomplete
     } = this.state
+
+    const type = this.state.overrideType || this.props.type
 
     if (!ready) {
       return <div className="huv-container" />
@@ -54,6 +62,7 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            onSwitchToEarlyVoting={onSwitchToEarlyVoting}
           />
         </div>
       )
@@ -85,6 +94,7 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            onSwitchToPollingPlace={onSwitchToPollingPlace}
           />
         )
       } else {
@@ -95,6 +105,7 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            onSwitchToEarlyVoting={onSwitchToEarlyVoting}
           />
         )
       }
@@ -267,6 +278,22 @@ class PollingPlaceFinder extends Component {
     const { type } = this.props
 
     trackEvent({ name: 'Address Changed', properties: { type } })
+  }
+
+  onSwitchToEarlyVoting = () => {
+    this.setState({
+      overrideType: 'early'
+    })
+
+    // TODO: fire track call with new url
+  }
+
+  onSwitchToPollingPlace = () => {
+    this.setState({
+      overrideType: 'polls'
+    })
+
+    // TODO: fire track call with new url
   }
 }
 

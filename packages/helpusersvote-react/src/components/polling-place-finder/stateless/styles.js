@@ -138,8 +138,13 @@ const styles = `
 
 .directions-info {
   padding: 1em;
+  max-width: 320px;
 }
-
+@media(min-width: 330px) {
+  .directions-info {
+    min-width: 260px;
+  }
+}
 .directions-label {
   margin-bottom: 8px;
   font-size: 12px;

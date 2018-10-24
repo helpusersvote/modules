@@ -18,7 +18,8 @@ export function PollingPlaceDirections({
   voterInfo,
   queryParams,
   onChangeAddress,
-  onClickDirections
+  onClickDirections,
+  onSwitchToEarlyVoting
 }) {
   const address = voterInfo.address || backupAddress
   const state = getState(address.state)
@@ -116,6 +117,7 @@ export function PollingPlaceDirections({
                 <EarlyVotingCTA
                   isElectionDay={isElectionDay}
                   timeLeft={earlyVotingTimeLeft}
+                  onClick={onSwitchToEarlyVoting}
                 />
                 <ElectionDayNotice isElectionDay={isElectionDay} />
               </div>

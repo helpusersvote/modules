@@ -48,7 +48,7 @@ class AddressForm extends Component {
         className="huv-address-form w-100 mt3 mt4-ns"
       >
         <div className="heading-container">
-          <h1 className="heading">{title}</h1>
+          <h1 className="heading">Find out where to vote</h1>
         </div>
         <div className="huv-address-form-content">
           {/* <div className="mt1 mb3 f5 f4-ns">{description}</div> */}

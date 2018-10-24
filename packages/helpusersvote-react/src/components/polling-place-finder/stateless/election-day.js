@@ -15,18 +15,14 @@ export function ElectionDayNotice({ isElectionDay }) {
   ) : null
 }
 
-export function ElectionDayCTA({ isElectionDay }) {
+export function ElectionDayCTA({ isElectionDay, onClick }) {
   return (
-    <a
-      href="https://www.vote.org/polling-place-locator/"
-      className="no-underline"
-      target="_blank"
-    >
+    <div onClick={onClick}>
       <div className="mt3 fw5 f6 lh-copy ba blue br2 pa2 hover-bg-washed-blue pointer">
         Want to vote on Election Day? Find your polling{' '}
         <span className="dib">place now &rarr;</span>
       </div>
-    </a>
+    </div>
   )
 }
 
