@@ -25,8 +25,8 @@ export const EVENTS_API_HOST = isProd
 
 // Exports
 export const CIVIC_INFO_API_KEY = get('CIVIC_INFO_API_KEY')
-export const GMAPS_API_SIGNATURE_SECRET = get('GMAP_API_SIGNATURE_SECRET')
 export const GMAPS_API_KEY = get('GMAPS_API_KEY')
+export const GMAPS_API_SIGNATURE_SECRET = get('GMAPS_API_SIGNATURE_SECRET')
 export const SENTRY_DSN = get('SENTRY_DSN') || defaultSentryDSN
 
 export default {
