@@ -9,11 +9,12 @@ import EarlyVotingCTA from './stateless/early-voting-cta'
 import PollingPlaceNotFound from './stateless/not-found'
 import LocationAddress from './stateless/location-address'
 import GoogleReportForm from './stateless/google-report-form'
-import { DirectionsDate, DirectionsHours } from './stateless/directions'
+import { DirectionsHours } from './stateless/directions'
 import { ElectionDayNotice } from './stateless/election-day'
 
 export function PollingPlaceDirections({
   address: backupAddress,
+  notFound,
   voterInfo,
   queryParams,
   onChangeAddress,
@@ -25,7 +26,7 @@ export function PollingPlaceDirections({
   const pollingPlace = POLLING_PLACE_DATA[state.abbr] || {}
   const { earlyVotingTimeLeft, earlyLocations, locations = [] } = voterInfo
 
-  if (locations && locations.length === 0) {
+  if (notFound || (locations && locations.length === 0)) {
     return (
       <PollingPlaceNotFound
         address={address}
@@ -108,7 +109,6 @@ export function PollingPlaceDirections({
                   className="directions-address1"
                   address={locationAddress}
                 />
-                <DirectionsDate />
                 <DirectionsHours
                   location={location}
                   pollingPlace={pollingPlace}

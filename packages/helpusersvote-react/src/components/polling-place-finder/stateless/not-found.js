@@ -4,7 +4,12 @@ import { getState } from '@helpusersvote/logic'
 import POLLING_PLACE_DATA from '../data/polls.json'
 import GoogleReportForm from './google-report-form'
 
-export function PollingPlaceNotFound({ address, voterInfo, onChangeAddress }) {
+export function PollingPlaceNotFound({
+  title,
+  address,
+  voterInfo,
+  onChangeAddress
+}) {
   const pollingPlace = POLLING_PLACE_DATA[address.state] || {}
 
   const stateSite = pollingPlace.polling_place_state_site
@@ -26,7 +31,11 @@ export function PollingPlaceNotFound({ address, voterInfo, onChangeAddress }) {
         <div className="directions directions-small mt3 mb1 flex-ns flex-row-ns">
           <div className="directions-info w-40-ns flex-ns flex-column-ns justify-between-ns">
             <div className="flex-auto-ns">
-              <div className="directions-label">No polling place found</div>
+              <div className="directions-label">{title}</div>
+              <p className="lh-copy">
+                Not all polling places are available yet, please check again in
+                a few days!
+              </p>
             </div>
             <div className="mt3 dn db-ns">
               <div className="directions-label">
@@ -104,6 +113,10 @@ export function PollingPlaceNotFound({ address, voterInfo, onChangeAddress }) {
       </div>
     </div>
   )
+}
+
+PollingPlaceNotFound.defaultProps = {
+  title: 'No polling place found'
 }
 
 export default PollingPlaceNotFound

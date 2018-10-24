@@ -1,8 +1,10 @@
 import React from 'react'
 import Day from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import GoogleReportForm from './stateless/google-report-form'
+import { shouldShowCTA } from '@helpusersvote/logic'
+import { ElectionDayCTA } from './stateless/election-day'
 import PollingPlaceNotFound from './stateless/not-found'
+import GoogleReportForm from './stateless/google-report-form'
 import { getMapImages, toAddr } from './utils'
 
 Day.extend(relativeTime)
@@ -20,6 +22,7 @@ export function EarlyVotingDirections({
   if (locations && locations.length === 0) {
     return (
       <PollingPlaceNotFound
+        title="No early voting locations found"
         address={address}
         voterInfo={voterInfo}
         queryParams={queryParams}
@@ -44,6 +47,8 @@ export function EarlyVotingDirections({
     pollAddr
   })
 
+  const isElectionDay = queryParams.election || shouldShowCTA()
+
   return (
     <div className={`mt3 w-100 ${className || ''}`}>
       <div className="mt1">
@@ -56,6 +61,7 @@ export function EarlyVotingDirections({
         <a
           className="link blue underline-hover pointer"
           href="https://www.vote.org/polling-place-locator/"
+          target="_blank"
         >
           find your polling place
         </a>
@@ -157,6 +163,7 @@ export function EarlyVotingDirections({
                         </div>
                       )}
                     </div>
+                    <ElectionDayCTA isElectionDay={isElectionDay} />
                   </div>
                 </div>
                 <div className="dn db-ns">
