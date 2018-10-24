@@ -1,5 +1,3 @@
-import 'url-search-params-polyfill'
-
 import React, { Component } from 'react'
 import PollingPlaceFinderError from './stateless/polling-place-finder-error'
 import PollingPlaceDirections from './polling-place-directions'
@@ -17,13 +15,14 @@ import {
   getEncryptedAddress,
   setEncryptedAddress,
   getEncryptedVoterInfo,
-  setEncryptedVoterInfo
+  setEncryptedVoterInfo,
+  getQueryParam
 } from './utils'
 
 class PollingPlaceFinder extends Component {
   render() {
     const { onSelectAddress, onChangeAddress, onClickDirections } = this
-    const { type, children } = this.props
+    const { type, notFound, children } = this.props
     const {
       ready,
       address,
@@ -41,6 +40,21 @@ class PollingPlaceFinder extends Component {
       return (
         <div className="huv-container">
           <PollingPlaceFinderError />
+        </div>
+      )
+    }
+
+    if (notFound && address) {
+      return (
+        <div className="huv-container">
+          <PollingPlaceDirections
+            notFound
+            address={address}
+            voterInfo={voterInfo}
+            queryParams={queryParams}
+            onChangeAddress={onChangeAddress}
+            onClickDirections={onClickDirections}
+          />
         </div>
       )
     }
@@ -149,8 +163,14 @@ class PollingPlaceFinder extends Component {
   }
 
   prepareState = async () => {
-    const address = getQueryAddress() || await getEncryptedAddress()
+    const address =
+      this.props.address || getQueryAddress() || (await getEncryptedAddress())
     const voterInfo = await this.getVoterInfo({ address })
+
+    // If we're getting linked here, set the address
+    if (address && address._fromQuery) {
+      // TODO: check if that's expected UX
+    }
 
     if (address && !(voterInfo && voterInfo.address)) {
       console.log('polls.componentDidMount: found address but no voter info')
@@ -171,9 +191,8 @@ class PollingPlaceFinder extends Component {
     }
 
     try {
-      const s = new URLSearchParams(window.location.search)
-      const queryParams = {
-        election: this.props.electionDay || s.get('election') !== null
+      const queryParams = this.props.queryParams || {
+        election: this.props.electionDay || Boolean(getQueryParam('election'))
       }
 
       this.setState({
@@ -196,7 +215,7 @@ class PollingPlaceFinder extends Component {
       return null
     }
 
-    const { alwaysUseNetwork = true } = this.props
+    const { alwaysUseNetwork } = this.props
 
     if (alwaysUseNetwork) {
       return await this.loadVoterInfo(address)
@@ -220,11 +239,16 @@ class PollingPlaceFinder extends Component {
     setEncryptedAddress(address)
 
     const voterInfo = await this.loadVoterInfo(address)
+    const { type, alwaysUseNetwork } = this.props
 
-    setEncryptedVoterInfo(voterInfo)
+    if (alwaysUseNetwork) {
+      setEncryptedVoterInfo(voterInfo)
+    }
+
     this.setState({ address, voterInfo })
 
     const properties = {
+      type,
       state: address.state
     }
 
@@ -240,8 +264,14 @@ class PollingPlaceFinder extends Component {
     setEncryptedAddress(address)
     setEncryptedVoterInfo(voterInfo)
 
-    trackEvent({ name: 'Address Changed' })
+    const { type } = this.props
+
+    trackEvent({ name: 'Address Changed', properties: { type } })
   }
+}
+
+PollingPlaceFinder.defaultProps = {
+  alwaysUseNetwork: true
 }
 
 export default PollingPlaceFinder

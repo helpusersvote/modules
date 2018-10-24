@@ -71,6 +71,11 @@ const styles = `
 .huv-address-form-content {
   padding: 16px;
 }
+.address-form-auto-complete-example {
+  padding: 4px .5rem;
+  font-size: 12px;
+  color: #596573;
+}
 .report-error {
   background: none;
   border: none;

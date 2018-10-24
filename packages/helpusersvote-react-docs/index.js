@@ -213,6 +213,15 @@ storiesOf('Polling Place Finder', module)
       <PollingPlaceFinder electionDay />
     </div>
   ))
+  .add('Not Found', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder
+        notFound
+        address={{ line1: '123 Main St', city: 'Farmsville', state: 'VA' }}
+      />
+    </div>
+  ))
   .add('Error Preview', () => (
     <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
