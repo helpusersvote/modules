@@ -101,7 +101,10 @@ export function fetchGeocoding(opts = {}) {
   const Geocoder = _.get(gclient, 'maps.Geocoder')
 
   if (!Geocoder) {
-    console.error(new Error('huv.gmaps: no geocoder service found'), gclient)
+    console.error(
+      new Error('huv.gmaps.geocode: no geocoder service found'),
+      gclient
+    )
     return Promise.resolve([])
   }
 
@@ -117,7 +120,7 @@ export function fetchGeocoding(opts = {}) {
   return new Promise((resolve, reject) => {
     svc.geocode(req, (results, status) => {
       if (status !== 'OK' && status !== 'ZERO_RESULTS') {
-        return reject(new Error(`huv.geocode: ${status} status`))
+        return reject(new Error(`huv.gmaps.geocode: ${status} status`))
       }
 
       resolve(results || [])
