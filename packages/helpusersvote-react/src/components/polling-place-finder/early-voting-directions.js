@@ -48,6 +48,8 @@ export function EarlyVotingDirections({
   })
 
   const isElectionDay = queryParams.election || shouldShowCTA()
+  // Use grouped dates for early voting location hours
+  const useGroupedDates = true
 
   return (
     <div className={`mt3 w-100 ${className || ''}`}>
@@ -121,6 +123,7 @@ export function EarlyVotingDirections({
                           </div>
                         )}
                       {!location.hoursParseFail &&
+                        useGroupedDates &&
                         location.groupedDates.map((dateRange, index) => (
                           <div key={index} className="f7">
                             <div>
@@ -139,6 +142,17 @@ export function EarlyVotingDirections({
                                   <div>{dateRange.startDateFormatted}</div>
                                 )}
                               </div>
+                            </div>
+                          </div>
+                        ))}
+                      {!location.hoursParseFail &&
+                        !useGroupedDates &&
+                        location.hoursPerDate &&
+                        location.hoursPerDate.map(({ date, hours }, index) => (
+                          <div key={index} className="f7">
+                            <div>
+                              <div className="ml2 fr">{hours}</div>
+                              <div className="directions-date">{date}</div>
                             </div>
                           </div>
                         ))}

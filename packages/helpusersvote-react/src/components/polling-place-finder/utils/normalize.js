@@ -333,6 +333,11 @@ export function normalizeLocation(location, options = {}) {
     }
   }
 
+  var hoursPerDate = hours.map(h => ({
+    date: `${h.day}, ${h.month} ${h.date}`,
+    hours: `${h.start} - ${h.end}`
+  }))
+
   // Group polling dates by hours
   var groupedDates = groupHoursByDate(hours)
   groupedDates = normalizeDateRange(groupedDates)
@@ -357,6 +362,7 @@ export function normalizeLocation(location, options = {}) {
     fallbackHours,
     groupedDates,
     hoursParseFail,
+    hoursPerDate,
     hoursToday,
     hoursTomorrow,
     hasHoursToday: !!hoursToday,
