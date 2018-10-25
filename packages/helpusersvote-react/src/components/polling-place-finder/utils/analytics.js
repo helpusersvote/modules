@@ -63,14 +63,19 @@ export function trackPageview(input = {}) {
     }
 
     const title = input.name || document.title
-    const path = window.location.pathname
+    const path = input.path || window.location.pathname
+    const url = input.url || window.location.href
 
     if (title) {
       properties.title = title
     }
 
-    if (path) {
+    if (path && !properties.path) {
       properties.path = path
+    }
+
+    if (url && !properties.url) {
+      properties.url = url
     }
 
     track({
@@ -143,12 +148,17 @@ const utmParams = [
 function getUTM() {
   try {
     const campaign = {}
+    let utmEmpty = true
 
     utmParams.forEach(({ param, key }) => {
       if (getQueryParam(param)) {
         campaign[key] = getQueryParam(param)
       }
     })
+
+    if (utmEmpty) {
+      return null
+    }
 
     return campaign
   } catch (err) {

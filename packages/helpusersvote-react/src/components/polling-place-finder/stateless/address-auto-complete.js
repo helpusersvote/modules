@@ -126,6 +126,8 @@ export class AddressAutoComplete extends Component {
           required
           autoFocus
           type="text"
+          name="line1"
+          autoComplete="off"
           value={inputValue}
           onChange={this.onInputChange}
           onKeyDown={this.onKeyDown}
