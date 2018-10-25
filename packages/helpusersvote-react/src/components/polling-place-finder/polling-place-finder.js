@@ -285,14 +285,18 @@ class PollingPlaceFinder extends Component {
       overrideType: 'early'
     })
 
+    const { type } = this.props
     const { address } = this.state
-    const pageview = { name: 'Early Voting Finder', properties: {} }
+
+    const path = getPagePath({ type, to: 'early' })
+    const pageview = {
+      name: 'Early Voting Finder',
+      properties: { path, from: 'polls' }
+    }
 
     if (address && address.state) {
       pageview.properties.state = address.state
     }
-
-    pageview.properties.from = 'polls'
 
     trackPageview(pageview)
   }
@@ -302,17 +306,35 @@ class PollingPlaceFinder extends Component {
       overrideType: 'polls'
     })
 
+    const { type } = this.props
     const { address } = this.state
-    const pageview = { name: 'Polling Place Finder', properties: {} }
+
+    const path = getPagePath({ type, to: 'polls' })
+    const pageview = {
+      name: 'Polling Place Finder',
+      properties: { path, from: 'early' }
+    }
 
     if (address && address.state) {
       pageview.properties.state = address.state
     }
 
-    pageview.properties.from = 'early'
-
     trackPageview(pageview)
   }
+}
+
+function getPagePath({ type, to }) {
+  if (type === 'early') {
+    if (to === 'polls') {
+      return '/polls'
+    }
+  } else {
+    if (to === 'early') {
+      return '/early'
+    }
+  }
+
+  return '/'
 }
 
 PollingPlaceFinder.defaultProps = {
