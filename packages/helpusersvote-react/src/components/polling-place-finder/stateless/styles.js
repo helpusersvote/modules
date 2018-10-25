@@ -2,12 +2,15 @@ import React from 'react'
 
 const styles = `
 .huv-container {
-  padding: 0 2px;
   font-family: SF UI Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 .huv-container .gray,
 .huv-container .light-gray {
   color: #69778b;
+}
+.outdent,
+.huv-switcher {
+  margin: 0 2px;
 }
 .huv-button {
   -webkit-font-smoothing: antialiased;
@@ -227,6 +230,59 @@ const styles = `
   font-size: 14px;
   line-height: 24px;
   color: #000;
+}
+/*
+ * Switcher
+ */
+.huv-switcher {
+  display: flex;
+}
+.huv-switcher-item {
+  padding: 6px 10px;
+  min-width: 100px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  user-select: none;
+  text-align: center;
+  color: rgb(66, 90, 112);
+  background-color: white;
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(244, 245, 247));
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px -1px 1px 0px inset;
+  box-sizing: border-box;
+  transition: box-shadow 80ms ease-in-out 0s;
+}
+.huv-switcher-item:hover {
+  background-image: linear-gradient(rgb(250, 251, 251), rgb(234, 236, 238));
+}
+.huv-switcher-item:active {
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
+.huv-switcher-item--active,
+.huv-switcher-item--active:hover,
+.huv-switcher-item--active:active {
+  cursor: default;
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
+.huv-switcher-item:first-of-type {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.huv-switcher-item:not(:first-of-type) {
+  margin-left: -1px;
+}
+.huv-switcher-item:last-of-type {
+  border-left: none;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
 }`
 
 const css = { __html: styles }
