@@ -11,6 +11,7 @@ import LocationAddress from './stateless/location-address'
 import GoogleReportForm from './stateless/google-report-form'
 import { DirectionsHours } from './stateless/directions'
 import { ElectionDayNotice } from './stateless/election-day'
+import Switcher from './stateless/switcher.js'
 
 export function PollingPlaceDirections({
   address: backupAddress,
@@ -61,7 +62,7 @@ export function PollingPlaceDirections({
 
   return (
     <div className="mt3 w-100">
-      <div className="mt1">
+      <div className="mt1 mb2">
         You can vote here {votingDate} from{' '}
         <span className="dib">
           <span className="b">
@@ -74,22 +75,12 @@ export function PollingPlaceDirections({
         <br />
       </div>
 
-      {!isElectionDay &&
-        earlyVoting &&
-        earlyLocations &&
-        earlyLocations.length > 0 && (
-          <div className="mt2 f5-ns f6 gray">
-            In {state.name}, you can also vote <i>before</i> Election Day —{' '}
-            <a
-              className="link blue underline-hover pointer"
-              href="https://www.vote.org/early-voting-calendar/"
-              target="_blank"
-            >
-              find your early voting information
-            </a>
-            .
-          </div>
-        )}
+      {!isElectionDay && (
+        <Switcher
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToEarlyVoting={onSwitchToEarlyVoting}
+        />
+      )}
 
       <div className="outdent">
         <div className="directions directions-small mt3 mb1 flex-ns flex-row-ns">

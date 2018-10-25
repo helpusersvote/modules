@@ -10,7 +10,7 @@ function get(key) {
   return ''
 }
 
-const isProd = get('NODE_ENV') === 'prod'
+const isProd = get('NODE_ENV') === 'production'
 
 // Defaults
 const defaultSentryDSN = isProd

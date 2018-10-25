@@ -4,6 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { shouldShowCTA } from '@helpusersvote/logic'
 import { ElectionDayCTA } from './stateless/election-day'
 import PollingPlaceNotFound from './stateless/not-found'
+import Switcher from './stateless/switcher'
 import GoogleReportForm from './stateless/google-report-form'
 import { getMapImages, toAddr } from './utils'
 
@@ -52,23 +53,16 @@ export function EarlyVotingDirections({
 
   return (
     <div className={`mt3 w-100 ${className || ''}`}>
-      <div className="mt1">
+      <div className="mt1 mb2">
         Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
         vote early, you can vote early and skip the lines on Election Day:
       </div>
 
-      <div className="mt2 f5-ns f6 gray">
-        Or vote on Election Day —{' '}
-        <span
-          className="link blue underline-hover pointer"
-          href="https://www.vote.org/polling-place-locator/"
-          target="_blank"
-          onClick={onSwitchToPollingPlace}
-        >
-          find your polling place
-        </span>
-        .
-      </div>
+      <Switcher
+        active="early"
+        earlyVotingTimeLeft={earlyVotingTimeLeft}
+        onSwitchToPollingPlace={onSwitchToPollingPlace}
+      />
 
       {locations.length && (
         <div className="outdent">

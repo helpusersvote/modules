@@ -285,7 +285,16 @@ class PollingPlaceFinder extends Component {
       overrideType: 'early'
     })
 
-    // TODO: fire track call with new url
+    const { address } = this.state
+    const pageview = { name: 'Early Voting Finder', properties: {} }
+
+    if (address && address.state) {
+      pageview.properties.state = address.state
+    }
+
+    pageview.properties.from = 'polls'
+
+    trackPageview(pageview)
   }
 
   onSwitchToPollingPlace = () => {
@@ -293,7 +302,16 @@ class PollingPlaceFinder extends Component {
       overrideType: 'polls'
     })
 
-    // TODO: fire track call with new url
+    const { address } = this.state
+    const pageview = { name: 'Polling Place Finder', properties: {} }
+
+    if (address && address.state) {
+      pageview.properties.state = address.state
+    }
+
+    pageview.properties.from = 'early'
+
+    trackPageview(pageview)
   }
 }
 
