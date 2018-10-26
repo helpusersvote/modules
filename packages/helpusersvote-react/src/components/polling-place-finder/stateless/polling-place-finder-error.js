@@ -14,7 +14,7 @@ export function PollingPlaceFinderError() {
               <p className="lh-copy">
                 Our engineers are looking into why this issue occurred. You can
                 contact your local election office to find your{' '}
-                <div className="dib">polling place.</div>
+                <span className="dib">polling place.</span>
               </p>
               <a
                 className="huv-button huv-button--blue tc dib"

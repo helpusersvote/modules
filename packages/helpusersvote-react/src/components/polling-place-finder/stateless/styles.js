@@ -22,20 +22,20 @@ const styles = `
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: #016cd1;
-  color: white;
+  background: #fff;
+  color: rgb(66, 90, 112);
   font-weight: 500;
   line-height: 32px;
   height: 32px;
-  padding: 0;
+  padding: 0 16px;
   min-width: 80px;
   border-radius: 3px;
   font-size: 12px;
   box-sizing: border-box;
-  background-image: -webkit-linear-gradient(to top, #0165c7, #0173df);
-  background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
-  background-image: linear-gradient(to top, #0165c7, #0173df);
-  box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
+  background-image: -webkit-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  background-image: -moz-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  background-image: linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px -1px 1px 0px inset;
   -webkit-transition: box-shadow 80ms ease-in-out;
   -moz-transition: box-shadow 80ms ease-in-out;
 }
@@ -44,10 +44,23 @@ const styles = `
   z-index: 2;
   box-shadow: 0 0 0 3px rgba(1,108,209,0.301), inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
 }
+.huv-button:hover {
+  background-image: -webkit-linear-gradient(to bottom, #FAFBFB, #EAECEE);
+  background-image: -moz-linear-gradient(to bottom, #FAFBFB, #EAECEE);
+  background-image: linear-gradient(to bottom, #FAFBFB, #EAECEE);
+}
+.huv-button:active {
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
 .huv-button--blue {
+  color: #fff;
+  background-color: #015ebd;
+  box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
   background-image: -webkit-linear-gradient(to top, #0165c7, #0173df);
-  background-image: -moz-linear-gradient(to top, #0165c7, #0173df)
-  background-image: linear-gradient(to top, #0165c7, #0173df);
+  background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
+  background-image: linear-gradient(to bottom, #0788DE, #116AB8);
 }
 .huv-button--blue:hover {
   background-image: -webkit-linear-gradient(to top, #015ebd, #016cd1);
