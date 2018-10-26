@@ -6,17 +6,17 @@ export function Step1({ onSelect }) {
 
   return (
     <div>
-      <Button className="mr3" blue={false} onClick={onClickSelect('walk')}>
+      <Button classes="mr3" blue={false} onClick={onClickSelect('walk')}>
         Walk (7 min)
       </Button>
-      <Button className="mr3" blue={false} onClick={onClickSelect('drive')}>
+      <Button classes="mr3" blue={false} onClick={onClickSelect('drive')}>
         Drive (2 min)
       </Button>
-      <Button className="mr3" blue={false} onClick={onClickSelect('bike')}>
+      <Button classes="mr3" blue={false} onClick={onClickSelect('bike')}>
         Bike (3 min)
       </Button>
       <Button blue={false} onClick={onClickSelect('transit')}>
-        Transit (11 min)
+        Bus/Train (11 min)
       </Button>
     </div>
   )
