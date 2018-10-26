@@ -6,8 +6,11 @@ export function Done({ values }) {
   return (
     <div>
       <div>
-        Don&rsquo;t forget to {transport} in the {time} on Election Day. You can
-        add a reminder to your calendar or we can text/email you below:
+        We can remind you to {transport} to your polling place in the {time} on
+        Election Day.
+        <br />
+        <br />
+        Just leave your email or phone number below.
       </div>
       {/*
       <h2>TODO</h2>

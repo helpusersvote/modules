@@ -6,10 +6,10 @@ export function Step2({ onSelect }) {
 
   return (
     <div>
-      <Button className="mr3" blue={false} onClick={onClickSelect('morning')}>
+      <Button classes="mr3" blue={false} onClick={onClickSelect('morning')}>
         Morning
       </Button>
-      <Button className="mr3" blue={false} onClick={onClickSelect('afternoon')}>
+      <Button classes="mr3" blue={false} onClick={onClickSelect('afternoon')}>
         Afternoon
       </Button>
       <Button blue={false} onClick={onClickSelect('evening')}>

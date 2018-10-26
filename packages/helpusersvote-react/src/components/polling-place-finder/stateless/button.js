@@ -7,7 +7,7 @@ export function Button({ blue, classes, style, children, ...props }) {
       className={cx(
         'huv-button',
         blue && 'huv-button--blue',
-        classes & classes
+        classes && classes
       )}
       style={style}
       {...props}

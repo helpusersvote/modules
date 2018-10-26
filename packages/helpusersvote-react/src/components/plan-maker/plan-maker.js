@@ -49,7 +49,8 @@ export class PlanMaker extends Component {
           <div className="directions-label">Want a reminder in your email?</div>
           {emailSubmitted ? (
             <div>
-              Awesome! We&rsquo;ll remind you at <strong>{emailSubmitted}</strong>.
+              Awesome! We&rsquo;ll remind you at{' '}
+              <strong>{emailSubmitted}</strong>.
             </div>
           ) : (
             <form
@@ -64,7 +65,7 @@ export class PlanMaker extends Component {
                 onChange={this.onInputChange('email')}
                 className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
               />
-              <Button className="ml2" style={{ height: 36 }}>
+              <Button classes="ml2" style={{ height: 36 }}>
                 Remind
               </Button>
             </form>
@@ -88,7 +89,7 @@ export class PlanMaker extends Component {
                 onChange={this.onInputChange('phone')}
                 className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
               />
-              <Button className="ml2" style={{ height: 36 }}>
+              <Button classes="ml2" style={{ height: 36 }}>
                 Remind
               </Button>
             </form>
