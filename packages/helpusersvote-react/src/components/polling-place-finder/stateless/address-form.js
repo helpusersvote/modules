@@ -13,7 +13,7 @@ const FIELD_PLACEHOLDERS = {
 class AddressForm extends Component {
   render() {
     const { state, props } = this
-    const { title, description } = props
+    const { title } = props
     const { useAutocomplete, autocompleteActive } = state
     const content = useAutocomplete ? (
       <AddressAutocomplete
@@ -48,22 +48,14 @@ class AddressForm extends Component {
         className="huv-address-form w-100 mt3 mt4-ns"
       >
         <div className="heading-container">
-          <h1 className="heading">Find out where to vote</h1>
+          <h1 className="heading">{title}</h1>
         </div>
         <div className="huv-address-form-content">
-          {/* <div className="mt1 mb3 f5 f4-ns">{description}</div> */}
           <div className="mt1 mb3 f5 f4-ns">Enter your address:</div>
           <div className="flex flex-wrap">{content}</div>
           {autocompleteActive ? null : (
             <div className="mt3 flex justify-center">
-              <Button
-                is="button"
-                width={100}
-                display="block"
-                textAlign="center"
-                appearance="blue"
-                onClick={this.onSubmit}
-              >
+              <Button width={100} blue onClick={this.onSubmit}>
                 Go!
               </Button>
             </div>
@@ -132,11 +124,9 @@ class AddressForm extends Component {
 }
 
 AddressForm.defaultProps = {
+  title: 'Find out where to vote',
   onSelectAddress: () =>
-    console.warn('Missing `onSubmit` for `<AddressForm />`'),
-  title: 'Find your polling place',
-  description:
-    'We’ll find your polling place and hours, so you can go vote on Election Day.'
+    console.warn('Missing `onSubmit` for `<AddressForm />`')
 }
 
 export default AddressForm

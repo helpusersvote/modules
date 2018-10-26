@@ -28,7 +28,7 @@ class PollingPlaceFinder extends Component {
       onSwitchToEarlyVoting,
       onSwitchToPollingPlace
     } = this
-    const { notFound, children } = this.props
+    const { notFound, children, directionsChildren } = this.props
     const {
       ready,
       address,
@@ -95,6 +95,7 @@ class PollingPlaceFinder extends Component {
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
             onSwitchToPollingPlace={onSwitchToPollingPlace}
+            children={directionsChildren}
           />
         )
       } else {
@@ -106,6 +107,7 @@ class PollingPlaceFinder extends Component {
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
             onSwitchToEarlyVoting={onSwitchToEarlyVoting}
+            children={directionsChildren}
           />
         )
       }
@@ -250,11 +252,7 @@ class PollingPlaceFinder extends Component {
     setEncryptedAddress(address)
 
     const voterInfo = await this.loadVoterInfo(address)
-    const { type, alwaysUseNetwork } = this.props
-
-    if (alwaysUseNetwork) {
-      setEncryptedVoterInfo(voterInfo)
-    }
+    const { type } = this.props
 
     this.setState({ address, voterInfo })
 

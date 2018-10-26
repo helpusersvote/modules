@@ -5,6 +5,7 @@ import EARLY_VOTING_DATA from './data/early-voting.json'
 import POLLING_PLACE_DATA from './data/polls.json'
 import { getMapImages, toAddr } from './utils'
 
+import PlanMaker from '../plan-maker'
 import EarlyVotingCTA from './stateless/early-voting-cta'
 import PollingPlaceNotFound from './stateless/not-found'
 import LocationAddress from './stateless/location-address'
@@ -14,6 +15,7 @@ import { ElectionDayNotice } from './stateless/election-day'
 import Switcher from './stateless/switcher.js'
 
 export function PollingPlaceDirections({
+  children,
   address: backupAddress,
   notFound,
   voterInfo,
@@ -161,13 +163,13 @@ export function PollingPlaceDirections({
             </div>
           </div>
         </div>
-        <div className="cf" style={{ fontSize: 12 }}>
+        <div className="cf mb2" style={{ fontSize: 12 }}>
           <div className="fr">
             <GoogleReportForm address={address} />
           </div>
         </div>
       </div>
-      {/* <PollingPlacePlan /> */}
+      {children}
     </div>
   )
 }
