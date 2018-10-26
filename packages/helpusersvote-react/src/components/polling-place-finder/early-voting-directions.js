@@ -56,6 +56,7 @@ export function EarlyVotingDirections({
         <a
           className="link blue underline-hover pointer"
           href="https://www.vote.org/polling-place-locator/"
+          target="_blank"
         >
           find your polling place
         </a>
