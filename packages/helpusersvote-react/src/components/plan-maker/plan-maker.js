@@ -49,7 +49,7 @@ export class PlanMaker extends Component {
           <div className="directions-label">Want a reminder in your email?</div>
           {emailSubmitted ? (
             <div>
-              Awesome! We'll remind you at <strong>{emailSubmitted}</strong>.
+              Awesome! We&rsquo;ll remind you at <strong>{emailSubmitted}</strong>.
             </div>
           ) : (
             <form
