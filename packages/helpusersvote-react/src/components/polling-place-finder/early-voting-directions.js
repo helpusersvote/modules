@@ -22,12 +22,26 @@ export function EarlyVotingDirections({
   const { earlyVotingTimeLeft, earlyLocations: locations } = voterInfo
 
   if (locations && locations.length === 0) {
+    const descriptionContent = (
+      <React.Fragment>
+        We couldn&rsquo;t find your early voting location. Please contact your{' '}
+        <a
+          className="dib link blue underline-hover pointer"
+          href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
+        >
+          local election office
+        </a>{' '}
+        to see if there is an early voting location we missed.
+      </React.Fragment>
+    )
+
     return (
       <PollingPlaceNotFound
         title="No early voting locations found"
         address={address}
         voterInfo={voterInfo}
         queryParams={queryParams}
+        description={descriptionContent}
         onChangeAddress={onChangeAddress}
       />
     )
@@ -71,7 +85,7 @@ export function EarlyVotingDirections({
               <div className="flex-auto-ns">
                 <div>
                   <div className="directions-label">
-                    Location&nbsp;&nbsp;&middot;&nbsp;
+                    Location&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                     <a
                       className="fw5 link blue underline-hover"
                       href={directionsURL}

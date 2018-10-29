@@ -239,6 +239,16 @@ storiesOf('Polling Place Finder', module)
       />
     </div>
   ))
+  .add('Not Found · Early', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder
+        notFound
+        type="early"
+        address={{ line1: '123 Main St', city: 'Farmsville', state: 'VA' }}
+      />
+    </div>
+  ))
   .add('Error Preview', () => (
     <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
