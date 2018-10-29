@@ -20,7 +20,8 @@ import {
   getEncryptedBallot,
   setEncryptedBallot,
   getEncryptedAddress,
-  setEncryptedAddress
+  setEncryptedAddress,
+  persistEncryptedValues
 } from './utils'
 
 export function StatelessBallot({
@@ -28,7 +29,8 @@ export function StatelessBallot({
   ballot,
   address = {},
   progress = 0,
-  moreInfoHref = 'ballotready.org',
+  handoffReady,
+  moreInfoHref = 'ballotpedia.org',
   onSelectChoice,
   onChangeAddress,
   onMoreInfoHrefSelect,
@@ -37,7 +39,7 @@ export function StatelessBallot({
   const referendumTopics = []
 
   return (
-    <div className="huv-container" {...props}>
+    <div className="center" style={{ maxWidth: 800 }} {...props}>
       <Notice referendumTopics={referendumTopics} />
 
       <div className="ballot mt2 mt3-ns">
@@ -62,10 +64,10 @@ export function StatelessBallot({
           moreInfoHref={moreInfoHref}
           onSelectChoice={onSelectChoice}
         />
-        <BallotHandoff />
+        {handoffReady && <BallotHandoff />}
       </div>
 
-      <div className="cf mt1" style={{ maxWidth: 800, fontSize: 12 }}>
+      <div className="cf mt1" style={{ fontSize: 12 }}>
         <div className="fr">
           <GoogleReportForm address={address} />
         </div>
@@ -215,7 +217,14 @@ export class Ballot extends Component {
     window.removeEventListener('scroll')
   }
 
-  onSelectChoice = (key, value) => {
+  componentDidCatch(error, info) {
+    this.setState({ didError: true })
+
+    // Report to sentry
+    reportError(error, info)
+  }
+
+  onSelectChoice = async (key, value) => {
     const ballot = { ...this.state.ballot }
 
     if (key === '*' && !value) {
@@ -228,14 +237,17 @@ export class Ballot extends Component {
       ballot[key] = value
     }
 
-    setEncryptedBallot(ballot)
-
     this.setState({ ballot })
+
+    try {
+      await setEncryptedBallot(ballot)
+      await persistEncryptedValues()
+    } catch (err) {
+      reportError(err)
+    }
   }
 
   onSelectAddress = async address => {
-    setEncryptedAddress(address)
-
     const voterInfo = await this.loadVoterInfo(address)
     const previouslyInvalid = !this.state.address || !this.state.address.line1
 
@@ -255,6 +267,15 @@ export class Ballot extends Component {
         state: address.state
       }
     })
+
+    try {
+      await setEncryptedAddress(address)
+      await setEncryptedBallot({})
+
+      this.setState({ handoffReady: true })
+    } catch (err) {
+      reportError(err)
+    }
   }
 
   onChangeAddress = () => {

@@ -81,8 +81,15 @@ class AddressForm extends Component {
   }
 
   onToggleAutocomplete = () => {
+    const {
+      autocompleteActive,
+      useAutocomplete: previousUseAutocomplete
+    } = this.state
+    const useAutocomplete = !previousUseAutocomplete
+
     this.setState({
-      useAutocomplete: !this.state.useAutocomplete
+      useAutocomplete,
+      autocompleteActive: useAutocomplete ? autocompleteActive : false
     })
   }
 

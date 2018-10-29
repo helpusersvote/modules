@@ -53,7 +53,7 @@ export default {
  * @return {Object}
  */
 
-export function normalizeVoterInfo(info) {
+export function normalizeVoterInfo(info = {}) {
   var data = {
     earlyLocations: [],
     generals: [],
@@ -372,7 +372,7 @@ export function normalizeLocation(location, options = {}) {
  * @return {Object}
  */
 
-function normalizeAddress(address) {
+function normalizeAddress(address = {}) {
   // Normalize the first address line.
   address.line1 = normalizeLine1(address.line1)
 

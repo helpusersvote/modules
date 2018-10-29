@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "npm run build",
+    "start": "npm run watch",
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack"
   },

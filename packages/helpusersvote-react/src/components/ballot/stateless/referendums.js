@@ -28,9 +28,9 @@ export function ElectionReferendums({
             {contest.title}
             {ballot[contest.key] && (
               <span>
-                &nbsp;&middot;&nbsp;
+                &nbsp;&middot;&nbsp;&nbsp;
                 <a
-                  className="fw5 link blue underline-hover"
+                  className="fw5 link blue underline-hover pointer"
                   onClick={() => onSelectChoice(contest.key, null)}
                 >
                   Change
@@ -65,7 +65,7 @@ export function ElectionReferendums({
           <div className="read-more-wrap">
             {contest.subtitle &&
               !stateBallotInfo.omit_subtitle && (
-                <div className="ballot-contest-subtitle">
+                <div className="ballot-contest-subtitle mt3">
                   {contest.subtitle}
                 </div>
               )}
@@ -82,7 +82,7 @@ export function ElectionReferendums({
             ) */}
             {contest.fiscalImpact &&
               !ballot[contest.key] && (
-                <div className="read-more-show mt2 f6 f5-ns i fw5">
+                <div className="read-more-show mv3 f6 f5-ns i fw5">
                   <em>Fiscal Impact:</em> {contest.fiscalImpact}
                 </div>
               )}
@@ -96,24 +96,30 @@ export function ElectionReferendums({
             />
           ) */}
 
-          <div className="list pl0">
+          <div className="list pl0 mt2">
             {contest.referendumBallotResponses &&
-              contest.referendumBallotResponses.map(response => (
-                <div className="lh-copy mr3" key={contest.key + response}>
+              contest.referendumBallotResponses.map((response, index) => (
+                <div className="lh-copy mr3 mb2" key={index}>
                   {(!ballot[contest.key] ||
                     ballot[contest.key] === response) && (
                     <div>
                       <input
                         id={`checkbox.${contest.title}.${response}`}
                         type="checkbox"
+                        style={{ width: 24, height: 24 }}
                         checked={ballot[contest.key] === response}
-                        onChange={() => onSelectChoice(contest.key, response)}
+                        onChange={() =>
+                          onSelectChoice(
+                            contest.key,
+                            ballot[contest.key] === response ? null : response
+                          )
+                        }
                       />
                       <label
                         className="pl1"
                         htmlFor={`checkbox.${contest.title}.${response}`}
                       >
-                        <span className="fw5 f6">{response}</span>
+                        <span className="fw5 f6 pointer">{response}</span>
                       </label>
                     </div>
                   )}

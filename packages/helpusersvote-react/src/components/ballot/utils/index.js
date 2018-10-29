@@ -1,4 +1,7 @@
 import storage from 'localforage'
+import HmacSHA1 from 'crypto-js/hmac-sha1'
+import Base58 from './base-58'
+import { getConfig, storeConfig } from './network'
 
 export * from './qr-code'
 
@@ -13,7 +16,7 @@ if (typeof window !== 'undefined') {
 }
 
 export function getMoreInfoLink({ href, term }) {
-  const moreInfoHref = href || 'ballotready.org'
+  const moreInfoHref = href || 'ballotpedia.org'
   return `http://www.google.com/search?q=${term}+site%3A${moreInfoHref}&btnI`
 }
 
@@ -79,19 +82,77 @@ const VOTER_INFO_STORAGE_KEY = 'enc_voter_info'
 const LOCALSTORAGE_VALUE_PREFIX = '__lfsc__:'
 
 function getLocalItem(key) {
-  return window.localStorage['huv/' + key].replace(
-    LOCALSTORAGE_VALUE_PREFIX,
-    ''
-  )
+  const value = window.localStorage['huv/' + key] || ''
+
+  return value.replace(LOCALSTORAGE_VALUE_PREFIX, '')
+}
+
+function setLocalItem(key, value) {
+  if (!(key && value)) {
+    return
+  }
+
+  window.localStorage['huv/' + key] = LOCALSTORAGE_VALUE_PREFIX + value
+}
+
+function getEncryptedValuesFromStorage() {
+  const enc_address = getLocalItem('enc_address')
+  const enc_ballot = getLocalItem('enc_ballot')
+
+  return { enc_address, enc_ballot }
+}
+
+export async function persistEncryptedValues() {
+  try {
+    const configId = 'ekv_' + generateKeyId()
+    const values = getEncryptedValuesFromStorage()
+
+    return await storeConfig({
+      namespaceId: 'ebd_vdo',
+      configId,
+      body: values
+    })
+  } catch (err) {
+    console.error(err)
+    return true
+  }
+}
+
+export async function parseKeyFragment(fragment) {
+  const hash = decodeURIComponent(fragment.replace('#', ''))
+  const values = hash.split('&').reduce((acc, str) => {
+    let [key, ...rest] = str.split('=')
+    return { ...acc, [key]: rest.join('=') }
+  }, {})
+
+  Object.keys(values).forEach(key => setLocalItem(key, values[key]))
+
+  return true
+}
+
+export function generateKeyId() {
+  const ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
+  const ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
+  const bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
+  const bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
+
+  return HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString(Base58)
 }
 
 export async function getKeyFragment() {
-  const bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
-  const bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
-  const ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
-  const ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
+  const payload = {}
 
-  return `#ak=${ak}&ac=${ac}&bk=${bk}&bc=${bc}`
+  payload.ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
+  payload.ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
+  payload.bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
+  payload.bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
+
+  return (
+    '#' +
+    Object.keys(payload)
+      .map(k => `${k}=${encodeURIComponent(payload[k])}`)
+      .join('&')
+  )
 }
 
 export async function getEncryptedBallot() {
@@ -213,8 +274,22 @@ async function getEncryptedData({ cryptoKeyName, key }) {
 
 // AES-CTR encrypt/decryptData
 
+function generateCtrIV(length = 16) {
+  const ctr = new Uint8Array(length)
+
+  if (window.crypto && window.crypto.getRandomValues) {
+    window.crypto.getRandomValues(ctr)
+  } else {
+    for (let i = 0; i < length; i++) {
+      ctr[i] = Math.floor(Math.random() * 255)
+    }
+  }
+
+  return ctr
+}
+
 async function encryptData({ cryptoKey, value }) {
-  const counter = new Uint8Array(16)
+  const counter = generateCtrIV(16)
   const encryptedArrayBuffer = await window.crypto.subtle.encrypt(
     {
       name: CRYPTO_ALGO,

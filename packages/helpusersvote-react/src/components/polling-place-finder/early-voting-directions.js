@@ -18,7 +18,10 @@ export function EarlyVotingDirections({
   onChangeAddress,
   onSwitchToPollingPlace
 }) {
-  const address = voterInfo.address || backupAddress
+  const address =
+    voterInfo.address && voterInfo.address.line1
+      ? voterInfo.address
+      : backupAddress
   const { earlyVotingTimeLeft, earlyLocations: locations } = voterInfo
 
   if (locations && locations.length === 0) {
