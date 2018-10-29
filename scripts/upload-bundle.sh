@@ -3,7 +3,7 @@
 # Stop on the first error
 set -e 
 
-S3_CACHE_MS=${S3_CACHE_MS:-"120000"}
+S3_CACHE_SECONDS=${S3_CACHE_SECONDS:-"120"}
 
 if [ -z "$(echo $S3_BUCKET)" ]; then
 	echo "Missing \$S3_BUCKET environment variable"
@@ -31,4 +31,4 @@ cd ../helpusersvote-bundle/ \
 # Don't have `pip` installed? Try this:
 # easy_install pip
 
-aws s3 sync --cache-control max-age=${S3_CACHE_MS} $(pwd)/dist s3://${S3_BUCKET}${S3_PREFIX}
+aws s3 sync --cache-control max-age=${S3_CACHE_SECONDS} $(pwd)/dist s3://${S3_BUCKET}${S3_PREFIX}
