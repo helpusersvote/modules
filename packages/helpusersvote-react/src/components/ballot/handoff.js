@@ -28,16 +28,16 @@ export class BallotHandoff extends Component {
 
   async componentDidMount() {
     const {
-      baseHref = 'https://www.vote.org/ballot-information/' // 'https://helpusersvote.com/apps/ballot'
+      baseHref = 'https://huv-ballot.now.sh/' // 'https://helpusersvote.com/apps/ballot'
     } = this.props
-    const keyFragment = '' // await getKeyFragment()
+    const keyFragment = await getKeyFragment()
     const ballotHref = baseHref + keyFragment
     const imgBuffer = await generateQR({
       text: ballotHref,
       path: 'https://helpusersvote.com/static/favicon.png',
       opt: {
         margin: 0,
-        errorCorrectionLevel: 'H'
+        errorCorrectionLevel: 'M'
       }
     })
     const imgSrc =

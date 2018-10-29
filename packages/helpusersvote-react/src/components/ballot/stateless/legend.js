@@ -4,18 +4,16 @@ import { getPartyColor } from '../utils'
 
 function MoreInfoSelect({ onSelect }) {
   return (
-    <select
-      className="huv-button"
-      onChange={e => onSelect(e.target.value)}
-      style={{
-        minWidth: 140,
-        appearance: 'menulist-button',
-        WebkitAppearance: 'menulist-button'
-      }}
-    >
-      <option value="ballotready.org">ballotready.org</option>
-      <option value="ballotpedia.org">ballotpedia.org</option>
-    </select>
+    <div className="dib huv-select-container">
+      <select
+        className="huv-button"
+        onChange={e => onSelect(e.target.value)}
+        style={{ minWidth: 140 }}
+      >
+        <option value="ballotpedia.org">ballotpedia.org</option>
+        <option value="ballotready.org">ballotready.org</option>
+      </select>
+    </div>
   )
 }
 
@@ -57,8 +55,10 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
         Legend
       </h3>
       {content}
-      <div className="directions-label mt2">More info will open on</div>
-      <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
+      <div className="directions-label mt2">
+        <span className="dib mr2">More info will open on</span>
+        <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
+      </div>
     </div>
   )
 }

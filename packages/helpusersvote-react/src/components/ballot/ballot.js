@@ -28,7 +28,7 @@ export function StatelessBallot({
   ballot,
   address = {},
   progress = 0,
-  moreInfoHref = 'ballotready.org',
+  moreInfoHref = 'ballotpedia.org',
   onSelectChoice,
   onChangeAddress,
   onMoreInfoHrefSelect,
@@ -37,7 +37,7 @@ export function StatelessBallot({
   const referendumTopics = []
 
   return (
-    <div className="huv-container" {...props}>
+    <div className="center" style={{ maxWidth: 800 }} {...props}>
       <Notice referendumTopics={referendumTopics} />
 
       <div className="ballot mt2 mt3-ns">
@@ -65,7 +65,7 @@ export function StatelessBallot({
         <BallotHandoff />
       </div>
 
-      <div className="cf mt1" style={{ maxWidth: 800, fontSize: 12 }}>
+      <div className="cf mt1" style={{ fontSize: 12 }}>
         <div className="fr">
           <GoogleReportForm address={address} />
         </div>
@@ -215,7 +215,14 @@ export class Ballot extends Component {
     window.removeEventListener('scroll')
   }
 
-  onSelectChoice = (key, value) => {
+  componentDidCatch(error, info) {
+    this.setState({ didError: true })
+
+    // Report to sentry
+    reportError(error, info)
+  }
+
+  onSelectChoice = async (key, value) => {
     const ballot = { ...this.state.ballot }
 
     if (key === '*' && !value) {
@@ -228,9 +235,14 @@ export class Ballot extends Component {
       ballot[key] = value
     }
 
-    setEncryptedBallot(ballot)
-
     this.setState({ ballot })
+
+    try {
+      await setEncryptedBallot(ballot)
+      await persistEncryptedValues()
+    } catch (err) {
+      reportError(err)
+    }
   }
 
   onSelectAddress = async address => {

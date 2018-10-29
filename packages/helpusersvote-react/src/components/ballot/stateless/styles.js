@@ -43,23 +43,42 @@ const styles = `
   }
   
   .ballot-link {
+    padding: 0 6px;
+    color: #fff;
+    cursor: pointer;
     font-size: 12px;
+    line-height: 28px;
+    border-radius: 2px;
+    background: #2F7EE7;
+    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    color: #2F7EE7;
-    cursor: pointer;
+    transition: background 0.2s ease-out;
   }
-  
   .ballot-link:hover {
-    text-decoration: underline;
+    background: #4e95f3;
   }
-
+  .ballot-link:active {
+    background: #1f6cd2;
+  }
+  @media(max-width: 280px) {
+    .ballot-candidate-name {
+      max-width: 40px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  @media(max-width: 376px) {
+    .ballot-link {
+      width: 28px;
+    }
+  }
   .ballot input[type="checkbox"] {
     width: 16px;
     height: 16px;
     vertical-align: bottom;
   }
-
   .ballot-header {
     background: white;
     border-bottom: 1px solid #e8e8e8;

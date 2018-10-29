@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 }
 
 export function getMoreInfoLink({ href, term }) {
-  const moreInfoHref = href || 'ballotready.org'
+  const moreInfoHref = href || 'ballotpedia.org'
   return `http://www.google.com/search?q=${term}+site%3A${moreInfoHref}&btnI`
 }
 
@@ -85,13 +85,36 @@ function getLocalItem(key) {
   )
 }
 
-export async function getKeyFragment() {
-  const bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
-  const bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
-  const ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
-  const ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
+function setLocalItem(key, value) {
+  window.localStorage['huv/' + key] = LOCALSTORAGE_VALUE_PREFIX + value
+}
 
-  return `#ak=${ak}&ac=${ac}&bk=${bk}&bc=${bc}`
+export async function parseKeyFragment(fragment) {
+  const hash = decodeURIComponent(fragment.replace('#', ''))
+  const values = hash.split('&').reduce((acc, str) => {
+    let [key, ...rest] = str.split('=')
+    return { ...acc, [key]: rest.join('=') }
+  }, {})
+
+  Object.keys(values).forEach(key => setLocalItem(key, values[key]))
+
+  return true
+}
+
+export async function getKeyFragment() {
+  const payload = {}
+
+  payload.bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
+  payload.bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
+  payload.ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
+  payload.ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
+
+  return (
+    '#' +
+    Object.keys(payload)
+      .map(k => `${k}=${encodeURIComponent(payload[k])}`)
+      .join('&')
+  )
 }
 
 export async function getEncryptedBallot() {
