@@ -53,17 +53,23 @@ class PollingPlaceFinder extends Component {
     }
 
     if (notFound && address) {
-      return (
+      const directionsProps = {
+        address,
+        notFound,
+        voterInfo,
+        queryParams,
+        onChangeAddress,
+        onClickDirections,
+        onSwitchToEarlyVoting
+      }
+
+      return type ? (
         <div className="huv-container">
-          <PollingPlaceDirections
-            notFound
-            address={address}
-            voterInfo={voterInfo}
-            queryParams={queryParams}
-            onChangeAddress={onChangeAddress}
-            onClickDirections={onClickDirections}
-            onSwitchToEarlyVoting={onSwitchToEarlyVoting}
-          />
+          <EarlyVotingDirections {...directionsProps} />
+        </div>
+      ) : (
+        <div className="huv-container">
+          <PollingPlaceDirections {...directionsProps} />
         </div>
       )
     }

@@ -8,6 +8,7 @@ export function PollingPlaceNotFound({
   title,
   address,
   voterInfo,
+  description,
   onChangeAddress
 }) {
   const pollingPlace = POLLING_PLACE_DATA[address.state] || {}
@@ -33,8 +34,19 @@ export function PollingPlaceNotFound({
             <div className="flex-auto-ns">
               <div className="directions-label">{title}</div>
               <p className="lh-copy">
-                Not all polling places are available yet, please check again in
-                a few days!
+                {description || (
+                  <React.Fragment>
+                    Not all polling places are available yet, please check again
+                    in a few days or contact your{' '}
+                    <a
+                      className="dib link blue underline-hover pointer"
+                      href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
+                    >
+                      local election office
+                    </a>
+                    .
+                  </React.Fragment>
+                )}
               </p>
             </div>
             <div className="mt3 dn db-ns">
@@ -116,7 +128,7 @@ export function PollingPlaceNotFound({
 }
 
 PollingPlaceNotFound.defaultProps = {
-  title: 'No polling place found'
+  title: 'No polling places found'
 }
 
 export default PollingPlaceNotFound

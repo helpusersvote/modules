@@ -2,7 +2,8 @@ import React from 'react'
 
 export function PollingPlaceFinderError() {
   const stateSite = false
-  const stateOfficeSite = 'https://www.vote.org/polling-place-locator/#table'
+  const stateOfficeSite =
+    'https://www.usvotefoundation.org/vote/eoddomestic.htm'
 
   return (
     <div className="mt3 w-100">
