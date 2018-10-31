@@ -5,8 +5,9 @@ import { shouldShowCTA, getState } from '@helpusersvote/logic'
 import { ElectionDayCTA } from './stateless/election-day'
 import PollingPlaceNotFound from './stateless/not-found'
 import Switcher from './stateless/switcher'
+import { DirectionsMap } from './stateless/directions'
 import GoogleReportForm from './stateless/google-report-form'
-import { getMapImages, toAddr } from './utils'
+import { toAddr } from './utils'
 
 Day.extend(relativeTime)
 
@@ -41,17 +42,12 @@ export function EarlyVotingDirections({
   const userAddr = toAddr(address)
   const pollAddr = toAddr(location.address || {})
 
-  const directionsURL = [
+  const directionsHref = [
     'https://maps.google.com?saddr=',
     encodeURIComponent(userAddr),
     '&daddr=',
     encodeURIComponent(pollAddr)
   ].join('')
-
-  const mapImages = getMapImages({
-    userAddr,
-    pollAddr
-  })
 
   const isElectionDay = queryParams.election || shouldShowCTA()
 
@@ -78,7 +74,7 @@ export function EarlyVotingDirections({
                     Location&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                     <a
                       className="fw5 link blue underline-hover"
-                      href={directionsURL}
+                      href={directionsHref}
                       target="_blank"
                     >
                       Get Directions
@@ -198,21 +194,11 @@ export function EarlyVotingDirections({
               </div>
             </div>
             <div className="directions-container relative flex-auto-ns">
-              <a
-                className="directions-map dn db-ns"
-                href={directionsURL}
-                target="_blank"
-                style={{
-                  backgroundImage: `url('${mapImages.large}')`
-                }}
+              <DirectionsMap
+                userAddr={userAddr}
+                pollAddr={pollAddr}
+                directionsHref={directionsHref}
               />
-              <a
-                className="directions-map db dn-ns"
-                href={directionsURL}
-                target="_blank"
-              >
-                <img src={mapImages.small} />
-              </a>
             </div>
             <div className="directions-info dn-ns">
               <div className="mt3">
