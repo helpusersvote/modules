@@ -15,6 +15,7 @@ export function EarlyVotingDirections({
   voterInfo,
   className,
   queryParams,
+  useGroupedDates,
   onChangeAddress,
   onSwitchToPollingPlace
 }) {
@@ -119,6 +120,7 @@ export function EarlyVotingDirections({
                         </div>
                       )}
                     {!location.hoursParseFail &&
+                      useGroupedDates &&
                       location.groupedDates.map((dateRange, index) => (
                         <div key={index} className="f7 mt1">
                           <div>
@@ -140,6 +142,18 @@ export function EarlyVotingDirections({
                           </div>
                         </div>
                       ))}
+                    {!location.hoursParseFail &&
+                      !useGroupedDates &&
+                      location.hoursPerDate &&
+                      location.hoursPerDate.map(({ date, hours }, index) => (
+                        <div key={index} className="f7 mt1">
+                          <div>
+                            <div className="ml2 fr">{hours}</div>
+                            <div className="directions-date">{date}</div>
+                          </div>
+                        </div>
+                      ))}
+
                     {!location.hoursParseFail &&
                       !location.groupedDates.length &&
                       location.fallbackHours && (
@@ -259,6 +273,10 @@ function NotFoundDescription({ state = '' }) {
       to see if there is an early voting location we missed.
     </React.Fragment>
   )
+}
+
+EarlyVotingDirections.defaultProps = {
+  useGroupedDates: false
 }
 
 export default EarlyVotingDirections
