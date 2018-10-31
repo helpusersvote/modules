@@ -324,14 +324,24 @@ export function normalizeLocation(location, options = {}) {
         hoursParseFail = true
       } else {
         endDateTime = _.maxBy(hours, h => h.endDateTime).endDateTime
-        hours = futureHours(hours)
         hoursToday = getHoursToday(hours)
         hoursTomorrow = getHoursTomorrow(hours)
+        hours = futureHours(hours)
       }
     } else {
-      hours = location.pollingHours
+      if (location.pollingHours) {
+        hours = location.pollingHours
+      }
     }
   }
+
+  var hoursPerDate =
+    typeof hours === 'string'
+      ? []
+      : hours.map(h => ({
+          date: `${h.day}, ${h.month} ${h.date}`,
+          hours: `${h.start} - ${h.end}`
+        }))
 
   // Group polling dates by hours
   var groupedDates = groupHoursByDate(hours)
@@ -357,6 +367,7 @@ export function normalizeLocation(location, options = {}) {
     fallbackHours,
     groupedDates,
     hoursParseFail,
+    hoursPerDate,
     hoursToday,
     hoursTomorrow,
     hasHoursToday: !!hoursToday,
@@ -528,9 +539,9 @@ function parseHours(hours) {
   )
 }
 
-function futureHours(hours) {
+function futureHours(hours = []) {
   return _.filter(hours, function(h) {
-    return Day() < Day(h.isoLocalDate).add(1, 'day')
+    return Day() < Day(h.isoLocalDate)
   })
 }
 

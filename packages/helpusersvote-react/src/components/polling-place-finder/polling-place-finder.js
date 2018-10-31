@@ -147,6 +147,7 @@ class PollingPlaceFinder extends Component {
       // defer analytics to next cycle
       setTimeout(() => this.startAnalytics(), 0)
     } catch (err) {
+      console.error(err)
       this.setState({ didError: true })
       reportError(err)
     }
