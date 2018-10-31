@@ -9,7 +9,7 @@ function render() {
     React.createElement('div', null, [
       React.createElement(Ballot, { key: 1 }),
       React.createElement(PollingPlaceFinder.Styles, { key: 2 }),
-      React.createElement(Ballot.Styles, { key: 4 })
+      React.createElement(Ballot.Styles, { key: 5 })
     ]),
     root
   )

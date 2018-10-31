@@ -41,7 +41,7 @@ export function ElectionReferendums({
 
           {!ballot[contest.key] && (
             <a
-              className="ballot-link fw5 fr pl2 relative"
+              className="huv-button fw5 fr relative"
               style={{ top: '.4em' }}
               href={getMoreInfoLink({
                 href: moreInfoHref,

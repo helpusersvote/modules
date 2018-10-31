@@ -3,6 +3,7 @@ import { generateQR, getKeyFragment } from './utils'
 
 export class BallotHandoff extends Component {
   render() {
+    const { ready } = this.props
     const { ballotHref, imgSrc } = this.state
 
     return imgSrc ? (
@@ -17,9 +18,13 @@ export class BallotHandoff extends Component {
             pick up where you left off!
           </div>
         </div>
-        <a href={ballotHref}>
-          <img width={60} height={60} src={imgSrc} />
-        </a>
+        {ready ? (
+          <a href={ballotHref}>
+            <img width={60} height={60} src={imgSrc} />
+          </a>
+        ) : (
+          <div style={{ width: 60, height: 60 }} />
+        )}
       </div>
     ) : null
   }
@@ -27,6 +32,16 @@ export class BallotHandoff extends Component {
   state = {}
 
   async componentDidMount() {
+    await this.deriveQR()
+  }
+
+  async componentWillReceiveProps(props) {
+    if (props.ready && !this.props.ready) {
+      await this.deriveQR()
+    }
+  }
+
+  deriveQR = async () => {
     const { protocol, host } = window.location
     const {
       baseHref = `${protocol}//${host}/` // 'https://huv-ballot.now.sh/' // 'https://helpusersvote.com/apps/ballot'

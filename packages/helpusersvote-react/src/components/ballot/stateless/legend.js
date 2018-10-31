@@ -54,7 +54,7 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
         Legend
       </h3>
       {content}
-      <div className="directions-label mt2">
+      <div className="directions-label mt2 flex justify-end items-center">
         <span className="dib mr2">More info will open on</span>
         <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
       </div>

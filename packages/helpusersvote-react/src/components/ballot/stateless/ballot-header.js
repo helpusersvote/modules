@@ -31,7 +31,7 @@ export function BallotHeader({
             <div className="progress mt1">
               <div
                 style={{ width: progressWidth }}
-                className="progress-inner"
+                className="progress-inner huv-button--blue"
               />
               <div className={`progress-text ${progress >= 54 ? 'major' : ''}`}>
                 {progressWidth}

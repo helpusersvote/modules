@@ -125,7 +125,7 @@ function CandidateDetail({
       </div>
       {!ballot[contest.office] && (
         <a
-          className="ballot-link fw5 fr relative"
+          className="huv-button fw5 fr relative"
           href={getMoreCandidateInfoLink({
             href: moreInfoHref,
             contest,

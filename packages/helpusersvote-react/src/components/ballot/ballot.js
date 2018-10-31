@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import PollingPlaceFinderError from '../polling-place-finder/stateless/polling-place-finder-error'
 import GoogleReportForm from '../polling-place-finder/stateless/google-report-form'
@@ -21,6 +22,7 @@ import {
   setEncryptedBallot,
   getEncryptedAddress,
   setEncryptedAddress,
+  recoverEncryptedValues,
   persistEncryptedValues
 } from './utils'
 
@@ -64,7 +66,7 @@ export function StatelessBallot({
           moreInfoHref={moreInfoHref}
           onSelectChoice={onSelectChoice}
         />
-        {handoffReady && <BallotHandoff />}
+        <BallotHandoff ready={handoffReady} />
       </div>
 
       <div className="cf mt1" style={{ fontSize: 12 }}>
@@ -92,6 +94,7 @@ export class Ballot extends Component {
       address,
       voterInfo,
       moreInfoHref,
+      handoffReady,
       shouldUseAutocomplete
     } = state
     const { ...otherProps } = props
@@ -132,6 +135,7 @@ export class Ballot extends Component {
             address={address}
             info={voterInfo}
             progress={progress}
+            handoffReady={handoffReady}
             moreInfoHref={moreInfoHref}
             onSelectChoice={onSelectChoice}
             onChangeAddress={onChangeAddress}
@@ -150,9 +154,23 @@ export class Ballot extends Component {
   }
 
   async componentDidMount() {
-    const ballot = await getEncryptedBallot()
-    const address = await getEncryptedAddress()
-    const voterInfo = await this.loadVoterInfo(address)
+    let ballot, address, voterInfo
+
+    const hash = _.get(window, 'location.hash') || ''
+
+    console.log('hash', hash)
+
+    if (hash) {
+      await recoverEncryptedValues({ hash })
+    }
+
+    try {
+      ballot = await getEncryptedBallot()
+      address = await getEncryptedAddress()
+      voterInfo = await this.loadVoterInfo(address)
+    } catch (err) {
+      console.error(err)
+    }
 
     let shouldUseAutocomplete = true
 
@@ -165,6 +183,7 @@ export class Ballot extends Component {
 
     await this.setState({
       shouldUseAutocomplete,
+      handoffReady: true,
       voterInfo,
       address,
       ballot,
@@ -237,11 +256,13 @@ export class Ballot extends Component {
       ballot[key] = value
     }
 
-    this.setState({ ballot })
+    this.setState({ ballot, handoffReady: false })
 
     try {
       await setEncryptedBallot(ballot)
       await persistEncryptedValues()
+
+      this.setState({ handoffReady: true })
     } catch (err) {
       reportError(err)
     }
