@@ -52,7 +52,7 @@ export function EarlyVotingDirections({
   const isElectionDay = queryParams.election || shouldShowCTA()
 
   return (
-    <div className={`mt3 w-100 ${className || ''}`}>
+    <div className={`pt3 w-100 ${className || ''}`}>
       <div className="mt1 mb2">
         Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
         vote early, you can vote early and skip the lines on Election Day:

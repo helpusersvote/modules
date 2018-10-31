@@ -43,25 +43,24 @@ class AddressForm extends Component {
     )
 
     return (
-      <form
-        onSubmit={this.onSubmit}
-        className="huv-address-form w-100 mt3 mt4-ns"
-      >
-        <div className="heading-container">
-          <h1 className="heading">{title}</h1>
-        </div>
-        <div className="huv-address-form-content">
-          <div className="mt1 mb3 f5 f4-ns">Enter your address:</div>
-          <div className="flex flex-wrap">{content}</div>
-          {autocompleteActive ? null : (
-            <div className="mt3 flex justify-center">
-              <Button width={100} blue onClick={this.onSubmit}>
-                Go!
-              </Button>
-            </div>
-          )}
-        </div>
-      </form>
+      <div className="pt3 pt4-ns">
+        <form onSubmit={this.onSubmit} className="huv-address-form w-100">
+          <div className="heading-container">
+            <h1 className="heading">{title}</h1>
+          </div>
+          <div className="huv-address-form-content">
+            <div className="mt1 mb3 f5 f4-ns">Enter your address:</div>
+            <div className="flex flex-wrap">{content}</div>
+            {autocompleteActive ? null : (
+              <div className="mt3 flex justify-center">
+                <Button width={100} blue onClick={this.onSubmit}>
+                  Go!
+                </Button>
+              </div>
+            )}
+          </div>
+        </form>
+      </div>
     )
   }
 

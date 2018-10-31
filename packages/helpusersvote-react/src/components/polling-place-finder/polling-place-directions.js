@@ -57,7 +57,7 @@ export function PollingPlaceDirections({
   const votingDate = isElectionDay ? <b>today</b> : 'on Election Day'
 
   return (
-    <div className="mt3 w-100">
+    <div className="pt3 w-100">
       <div className="mt1 mb2">
         You can vote here {votingDate} from{' '}
         <span className="dib">
