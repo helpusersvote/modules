@@ -3,14 +3,13 @@ import React from 'react'
 import { getState, shouldShowCTA } from '@helpusersvote/logic'
 import EARLY_VOTING_DATA from './data/early-voting.json'
 import POLLING_PLACE_DATA from './data/polls.json'
-import { getMapImages, toAddr } from './utils'
+import { toAddr } from './utils'
 
-import PlanMaker from '../plan-maker'
 import EarlyVotingCTA from './stateless/early-voting-cta'
 import PollingPlaceNotFound from './stateless/not-found'
 import LocationAddress from './stateless/location-address'
 import GoogleReportForm from './stateless/google-report-form'
-import { DirectionsHours } from './stateless/directions'
+import { DirectionsHours, DirectionsMap } from './stateless/directions'
 import { ElectionDayNotice } from './stateless/election-day'
 import Switcher from './stateless/switcher.js'
 
@@ -47,17 +46,12 @@ export function PollingPlaceDirections({
   const userAddr = toAddr(address)
   const pollAddr = toAddr(location.address)
 
-  const directionsURL = [
+  const directionsHref = [
     'https://maps.google.com?saddr=',
     encodeURIComponent(userAddr),
     '&daddr=',
     encodeURIComponent(pollAddr)
   ].join('')
-
-  const mapImages = getMapImages({
-    userAddr,
-    pollAddr
-  })
 
   const isElectionDay = queryParams.election || shouldShowCTA()
   const votingDate = isElectionDay ? <b>today</b> : 'on Election Day'
@@ -93,7 +87,7 @@ export function PollingPlaceDirections({
                   Your Polling Place&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                   <a
                     className="fw5 link blue underline-hover"
-                    href={directionsURL}
+                    href={directionsHref}
                     target="_blank"
                   >
                     Get Directions
@@ -132,21 +126,11 @@ export function PollingPlaceDirections({
             onClick={onClickDirections}
             className="directions-container relative flex-auto-ns"
           >
-            <a
-              className="directions-map dn db-ns"
-              href={directionsURL}
-              target="_blank"
-              style={{
-                backgroundImage: `url('${mapImages.large}')`
-              }}
+            <DirectionsMap
+              userAddr={userAddr}
+              pollAddr={pollAddr}
+              directionsHref={directionsHref}
             />
-            <a
-              className="directions-map db dn-ns"
-              href={directionsURL}
-              target="_blank"
-            >
-              <img src={mapImages.small} />
-            </a>
           </div>
           <div className="directions-info dn-ns">
             <div className="mt3-ns">
