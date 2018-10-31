@@ -27,7 +27,7 @@ export function PollingPlaceNotFound({
   )
 
   return (
-    <div className="mt3 w-100">
+    <div className="pt3 w-100">
       <div className="outdent">
         <div className="directions directions-small mt3 mb1 flex-ns flex-row-ns">
           <div className="directions-info w-40-ns flex-ns flex-column-ns justify-between-ns">
