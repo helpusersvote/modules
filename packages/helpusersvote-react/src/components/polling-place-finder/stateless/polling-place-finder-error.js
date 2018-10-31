@@ -20,6 +20,7 @@ export function PollingPlaceFinderError() {
               <a
                 className="huv-button huv-button--blue tc dib"
                 href={stateOfficeSite}
+                target="_blank"
               >
                 Contact
               </a>

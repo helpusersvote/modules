@@ -41,6 +41,7 @@ export function PollingPlaceNotFound({
                     <a
                       className="dib link blue underline-hover pointer"
                       href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
+                      target="_blank"
                     >
                       local election office
                     </a>

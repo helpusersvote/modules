@@ -1,7 +1,7 @@
 import React from 'react'
 import Day from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { shouldShowCTA } from '@helpusersvote/logic'
+import { shouldShowCTA, getState } from '@helpusersvote/logic'
 import { ElectionDayCTA } from './stateless/election-day'
 import PollingPlaceNotFound from './stateless/not-found'
 import Switcher from './stateless/switcher'
@@ -22,18 +22,7 @@ export function EarlyVotingDirections({
   const { earlyVotingTimeLeft, earlyLocations: locations } = voterInfo
 
   if (locations && locations.length === 0) {
-    const descriptionContent = (
-      <React.Fragment>
-        We couldn&rsquo;t find your early voting location. Please contact your{' '}
-        <a
-          className="dib link blue underline-hover pointer"
-          href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
-        >
-          local election office
-        </a>{' '}
-        to see if there is an early voting location we missed.
-      </React.Fragment>
-    )
+    const descriptionContent = <NotFoundDescription state={address.state} />
 
     return (
       <PollingPlaceNotFound
@@ -237,6 +226,38 @@ export function EarlyVotingDirections({
         </div>
       )}
     </div>
+  )
+}
+
+function NotFoundDescription({ state = '' }) {
+  if (getState(state).abbr === 'NJ') {
+    return (
+      <React.Fragment>
+        Early voting is available at your{' '}
+        <a
+          className="dib link blue underline-hover pointer"
+          href="https://www.state.nj.us/state/elections/voting-information-local-officials.html"
+          target="_blank"
+        >
+          County Clerk&rsquo;s office
+        </a>
+        . Please contact your clerk for hours and information.
+      </React.Fragment>
+    )
+  }
+
+  return (
+    <React.Fragment>
+      We couldn&rsquo;t find your early voting location. Please contact your{' '}
+      <a
+        className="dib link blue underline-hover pointer"
+        href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
+        target="_blank"
+      >
+        local election office
+      </a>{' '}
+      to see if there is an early voting location we missed.
+    </React.Fragment>
   )
 }
 
