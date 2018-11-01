@@ -189,10 +189,10 @@ function createMessageBody(key) {
 
   switch(key) {
     case "phone":
-        return `Hi, this is Vote.org!\r\n\r\n
-        Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.\r\n
-        Below is the address which provides directions to get there!\r\n\r\n
-        ${pollLocation.address.text}`
+        var response = 'Hi, this is Vote.org!\r\n\r\n';
+        response += `Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.\r\n\r\n`;
+        response += `Below is the address which provides directions to get there!\r\n\r\n${pollLocation.address.text}`;
+        return response;
     default:
         return `Hi, this is Vote.org!<br><br>
         Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.<br>
