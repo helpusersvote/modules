@@ -26,6 +26,41 @@ const styles = `
   padding: 16px;
   border-top: 1px solid rgba(67, 90, 111, 0.145);
 }
+
+.add-to-calendar {
+  margin-bottom: 0;
+  width: 154px;
+}
+
+.react-add-to-calendar {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  position: relative;
+}
+
+.react-add-to-calendar__dropdown {
+  position: absolute;
+  left: -15px;
+  border-radius: 2px;
+  width: 152px;
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #a8a8a8;
+  background-color: #fff;
+  text-align: left;
+}
+
+.react-add-to-calendar__dropdown ul{
+  padding-left: 5px;
+  margin: 0;
+}
+
+.react-add-to-calendar__dropdown a{
+  text-decoration: none;
+}
+
+.react-add-to-calendar__dropdown i{
+  margin-right: 5px;
+}
 `
 
 const css = { __html: styles }
