@@ -265,3 +265,10 @@ storiesOf('Ballot', module)
       <Ballot />
     </div>
   ))
+  .add('Handoff Pop-up Open', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <Ballot.Styles />
+      <Ballot isHandoffModalOpen={true} />
+    </div>
+  ))

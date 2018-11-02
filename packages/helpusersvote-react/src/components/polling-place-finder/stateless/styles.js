@@ -120,11 +120,11 @@ const styles = `
 .report-error:hover, .report-error:focus {
   text-decoration: underline;
 }
-.huv-address-form input {
+.huv-container input[type="text"] {
   transition: 0.125s ease-out box-shadow;
 }
-.huv-address-form input:not([disabled]):not([data-disabled]):focus,
-.huv-address-form input:not([disabled]):not([data-disabled]):focus {
+.huv-container input[type="text"]:not([disabled]):not([data-disabled]):focus,
+.huv-container input[type="text"]:not([disabled]):not([data-disabled]):focus {
   outline: none;
   z-index: 2;
   border: 1px solid #579ad9;

@@ -32,7 +32,11 @@ export function StatelessBallot({
   address = {},
   progress = 0,
   handoffReady,
+  newChoiceCount,
   moreInfoHref = 'ballotpedia.org',
+  isModalOpen,
+  onOpenModal,
+  onCloseModal,
   onSelectChoice,
   onChangeAddress,
   onMoreInfoHrefSelect,
@@ -49,8 +53,10 @@ export function StatelessBallot({
           ballot={ballot}
           address={address}
           progress={progress}
+          onOpenModal={onOpenModal}
           onSelectChoice={onSelectChoice}
           onChangeAddress={onChangeAddress}
+          newChoiceCount={newChoiceCount}
         />
         <Legend info={info} onMoreInfoHrefSelect={onMoreInfoHrefSelect} />
         <Contests
@@ -66,7 +72,12 @@ export function StatelessBallot({
           moreInfoHref={moreInfoHref}
           onSelectChoice={onSelectChoice}
         />
-        <BallotHandoff ready={handoffReady} />
+        <BallotHandoff
+          ready={handoffReady}
+          isModalOpen={isModalOpen}
+          onOpenModal={onOpenModal}
+          onCloseModal={onCloseModal}
+        />
       </div>
 
       <div className="cf mt1" style={{ fontSize: 12 }}>
@@ -85,19 +96,24 @@ export class Ballot extends Component {
       onChangeAddress,
       onSelectAddress,
       onSelectChoice,
+      onCloseModal,
+      onOpenModal,
       props,
       state
     } = this
+
+    const { isHandoffModalOpen, ...otherProps } = props
     const {
       ready,
       ballot,
       address,
       voterInfo,
+      isModalOpen = isHandoffModalOpen,
       moreInfoHref,
       handoffReady,
+      newChoiceCount,
       shouldUseAutocomplete
     } = state
-    const { ...otherProps } = props
 
     if (!ready) {
       return null
@@ -137,6 +153,10 @@ export class Ballot extends Component {
             progress={progress}
             handoffReady={handoffReady}
             moreInfoHref={moreInfoHref}
+            newChoiceCount={newChoiceCount}
+            isModalOpen={isModalOpen}
+            onOpenModal={onOpenModal}
+            onCloseModal={onCloseModal}
             onSelectChoice={onSelectChoice}
             onChangeAddress={onChangeAddress}
             onMoreInfoHrefSelect={onMoreInfoHrefSelect}
@@ -157,8 +177,6 @@ export class Ballot extends Component {
     let ballot, address, voterInfo
 
     const hash = _.get(window, 'location.hash') || ''
-
-    console.log('hash', hash)
 
     if (hash) {
       await recoverEncryptedValues({ hash })
@@ -244,23 +262,28 @@ export class Ballot extends Component {
   }
 
   onSelectChoice = async (key, value) => {
-    const ballot = { ...this.state.ballot }
+    let { newChoiceCount = 0, choiceDelta = {}, ballot: oldBallot } = this.state
+    let ballot = { ...oldBallot }
 
     if (key === '*' && !value) {
       Object.keys(ballot).forEach(k => {
         delete ballot[k]
       })
+      choiceDelta = {}
     } else if (value === null) {
       delete ballot[key]
+      choiceDelta[key] = true
     } else {
       ballot[key] = value
+      choiceDelta[key] = true
     }
 
-    this.setState({ ballot, handoffReady: false })
+    newChoiceCount = Object.keys(choiceDelta).length
+
+    this.setState({ ballot, choiceDelta, newChoiceCount, handoffReady: false })
 
     try {
       await setEncryptedBallot(ballot)
-      await persistEncryptedValues()
 
       this.setState({ handoffReady: true })
     } catch (err) {
@@ -311,6 +334,15 @@ export class Ballot extends Component {
 
   onMoreInfoHrefSelect = moreInfoHref => {
     this.setState({ moreInfoHref })
+  }
+
+  onOpenModal = async () => {
+    await persistEncryptedValues()
+    this.setState({ isModalOpen: true, choiceDelta: {}, newChoiceCount: 0 })
+  }
+
+  onCloseModal = () => {
+    this.setState({ isModalOpen: false })
   }
 }
 

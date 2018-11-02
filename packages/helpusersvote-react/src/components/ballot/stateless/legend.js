@@ -32,9 +32,9 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
     )
 
     content = (
-      <div className="flex justify-between flex-wrap">
+      <div className="flex justify-start flex-wrap">
         {parties.map((party, index) => (
-          <div key={index} className="w-100 w-50-ns pb2">
+          <div key={index} className="w-100 w-50-m w-33-ns pb3">
             <span
               title={party}
               className={`party-icon ${getPartyColor(party)}`}

@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React, { Fragment } from 'react'
 import { getMoreCandidateInfoLink, getPartyColor } from '../utils'
 
@@ -83,14 +84,14 @@ function CandidateDetail({
   onSelectChoice
 }) {
   const isChecked = ballot[contest.office] === candidate.key
-
-  if (ballot[contest.office] && !isChecked) {
-    return null
-  }
+  const isOtherChecked = ballot[contest.office] && !isChecked
 
   return (
     <div
-      className="ballot-candidate flex justify-between mt1"
+      className={cx(
+        'ballot-candidate flex justify-between mt1',
+        isOtherChecked && 'o-40'
+      )}
       style={{ padding: '2px 0' }}
     >
       <div>
@@ -123,21 +124,19 @@ function CandidateDetail({
           <CandidateParties parties={candidate.parties} />
         </label>
       </div>
-      {!ballot[contest.office] && (
-        <a
-          className="huv-button fw5 fr relative"
-          href={getMoreCandidateInfoLink({
-            href: moreInfoHref,
-            contest,
-            candidate,
-            state
-          })}
-          target="_blank"
-          rel="noopener"
-        >
-          <span className="dn di-ns">More Info</span> &rarr;
-        </a>
-      )}
+      <a
+        className="huv-button fw5 fr relative"
+        href={getMoreCandidateInfoLink({
+          href: moreInfoHref,
+          contest,
+          candidate,
+          state
+        })}
+        target="_blank"
+        rel="noopener"
+      >
+        <span className="dn di-ns">More Info</span> &rarr;
+      </a>
     </div>
   )
 }

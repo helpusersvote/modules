@@ -181,9 +181,6 @@ export function generateKeyId(opts = {}) {
     bc = getLocalItem(toStorageKey['bc'])
   } = opts
 
-  console.log('pt', opts)
-  console.log('t', { ak, ac, bk, bc })
-
   return (
     'ekv_' + HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString(Base58)
   )

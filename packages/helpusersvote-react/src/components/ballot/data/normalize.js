@@ -286,6 +286,12 @@ function normalizeReferendum(contest) {
     contest.subtitle = subtitle
   }
 
+  if (contest.referendumBallotResponses) {
+    if (contest.referendumBallotResponses.filter(r => r === '').length > 0) {
+      contest.referendumBallotResponses = ['Yes', 'No']
+    }
+  }
+
   return contest
 }
 

@@ -1,6 +1,8 @@
 import React from 'react'
+import cx from 'classnames'
 import { getState } from '@helpusersvote/logic'
 import { getMoreInfoLink } from '../utils'
+import { captureException } from '@sentry/core'
 
 export function ElectionReferendums({
   info,
@@ -80,12 +82,11 @@ export function ElectionReferendums({
                 </div>
               </Fragment>
             ) */}
-            {contest.fiscalImpact &&
-              !ballot[contest.key] && (
-                <div className="read-more-show mv3 f6 f5-ns i fw5">
-                  <em>Fiscal Impact:</em> {contest.fiscalImpact}
-                </div>
-              )}
+            {contest.fiscalImpact && (
+              <div className="read-more-show mv3 f6 f5-ns i fw5">
+                <em>Fiscal Impact:</em> {contest.fiscalImpact}
+              </div>
+            )}
           </div>
 
           {/* ballot[contest.key] && (
@@ -98,33 +99,36 @@ export function ElectionReferendums({
 
           <div className="list pl0 mt2">
             {contest.referendumBallotResponses &&
-              contest.referendumBallotResponses.map((response, index) => (
-                <div className="lh-copy mr3 mb2" key={index}>
-                  {(!ballot[contest.key] ||
-                    ballot[contest.key] === response) && (
-                    <div>
-                      <input
-                        id={`checkbox.${contest.title}.${response}`}
-                        type="checkbox"
-                        style={{ width: 24, height: 24 }}
-                        checked={ballot[contest.key] === response}
-                        onChange={() =>
-                          onSelectChoice(
-                            contest.key,
-                            ballot[contest.key] === response ? null : response
-                          )
-                        }
-                      />
-                      <label
-                        className="pl1"
-                        htmlFor={`checkbox.${contest.title}.${response}`}
-                      >
-                        <span className="fw5 f6 pointer">{response}</span>
-                      </label>
-                    </div>
-                  )}
-                </div>
-              ))}
+              contest.referendumBallotResponses.map((response, index) => {
+                const isOtherChecked =
+                  ballot[contest.key] && ballot[contest.key] !== response
+
+                return (
+                  <div
+                    className={cx('lh-copy mr3 mb2', isOtherChecked && 'o-60')}
+                    key={index}
+                  >
+                    <input
+                      id={`checkbox.${contest.title}.${response}`}
+                      type="checkbox"
+                      style={{ width: 24, height: 24 }}
+                      checked={ballot[contest.key] === response}
+                      onChange={() =>
+                        onSelectChoice(
+                          contest.key,
+                          ballot[contest.key] === response ? null : response
+                        )
+                      }
+                    />
+                    <label
+                      className="pl1"
+                      htmlFor={`checkbox.${contest.title}.${response}`}
+                    >
+                      <span className="fw5 f6 pointer">{response}</span>
+                    </label>
+                  </div>
+                )
+              })}
           </div>
         </div>
       ))}

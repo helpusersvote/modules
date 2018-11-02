@@ -158,6 +158,27 @@ export function normalizeVoterInfo(info = {}) {
   return data
 }
 
+function getUniqueParty(party) {
+  if (!party) {
+    return ''
+  }
+
+  if (party.indexOf('(') >= 0) {
+    switch (party) {
+      case '(DEM)':
+        return 'Democratic Party'
+      case '(REP)':
+        return 'Democratic Party'
+      case '(LIB)':
+        return 'Libertarian Party'
+      default:
+        return party
+    }
+  } else {
+    return party
+  }
+}
+
 /**
  * Normalize a general `contest`.
  *
@@ -174,10 +195,11 @@ function normalizeGeneral(contest) {
     var candidates = []
 
     contest.candidates.forEach(c => {
-      var party = c.party
+      var party = getUniqueParty(c.party)
+      var parties = c.parties ? c.parties.map(getUniqueParty) : []
       var name = c.name.replace('/', ' & ')
       var cached = cache[name]
-      var candidate = cached ? cached : { name, parties: c.parties || [] }
+      var candidate = cached ? cached : { name, parties }
 
       // Add a unique key.
       candidate.key = encodeURIComponent(name)
@@ -288,6 +310,12 @@ function normalizeReferendum(contest) {
     }
     subtitle = addNbsp(subtitle)
     contest.subtitle = subtitle
+  }
+
+  if (contest.referendumBallotResponses) {
+    if (contest.referendumBallotResponses.filter(r => r === '').length > 0) {
+      contest.referendumBallotResponses = ['Yes', 'No']
+    }
   }
 
   return contest
