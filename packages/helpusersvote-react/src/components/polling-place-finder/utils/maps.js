@@ -2,6 +2,31 @@ import _ from 'lodash'
 import { generateSignature } from './maps-sign'
 import { GMAPS_API_KEY, GMAPS_API_SIGNATURE_SECRET } from './settings'
 
+export function getMapImage(opts = {}) {
+  const { width = 370, height = 200 } = opts
+  const key = `&key=${GMAPS_API_KEY}`
+  const { userAddr, pollAddr } = opts
+  const markers = `&markers=icon:https://i.imgur.com/GyWhTdV.png%7C${encodeURIComponent(
+    userAddr
+  )}&markers=color:red%7C${encodeURIComponent(pollAddr)}`
+
+  function signMapsURL(size) {
+    const path = `/maps/api/staticmap?scale=2&${size}${markers}${key}&style=feature:poi|visibility:off`
+
+    const pathParts = [path]
+
+    if (GMAPS_API_SIGNATURE_SECRET) {
+      const signature = generateSignature(path, GMAPS_API_SIGNATURE_SECRET)
+
+      pathParts.push(`signature=${signature}`)
+    }
+
+    return `https://maps.googleapis.com${pathParts.join('&')}`
+  }
+
+  return signMapsURL(`size=${width}x${height}`)
+}
+
 export function getMapImages(opts = {}) {
   const key = `&key=${GMAPS_API_KEY}`
   const { userAddr, pollAddr } = opts
