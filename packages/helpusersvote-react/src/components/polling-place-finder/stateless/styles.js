@@ -107,7 +107,7 @@ const styles = `
 }
 .address-form-auto-complete-example {
   padding: 4px .5rem;
-  font-size: 12px;
+  font-size: 10px;
   color: #596573;
 }
 .report-error {

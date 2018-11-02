@@ -143,13 +143,20 @@ export class Ballot extends Component {
         !(voterInfo.generals && voterInfo.generals.length) &&
         !(voterInfo.referendums && voterInfo.referendums.length)
       ) {
-        content = <BallotNotFound address={address} voterInfo={voterInfo} />
+        content = (
+          <BallotNotFound
+            address={address}
+            voterInfo={voterInfo}
+            onChangeAddress={onChangeAddress}
+          />
+        )
       } else {
         const totalCount =
           voterInfo.generals.length +
           voterInfo.referendums.filter(r => r.referendumBallotResponses).length
-        const progress = Math.floor(
-          (Object.keys(ballot).length / totalCount) * 100
+        const progress = Math.min(
+          Math.floor((Object.keys(ballot).length / totalCount) * 100),
+          100
         )
 
         content = (
@@ -181,7 +188,7 @@ export class Ballot extends Component {
   }
 
   async componentDidMount() {
-    let ballot, address, voterInfo
+    let ballot, address, voterInfo, didCompleteHandoff
 
     const hash = _.get(window, 'location.hash') || ''
 
@@ -195,6 +202,7 @@ export class Ballot extends Component {
 
     if (hash) {
       await recoverEncryptedValues({ hash })
+      didCompleteHandoff = true
     }
 
     try {
@@ -224,12 +232,24 @@ export class Ballot extends Component {
       ready: true
     })
 
+    if (didCompleteHandoff) {
+      const event = { name: 'Ballot Handoff Completed' }
+
+      if (address && address.state) {
+        event.properties = {
+          state: address.state
+        }
+      }
+
+      trackEvent(event)
+    }
+
     this.attachListeners()
   }
 
   startAnalytics = () => {
     const { address } = this.state
-    const name = 'Ballot Tool'
+    const name = 'Ballot Preview'
     const pageview = { name }
 
     if (address && address.state) {
@@ -293,8 +313,12 @@ export class Ballot extends Component {
   }
 
   onSelectChoice = async (key, value) => {
-    let { newChoiceCount = 0, choiceDelta = {}, ballot: oldBallot } = this.state
-    let ballot = { ...oldBallot }
+    let {
+      choiceDelta = {},
+      newChoiceCount = 0,
+      ballot: previousBallot
+    } = this.state
+    let ballot = { ...previousBallot }
 
     if (key === '*' && !value) {
       Object.keys(ballot).forEach(k => {
@@ -319,6 +343,28 @@ export class Ballot extends Component {
       this.setState({ handoffReady: true })
     } catch (err) {
       reportError(err)
+    }
+
+    const { address, voterInfo } = this.state
+
+    const totalCount =
+      voterInfo.generals.length +
+      voterInfo.referendums.filter(r => r.referendumBallotResponses).length
+    const progress = Math.min(
+      Math.floor((Object.keys(ballot).length / totalCount) * 100),
+      100
+    )
+
+    // Check if progress is at least 20%
+    // and within 4 pct of  25, 50, 75 or 100%
+    if (progress > 20 && progress % 25 < 4) {
+      const event = { name: 'Ballot Updated', properties: { progress } }
+
+      if (address && address.state) {
+        event.properties.state = address.state
+      }
+
+      trackEvent(event)
     }
   }
 
@@ -370,6 +416,17 @@ export class Ballot extends Component {
   onOpenModal = async () => {
     await persistEncryptedValues()
     this.setState({ isModalOpen: true, choiceDelta: {}, newChoiceCount: 0 })
+
+    const { address } = this.state
+    const event = { name: 'Ballot Handoff Started' }
+
+    if (address && address.state) {
+      event.properties = {
+        state: address.state
+      }
+    }
+
+    trackEvent(event)
   }
 
   onCloseModal = () => {

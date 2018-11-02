@@ -41,20 +41,18 @@ export function ElectionReferendums({
             )}
           </label>
 
-          {!ballot[contest.key] && (
-            <a
-              className="huv-button fw5 fr relative"
-              style={{ top: '.4em' }}
-              href={getMoreInfoLink({
-                href: moreInfoHref,
-                term: state.name + ' November 2018 ' + contest.title
-              })}
-              target="_blank"
-              rel="noopener"
-            >
-              <span className="dn di-ns">More Info</span> &rarr;
-            </a>
-          )}
+          <a
+            className="huv-button fw5 fr relative"
+            style={{ top: '.4em' }}
+            href={getMoreInfoLink({
+              href: moreInfoHref,
+              term: state.name + ' November 2018 ' + contest.title
+            })}
+            target="_blank"
+            rel="noopener"
+          >
+            <span className="dn di-ns">More Info</span> &rarr;
+          </a>
 
           {/* ballot[contest.key] && (
             <input
