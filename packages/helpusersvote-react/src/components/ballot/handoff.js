@@ -17,7 +17,7 @@ export class BallotHandoff extends Component {
             pick up where you left off!
           </div>
         </div>
-        <a href={ballotHref}>
+        <a href={ballotHref} target="_blank">
           <img width={60} height={60} src={imgSrc} />
         </a>
       </div>
