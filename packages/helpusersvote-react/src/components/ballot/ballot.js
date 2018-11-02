@@ -4,6 +4,7 @@ import PollingPlaceFinderError from '../polling-place-finder/stateless/polling-p
 import GoogleReportForm from '../polling-place-finder/stateless/google-report-form'
 import AddressForm from '../polling-place-finder/stateless/address-form'
 import BallotHeader from './stateless/ballot-header'
+import BallotNotFound from './stateless/not-found'
 import Referendums from './stateless/referendums'
 import Contests from './stateless/contests'
 import Legend from './stateless/legend'
@@ -137,6 +138,11 @@ export class Ballot extends Component {
             onChangeAddress={onChangeAddress}
           />
         )
+      } else if (
+        !(voterInfo.generals && voterInfo.generals.length) &&
+        !(voterInfo.referendums && voterInfo.referendums.length)
+      ) {
+        content = <BallotNotFound address={address} voterInfo={voterInfo} />
       } else {
         const totalCount =
           voterInfo.generals.length +

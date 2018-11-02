@@ -37,6 +37,10 @@ export function Contests({
 }) {
   const { generals = defaultGeneralElections } = info
 
+  if (!generals) {
+    return null
+  }
+
   return (
     <div className="ballot-content">
       <h3 className="b f4" style={{ borderTop: 'none' }}>
