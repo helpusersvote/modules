@@ -16,6 +16,7 @@ import {
   reportError,
   trackPageview,
   fetchVoterInfo,
+  listenForEvents,
   normalizeVoterInfo
 } from '../polling-place-finder/utils'
 import {
@@ -184,6 +185,14 @@ export class Ballot extends Component {
 
     const hash = _.get(window, 'location.hash') || ''
 
+    try {
+      // defer analytics to next cycle
+      setTimeout(() => this.startAnalytics(), 0)
+    } catch (err) {
+      console.error(err)
+      reportError(err)
+    }
+
     if (hash) {
       await recoverEncryptedValues({ hash })
     }
@@ -194,6 +203,7 @@ export class Ballot extends Component {
       voterInfo = await this.loadVoterInfo(address)
     } catch (err) {
       console.error(err)
+      reportError(err)
     }
 
     let shouldUseAutocomplete = true
@@ -215,6 +225,21 @@ export class Ballot extends Component {
     })
 
     this.attachListeners()
+  }
+
+  startAnalytics = () => {
+    const { address } = this.state
+    const name = 'Ballot Tool'
+    const pageview = { name }
+
+    if (address && address.state) {
+      pageview.properties = {
+        state: address.state
+      }
+    }
+
+    trackPageview(pageview)
+    listenForEvents()
   }
 
   loadVoterInfo = async address => {
