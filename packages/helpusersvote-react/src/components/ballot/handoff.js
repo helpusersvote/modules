@@ -115,10 +115,8 @@ export class BallotHandoff extends Component {
   }
 
   deriveQR = async () => {
-    const { protocol, host } = window.location
-    const {
-      baseHref = `${protocol}//${host}/` // 'https://huv-ballot.now.sh/' // 'https://helpusersvote.com/apps/ballot'
-    } = this.props
+    const { protocol, host, pathname } = window.location
+    const { baseHref = `${protocol}//${host}${pathname}` } = this.props
     const keyFragment = await getKeyFragment()
     const ballotHref = baseHref + keyFragment
     const imgBuffer = await generateQR({
