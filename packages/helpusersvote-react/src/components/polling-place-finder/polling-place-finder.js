@@ -3,6 +3,7 @@ import PollingPlaceFinderError from './stateless/polling-place-finder-error'
 import PollingPlaceDirections from './polling-place-directions'
 import EarlyVotingDirections from './early-voting-directions'
 import AddressForm from './stateless/address-form'
+import { setEncryptedBallot } from '../ballot/utils'
 import {
   loadGmaps,
   trackEvent,
@@ -272,6 +273,7 @@ class PollingPlaceFinder extends Component {
   }
 
   onChangeAddress = () => {
+    const ballot = null
     const address = null
     const voterInfo = null
 
@@ -279,6 +281,7 @@ class PollingPlaceFinder extends Component {
 
     setEncryptedAddress(address)
     setEncryptedVoterInfo(voterInfo)
+    setEncryptedBallot(ballot)
 
     const { type } = this.props
 
