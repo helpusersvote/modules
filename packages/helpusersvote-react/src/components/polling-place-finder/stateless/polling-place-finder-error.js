@@ -2,10 +2,11 @@ import React from 'react'
 
 export function PollingPlaceFinderError() {
   const stateSite = false
-  const stateOfficeSite = 'https://www.vote.org/polling-place-locator/#table'
+  const stateOfficeSite =
+    'https://www.usvotefoundation.org/vote/eoddomestic.htm'
 
   return (
-    <div className="mt3 w-100">
+    <div className="pt3 w-100">
       <div className="outdent">
         <div className="directions directions-small mt3 mb1 flex-ns flex-row-ns">
           <div className="directions-info w-40-ns flex-ns flex-column-ns justify-between-ns">
@@ -19,6 +20,7 @@ export function PollingPlaceFinderError() {
               <a
                 className="huv-button huv-button--blue tc dib"
                 href={stateOfficeSite}
+                target="_blank"
               >
                 Contact
               </a>

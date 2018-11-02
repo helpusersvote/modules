@@ -5,7 +5,7 @@ export function Notice({ referendumTopics }) {
 
   if (referendumTopics && referendumTopics.length > 0) {
     content = (
-      <div className="mt3">
+      <div className="pt3">
         By voting the entire ballot, you can have a say on big issues including{' '}
         <b>
           {referendumTopics.map((topic, id) => (
@@ -26,7 +26,7 @@ export function Notice({ referendumTopics }) {
 
   return (
     <div>
-      <div className="mt3 f6 gray">
+      <div className="pt3 f6 gray">
         This is <span className="fw5">not an official ballot</span>, only a
         guide to help you research your decision before you vote at your polling
         place.
