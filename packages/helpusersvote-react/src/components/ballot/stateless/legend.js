@@ -4,18 +4,16 @@ import { getPartyColor } from '../utils'
 
 function MoreInfoSelect({ onSelect }) {
   return (
-    <select
-      className="huv-button"
-      onChange={e => onSelect(e.target.value)}
-      style={{
-        minWidth: 140,
-        appearance: 'menulist-button',
-        WebkitAppearance: 'menulist-button'
-      }}
-    >
-      <option value="ballotready.org">ballotready.org</option>
-      <option value="ballotpedia.org">ballotpedia.org</option>
-    </select>
+    <div className="dib huv-select-container">
+      <select
+        className="huv-button"
+        onChange={e => onSelect(e.target.value)}
+        style={{ minWidth: 140 }}
+      >
+        <option value="ballotpedia.org">ballotpedia.org</option>
+        <option value="ballotready.org">ballotready.org</option>
+      </select>
+    </div>
   )
 }
 
@@ -34,11 +32,10 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
     )
 
     content = (
-      <div className="flex justify-between flex-wrap">
+      <div className="flex justify-start flex-wrap">
         {parties.map((party, index) => (
-          <div className="w-100 w-50-ns pb2">
+          <div key={index} className="w-100 w-50-m w-33-ns pb3">
             <span
-              key={index}
               title={party}
               className={`party-icon ${getPartyColor(party)}`}
             >
@@ -57,8 +54,10 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
         Legend
       </h3>
       {content}
-      <div className="directions-label mt2">More info will open on</div>
-      <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
+      <div className="directions-label mt2 flex justify-end items-center">
+        <span className="dib mr2">More info will open on</span>
+        <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
+      </div>
     </div>
   )
 }

@@ -62,22 +62,22 @@ function getResizedLogo({ path, w, h, ignoreCache = false }) {
 
 export async function generateQR({ text, path, opt, ignoreCache, ratio = 2 }) {
   const img = await createQRCode(text, opt)
-  const logo = await getResizedLogo({
-    path,
-    w: Math.floor(img.bitmap.width / ratio),
-    h: Math.floor(img.bitmap.height / ratio),
-    ignoreCache
-  })
+  // const logo = await getResizedLogo({
+  //   path,
+  //   w: Math.floor(img.bitmap.width / ratio),
+  //   h: Math.floor(img.bitmap.height / ratio),
+  //   ignoreCache
+  // })
 
-  // Center the logo
-  const x = Math.floor((img.bitmap.width - logo.bitmap.width) / 2)
-  const y = Math.floor((img.bitmap.height - logo.bitmap.height) / 2)
+  // // Center the logo
+  // const x = Math.floor(img.bitmap.width - logo.bitmap.width) // / 2)
+  // const y = Math.floor(img.bitmap.height - logo.bitmap.height) // / 2)
 
   // Apply on the QRCode
-  const qrImg = img.composite(logo, x, y)
+  // const qrImg = img.composite(logo, x, y)
 
   return new Promise((res, rej) => {
-    qrImg.getBuffer(Jimp.MIME_PNG, (err, buf) => {
+    img.getBuffer(Jimp.MIME_PNG, (err, buf) => {
       if (err) return rej(err)
       return res(buf)
     })

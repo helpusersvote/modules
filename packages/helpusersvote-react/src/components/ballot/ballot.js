@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import PollingPlaceFinderError from '../polling-place-finder/stateless/polling-place-finder-error'
 import GoogleReportForm from '../polling-place-finder/stateless/google-report-form'
@@ -20,7 +21,9 @@ import {
   getEncryptedBallot,
   setEncryptedBallot,
   getEncryptedAddress,
-  setEncryptedAddress
+  setEncryptedAddress,
+  recoverEncryptedValues,
+  persistEncryptedValues
 } from './utils'
 
 export function StatelessBallot({
@@ -28,7 +31,12 @@ export function StatelessBallot({
   ballot,
   address = {},
   progress = 0,
-  moreInfoHref = 'ballotready.org',
+  handoffReady,
+  newChoiceCount,
+  moreInfoHref = 'ballotpedia.org',
+  isModalOpen,
+  onOpenModal,
+  onCloseModal,
   onSelectChoice,
   onChangeAddress,
   onMoreInfoHrefSelect,
@@ -37,7 +45,7 @@ export function StatelessBallot({
   const referendumTopics = []
 
   return (
-    <div className="huv-container" {...props}>
+    <div className="center" style={{ maxWidth: 800 }} {...props}>
       <Notice referendumTopics={referendumTopics} />
 
       <div className="ballot mt2 mt3-ns">
@@ -45,8 +53,10 @@ export function StatelessBallot({
           ballot={ballot}
           address={address}
           progress={progress}
+          onOpenModal={onOpenModal}
           onSelectChoice={onSelectChoice}
           onChangeAddress={onChangeAddress}
+          newChoiceCount={newChoiceCount}
         />
         <Legend info={info} onMoreInfoHrefSelect={onMoreInfoHrefSelect} />
         <Contests
@@ -62,10 +72,15 @@ export function StatelessBallot({
           moreInfoHref={moreInfoHref}
           onSelectChoice={onSelectChoice}
         />
-        <BallotHandoff />
+        <BallotHandoff
+          ready={handoffReady}
+          isModalOpen={isModalOpen}
+          onOpenModal={onOpenModal}
+          onCloseModal={onCloseModal}
+        />
       </div>
 
-      <div className="cf mt1" style={{ maxWidth: 800, fontSize: 12 }}>
+      <div className="cf mt1" style={{ fontSize: 12 }}>
         <div className="fr">
           <GoogleReportForm address={address} />
         </div>
@@ -81,18 +96,24 @@ export class Ballot extends Component {
       onChangeAddress,
       onSelectAddress,
       onSelectChoice,
+      onCloseModal,
+      onOpenModal,
       props,
       state
     } = this
+
+    const { isHandoffModalOpen, ...otherProps } = props
     const {
       ready,
       ballot,
       address,
       voterInfo,
+      isModalOpen = isHandoffModalOpen,
       moreInfoHref,
+      handoffReady,
+      newChoiceCount,
       shouldUseAutocomplete
     } = state
-    const { ...otherProps } = props
 
     if (!ready) {
       return null
@@ -130,7 +151,12 @@ export class Ballot extends Component {
             address={address}
             info={voterInfo}
             progress={progress}
+            handoffReady={handoffReady}
             moreInfoHref={moreInfoHref}
+            newChoiceCount={newChoiceCount}
+            isModalOpen={isModalOpen}
+            onOpenModal={onOpenModal}
+            onCloseModal={onCloseModal}
             onSelectChoice={onSelectChoice}
             onChangeAddress={onChangeAddress}
             onMoreInfoHrefSelect={onMoreInfoHrefSelect}
@@ -148,9 +174,21 @@ export class Ballot extends Component {
   }
 
   async componentDidMount() {
-    const ballot = await getEncryptedBallot()
-    const address = await getEncryptedAddress()
-    const voterInfo = await this.loadVoterInfo(address)
+    let ballot, address, voterInfo
+
+    const hash = _.get(window, 'location.hash') || ''
+
+    if (hash) {
+      await recoverEncryptedValues({ hash })
+    }
+
+    try {
+      ballot = await getEncryptedBallot()
+      address = await getEncryptedAddress()
+      voterInfo = await this.loadVoterInfo(address)
+    } catch (err) {
+      console.error(err)
+    }
 
     let shouldUseAutocomplete = true
 
@@ -163,6 +201,7 @@ export class Ballot extends Component {
 
     await this.setState({
       shouldUseAutocomplete,
+      handoffReady: true,
       voterInfo,
       address,
       ballot,
@@ -215,27 +254,44 @@ export class Ballot extends Component {
     window.removeEventListener('scroll')
   }
 
-  onSelectChoice = (key, value) => {
-    const ballot = { ...this.state.ballot }
+  componentDidCatch(error, info) {
+    this.setState({ didError: true })
+
+    // Report to sentry
+    reportError(error, info)
+  }
+
+  onSelectChoice = async (key, value) => {
+    let { newChoiceCount = 0, choiceDelta = {}, ballot: oldBallot } = this.state
+    let ballot = { ...oldBallot }
 
     if (key === '*' && !value) {
       Object.keys(ballot).forEach(k => {
         delete ballot[k]
       })
+      choiceDelta = {}
     } else if (value === null) {
       delete ballot[key]
+      choiceDelta[key] = true
     } else {
       ballot[key] = value
+      choiceDelta[key] = true
     }
 
-    setEncryptedBallot(ballot)
+    newChoiceCount = Object.keys(choiceDelta).length
 
-    this.setState({ ballot })
+    this.setState({ ballot, choiceDelta, newChoiceCount, handoffReady: false })
+
+    try {
+      await setEncryptedBallot(ballot)
+
+      this.setState({ handoffReady: true })
+    } catch (err) {
+      reportError(err)
+    }
   }
 
   onSelectAddress = async address => {
-    setEncryptedAddress(address)
-
     const voterInfo = await this.loadVoterInfo(address)
     const previouslyInvalid = !this.state.address || !this.state.address.line1
 
@@ -255,6 +311,15 @@ export class Ballot extends Component {
         state: address.state
       }
     })
+
+    try {
+      await setEncryptedAddress(address)
+      await setEncryptedBallot({})
+
+      this.setState({ handoffReady: true })
+    } catch (err) {
+      reportError(err)
+    }
   }
 
   onChangeAddress = () => {
@@ -269,6 +334,15 @@ export class Ballot extends Component {
 
   onMoreInfoHrefSelect = moreInfoHref => {
     this.setState({ moreInfoHref })
+  }
+
+  onOpenModal = async () => {
+    await persistEncryptedValues()
+    this.setState({ isModalOpen: true, choiceDelta: {}, newChoiceCount: 0 })
+  }
+
+  onCloseModal = () => {
+    this.setState({ isModalOpen: false })
   }
 }
 
