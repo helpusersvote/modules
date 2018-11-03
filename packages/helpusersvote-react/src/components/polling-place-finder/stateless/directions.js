@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getMapImage } from '../utils'
 
-const RESIZE_TIMEOUT_MS = 500
+const RESIZE_TIMEOUT_MS = 200
 
 export class DirectionsMap extends Component {
   render() {
@@ -84,15 +84,16 @@ export class DirectionsMap extends Component {
 }
 
 export function DirectionsHours({ location, pollingPlace }) {
+  const hoursText =
+    location.hours && location.hours.length > 0
+      ? location.hours
+      : pollingPlace.hours
+
   return (
     <div className="directions-hours mt3">
       <div className="directions-label pb1">Hours</div>
       <div className="directions-hours fw6">
-        <div className="fr">
-          {location.hours && location.hours.length > 0
-            ? location.hours
-            : pollingPlace.hours}
-        </div>
+        <div className="fr">{hoursText}</div>
         <div className="fw6 directions-date">
           November 6<sup style={{ fontSize: 9 }}>th</sup>
         </div>

@@ -3,7 +3,7 @@ import Day from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { shouldShowCTA, getState } from '@helpusersvote/logic'
 import { ElectionDayCTA } from './stateless/election-day'
-import PollingPlaceNotFound from './stateless/not-found'
+import EarlyNotFound from './stateless/early-not-found'
 import Switcher from './stateless/switcher'
 import { DirectionsMap } from './stateless/directions'
 import GoogleReportForm from './stateless/google-report-form'
@@ -11,13 +11,33 @@ import { toAddr } from './utils'
 
 Day.extend(relativeTime)
 
+function EarlyLocationSelect({ earlyLocations, currentValue, onSelect }) {
+  return (
+    <div className="dib huv-select-container huv-select--small">
+      <select
+        className="huv-button"
+        onChange={e => onSelect(parseInt(e.target.value))}
+        style={{ minWidth: 140, height: 27, lineHeight: '27px' }}
+      >
+        {earlyLocations.map((loc, index) => (
+          <option key={index} value={index}>
+            {(loc.selectText || '').trim()}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
 export function EarlyVotingDirections({
+  locationSelectIndex,
   address: backupAddress,
   voterInfo,
   className,
   queryParams,
   useGroupedDates,
   onChangeAddress,
+  onLocationSelectIndex,
   onSwitchToPollingPlace
 }) {
   const address =
@@ -30,18 +50,31 @@ export function EarlyVotingDirections({
     const descriptionContent = <NotFoundDescription state={address.state} />
 
     return (
-      <PollingPlaceNotFound
-        title="No early voting locations found"
-        address={address}
-        voterInfo={voterInfo}
-        queryParams={queryParams}
-        description={descriptionContent}
-        onChangeAddress={onChangeAddress}
-      />
+      <div className={`pt3 w-100 ${className || ''}`}>
+        <div className="mt1 mb2">
+          Early voting has passed, you can find your polling place to vote on
+          Election Day:
+        </div>
+
+        <Switcher
+          active="early"
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+
+        <EarlyNotFound
+          address={address}
+          voterInfo={voterInfo}
+          queryParams={queryParams}
+          description={descriptionContent}
+          onChangeAddress={onChangeAddress}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+      </div>
     )
   }
 
-  const location = locations[0] || {}
+  const location = locations[parseInt(locationSelectIndex || 0)] || {}
   const userAddr = toAddr(address)
   const pollAddr = toAddr(location.address || {})
 
@@ -56,16 +89,34 @@ export function EarlyVotingDirections({
 
   return (
     <div className={`pt3 w-100 ${className || ''}`}>
-      <div className="mt1 mb2">
-        Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
-        vote early, you can vote early and skip the lines on Election Day:
-      </div>
+      {!voterInfo.isEarlyVotingOver ? (
+        <div className="mt1 mb2">
+          Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
+          vote early, you can vote early and skip the lines on Election Day:
+        </div>
+      ) : (
+        <div className="mt1 mb2">
+          Early voting has passed, you can find your polling place to vote on
+          Election Day:
+        </div>
+      )}
 
-      <Switcher
-        active="early"
-        earlyVotingTimeLeft={earlyVotingTimeLeft}
-        onSwitchToPollingPlace={onSwitchToPollingPlace}
-      />
+      <div className="flex-ns flex-wrap justify-between">
+        <Switcher
+          active="early"
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+
+        {voterInfo.earlyLocations &&
+          voterInfo.earlyLocations.length > 1 && (
+            <EarlyLocationSelect
+              onSelect={onLocationSelectIndex}
+              currentValue={locationSelectIndex}
+              earlyLocations={voterInfo.earlyLocations}
+            />
+          )}
+      </div>
 
       {locations.length && (
         <div className="outdent">
@@ -101,23 +152,34 @@ export function EarlyVotingDirections({
                   )}
                   <div className="directions-hours mt3">
                     <div className="directions-label pb1">Hours</div>
-                    {location.hoursToday && (
-                      <div>
-                        <div className="ml2 fr fw6">
-                          {location.hoursToday.start}
-                          {' - '}
-                          {location.hoursToday.end}
+                    {!voterInfo.isEarlyVotingOver &&
+                      location.hoursToday && (
+                        <div>
+                          <div className="ml2 fr fw6">
+                            {location.hoursToday.start}
+                            {' - '}
+                            {location.hoursToday.end}
+                          </div>
+                          <div className="fw6 directions-date">
+                            {location.isClosed ? (
+                              'Open today'
+                            ) : (
+                              <span className="red fw5">Closed now</span>
+                            )}
+                          </div>
                         </div>
-                        <div className="fw6 directions-date">Open today</div>
-                      </div>
-                    )}
-                    {!location.hoursToday &&
+                      )}
+                    {!voterInfo.isEarlyVotingOver &&
+                      !location.hoursToday &&
                       !location.hoursParseFail &&
                       location.fallbackHours && (
                         <div className="red fw6 directions-date">
                           Closed today
                         </div>
                       )}
+                    {voterInfo.isEarlyVotingOver && (
+                      <div className="red fw6 directions-date">Closed now</div>
+                    )}
                     {!location.hoursParseFail &&
                       useGroupedDates &&
                       location.groupedDates.map((dateRange, index) => (
@@ -251,7 +313,8 @@ function NotFoundDescription({ state = '' }) {
 
   return (
     <React.Fragment>
-      We couldn&rsquo;t find your early voting location. Please contact your{' '}
+      We couldn&rsquo;t find any open early voting locations. Please contact
+      your{' '}
       <a
         className="dib link blue underline-hover pointer"
         href="https://www.usvotefoundation.org/vote/eoddomestic.htm"

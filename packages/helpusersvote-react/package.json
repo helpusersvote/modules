@@ -1,6 +1,6 @@
 {
   "name": "@helpusersvote/react",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "React components to help your users vote",
   "author": "UserMirror, Inc. <huv@usermirror.com",
   "license": "MIT",
