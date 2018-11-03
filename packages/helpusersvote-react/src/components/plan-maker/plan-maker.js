@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as AWS from 'aws-sdk';
 import Button from '../polling-place-finder/stateless/button'
 
 import Step1 from './stateless/steps/step-1'
@@ -14,6 +15,13 @@ const doneStep = {
   title: `You're ready to vote!`,
   component: Done
 }
+
+// Initialize Amazon Cognito
+const region = 'us-east-1';
+AWS.config.region = region;
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: region + ':349a4488-ffe3-415b-baeb-224c6f6ac3d4',
+});
 
 export class PlanMaker extends Component {
   render() {
@@ -114,9 +122,22 @@ export class PlanMaker extends Component {
     e.preventDefault()
     e.stopPropagation()
 
+    //retrieve the polling place location and send message
+    if(window && window.pollingPlaces){
+      var lambdaParams = getLambdaParams(key, this.state[key]);
+      var lambda = new AWS.Lambda({region: region, apiVersion: '2015-03-31'});
+
+      lambda.invoke(lambdaParams, function(error, data) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log(data.Payload)
+        }
+      });
+    }
+
     const { [key]: value } = this.state
 
-    // TODO: submit email/phone to VDO Reminders API
     this.setState({
       [key + 'Submitted']: value
     })
@@ -132,5 +153,54 @@ export class PlanMaker extends Component {
     this.setState({ stepValues, stepIndex: index + 1 })
   }
 }
+
+/**
+ * Retrieve the needed params to send to Lambda
+ *
+ * @param {String}
+ * @return {Object}
+ */
+function getLambdaParams(key, value) { 
+  let pollLocation = window.pollingPlaces;
+
+  return {
+    FunctionName : key == "phone" ? 'sendTextMessage' : 'sendPollingPlaceMessage',
+    InvocationType : 'RequestResponse',
+    LogType : 'None',
+    Payload : JSON.stringify({
+      method: key,
+      value: key == "phone" ? value.replace(/[^0-9]/gi, '') : value,
+      pollLocation: pollLocation.address.locationName,
+      body: createMessageBody(key)
+    })
+  };
+}
+
+/**
+ * Create the message body needed for Lambda functions
+ *
+ * @param {String}
+ * @return {String}
+ */
+function createMessageBody(key) { 
+  //initialize the parameters
+  let pollLocation = window.pollingPlaces;
+  let directions = window.directionsURL;
+
+  switch(key) {
+    case "phone":
+        var response = 'Hi, this is Vote.org!\r\n\r\n';
+        response += `Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.\r\n\r\n`;
+        response += `Below is the address which provides directions to get there!\r\n\r\n${pollLocation.address.text}`;
+        return response;
+    default:
+        return `Hi, this is Vote.org!<br><br>
+        Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.<br>
+        Below is the address and a link for directions to get there!<br><br>
+        ${pollLocation.address.text}<br>
+        <a href='${directions}' target='_blank'>Get Directions</a>`
+  }
+}
+
 
 export default PlanMaker
