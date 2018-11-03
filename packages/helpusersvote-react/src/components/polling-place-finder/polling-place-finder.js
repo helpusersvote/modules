@@ -63,7 +63,8 @@ class PollingPlaceFinder extends Component {
         queryParams,
         onChangeAddress,
         onClickDirections,
-        onSwitchToEarlyVoting
+        onSwitchToEarlyVoting,
+        onSwitchToPollingPlace
       }
 
       return type ? (
