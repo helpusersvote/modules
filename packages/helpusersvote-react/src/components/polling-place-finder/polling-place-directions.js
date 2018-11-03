@@ -60,7 +60,6 @@ export function PollingPlaceDirections({
     window.pollingPlaces = location
     window.directionsURL = directionsHref
   }
-  
 
   const isElectionDay = queryParams.election || shouldShowCTA()
   const votingDate = isElectionDay ? <b>today</b> : 'on Election Day'
