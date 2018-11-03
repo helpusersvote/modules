@@ -58,13 +58,9 @@ export function PollingPlaceDirections({
 
   if(window){
     window.pollingPlaces = location
-    window.directionsURL = directionsURL
+    window.directionsURL = directionsHref
   }
-
-  const mapImages = getMapImages({
-    userAddr,
-    pollAddr
-  })
+  
 
   const isElectionDay = queryParams.election || shouldShowCTA()
   const votingDate = isElectionDay ? <b>today</b> : 'on Election Day'
