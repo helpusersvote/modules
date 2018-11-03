@@ -3,7 +3,7 @@ import Day from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { shouldShowCTA, getState } from '@helpusersvote/logic'
 import { ElectionDayCTA } from './stateless/election-day'
-import PollingPlaceNotFound from './stateless/not-found'
+import EarlyNotFound from './stateless/early-not-found'
 import Switcher from './stateless/switcher'
 import { DirectionsMap } from './stateless/directions'
 import GoogleReportForm from './stateless/google-report-form'
@@ -50,14 +50,27 @@ export function EarlyVotingDirections({
     const descriptionContent = <NotFoundDescription state={address.state} />
 
     return (
-      <PollingPlaceNotFound
-        title="No early voting locations found"
-        address={address}
-        voterInfo={voterInfo}
-        queryParams={queryParams}
-        description={descriptionContent}
-        onChangeAddress={onChangeAddress}
-      />
+      <div className={`pt3 w-100 ${className || ''}`}>
+        <div className="mt1 mb2">
+          Early voting has passed, you can find your polling place to vote on
+          Election Day:
+        </div>
+
+        <Switcher
+          active="early"
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+
+        <EarlyNotFound
+          address={address}
+          voterInfo={voterInfo}
+          queryParams={queryParams}
+          description={descriptionContent}
+          onChangeAddress={onChangeAddress}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+      </div>
     )
   }
 
@@ -88,7 +101,7 @@ export function EarlyVotingDirections({
         </div>
       )}
 
-      <div className="flex-ns db-m justify-between">
+      <div className="flex-ns flex-wrap justify-between">
         <Switcher
           active="early"
           earlyVotingTimeLeft={earlyVotingTimeLeft}
@@ -300,7 +313,8 @@ function NotFoundDescription({ state = '' }) {
 
   return (
     <React.Fragment>
-      We couldn&rsquo;t find your early voting location. Please contact your{' '}
+      We couldn&rsquo;t find any open early voting locations. Please contact
+      your{' '}
       <a
         className="dib link blue underline-hover pointer"
         href="https://www.usvotefoundation.org/vote/eoddomestic.htm"

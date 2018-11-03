@@ -117,16 +117,6 @@ export function normalizeVoterInfo(info = {}) {
     data.earlyVotingSameDayReg = earlyVoting.same_day_reg
     data.earlyVotingSameDayRegNote = earlyVoting.same_day_reg_note
     data.earlyVotingWhoIsEligible = earlyVoting.who
-    data.earlyVotingStartDate = earlyVoting.starts_at
-    // remove tz info that was added
-    var ends_at = earlyVoting.ends_at.slice(0, 10)
-    data.earlyVotingEndDate = ends_at
-    // Assume polls close at 5pm
-    var ends = Day(ends_at)
-    if (ends.hour() == 0) {
-      ends = ends.set('hour', earlyVoting.ends_at_time || 17)
-    }
-    data.earlyVotingEndDateTime = ends
   }
 
   if (data.earlyLocations.length > 0) {
