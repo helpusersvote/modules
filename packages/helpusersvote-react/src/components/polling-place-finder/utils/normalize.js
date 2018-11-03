@@ -148,6 +148,10 @@ export function normalizeVoterInfo(info = {}) {
   }
 
   if (data.earlyVotingEndDateTime) {
+    data.isEarlyVotingOver = Day().isAfter(Day(data.earlyVotingEndDateTime))
+  }
+
+  if (!data.isEarlyVotingOver && data.earlyVotingEndDateTime) {
     data.earlyVotingTimeLeft = Day(data.earlyVotingEndDateTime).fromNow(true)
   }
 
@@ -510,18 +514,26 @@ function parseHours(hours) {
       // Convert the matches into their components.
       .map(match => {
         if (match.length == 6) {
-          var [original, day, month, date, start, end] = match
+          var [original, day, month, date, startTime, endTime] = match
           var format = 'h: PM'
-          start = time(start).format(format)
-          end = time(end).format(format)
-          var startHours = Day(start, ['h:m a']).hour()
-          var endHours = Day(end, ['h:m a']).hour()
+          var start = time(startTime).format(format)
+          var end = time(endTime).format(format)
+          var startParts = startTime.split(' ')
+          var [startHours = 0, startMinutes = 0] = (startParts[0] || '')
+            .split(':')
+            .map(i => parseInt(i))
+          var endParts = endTime.split(' ')
+          var [endHours = 0, endMinutes = 0] = (endParts[0] || '')
+            .split(':')
+            .map(i => parseInt(i))
           var isoLocalDate = Day(month + ' ' + date + ', 2018').format()
           var startDate = Day(`${month} ${date}, 2018`)
-          startDate.set('hour', startHours)
+            .set('h', startHours)
+            .set('m', startMinutes)
           var startDateTime = startDate.format()
           var endDate = Day(`${month} ${date}, 2018`)
-          endDate.set('hour', endHours)
+            .set('h', endHours)
+            .set('m', startMinutes)
           var endDateTime = endDate.format()
 
           return {

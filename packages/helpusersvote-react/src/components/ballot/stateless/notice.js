@@ -26,7 +26,7 @@ export function Notice({ referendumTopics }) {
 
   return (
     <div>
-      <div className="pt3 f6 gray">
+      <div className="pt3 ph1 f6 gray">
         This is <span className="fw5">not an official ballot</span>, only a
         guide to help you research your decision before you vote at your polling
         place.

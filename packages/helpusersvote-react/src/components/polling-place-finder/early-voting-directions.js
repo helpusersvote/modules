@@ -56,14 +56,21 @@ export function EarlyVotingDirections({
 
   return (
     <div className={`pt3 w-100 ${className || ''}`}>
-      <div className="mt1 mb2">
-        Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
-        vote early, you can vote early and skip the lines on Election Day:
-      </div>
+      {!voterInfo.isEarlyVotingOver ? (
+        <div className="mt1 mb2">
+          Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
+          vote early, you can vote early and skip the lines on Election Day:
+        </div>
+      ) : (
+        <div className="mt1 mb2">
+          Early voting has passed, you can find your polling place to vote on
+          Election Day:
+        </div>
+      )}
 
       <Switcher
         active="early"
-        earlyVotingTimeLeft={earlyVotingTimeLeft}
+        earlyVotingTimeLeft={!voterInfo.isClosed && earlyVotingTimeLeft}
         onSwitchToPollingPlace={onSwitchToPollingPlace}
       />
 
@@ -101,23 +108,28 @@ export function EarlyVotingDirections({
                   )}
                   <div className="directions-hours mt3">
                     <div className="directions-label pb1">Hours</div>
-                    {location.hoursToday && (
-                      <div>
-                        <div className="ml2 fr fw6">
-                          {location.hoursToday.start}
-                          {' - '}
-                          {location.hoursToday.end}
+                    {!voterInfo.isEarlyVotingOver &&
+                      location.hoursToday && (
+                        <div>
+                          <div className="ml2 fr fw6">
+                            {location.hoursToday.start}
+                            {' - '}
+                            {location.hoursToday.end}
+                          </div>
+                          <div className="fw6 directions-date">Open today</div>
                         </div>
-                        <div className="fw6 directions-date">Open today</div>
-                      </div>
-                    )}
-                    {!location.hoursToday &&
+                      )}
+                    {!voterInfo.isEarlyVotingOver &&
+                      !location.hoursToday &&
                       !location.hoursParseFail &&
                       location.fallbackHours && (
                         <div className="red fw6 directions-date">
                           Closed today
                         </div>
                       )}
+                    {voterInfo.isEarlyVotingOver && (
+                      <div className="red fw6 directions-date">Closed now</div>
+                    )}
                     {!location.hoursParseFail &&
                       useGroupedDates &&
                       location.groupedDates.map((dateRange, index) => (
