@@ -171,6 +171,7 @@ function getLambdaParams(key, value) {
       method: key,
       value: key == "phone" ? value.replace(/[^0-9]/gi, '') : value,
       pollLocation: pollLocation.address.locationName,
+      pollAddress: pollLocation.address.text,
       body: createMessageBody(key)
     })
   };
