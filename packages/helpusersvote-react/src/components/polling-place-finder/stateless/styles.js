@@ -9,8 +9,7 @@ const styles = `
 .huv-container .light-gray {
   color: #69778b;
 }
-.outdent,
-.huv-switcher {
+.outdent {
   margin: 0 2px;
 }
 .huv-select-container {
@@ -28,6 +27,9 @@ const styles = `
   border-right: 4px solid transparent;
   border-top: 4px solid #425a70;
   transform: translateX(-12px) translateY(-50%);
+}
+.huv-select--small {
+  height: 27px;
 }
 .huv-button {
   -webkit-font-smoothing: antialiased;

@@ -32,19 +32,6 @@ test(`check hardcoded dates`, t => {
   t.is(hours, 2, 'hours should be two')
 })
 
-test(`check Date objects`, t => {
-  const d = new Date()
-  const d2 = new Date()
-
-  d2.setDate(d2.getDate() + 1)
-  d2.setHours(d2.getHours() + 2)
-
-  const { days, hours } = getCountdown({ start: d, end: d2 })
-
-  t.is(days, 1, 'days should be one')
-  t.is(hours, 2, 'hours should be two')
-})
-
 test(`check NVRD to Election Day`, t => {
   const d = '2018-09-25'
   const d2 = '2018-11-06'

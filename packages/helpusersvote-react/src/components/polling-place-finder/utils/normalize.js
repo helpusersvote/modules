@@ -347,6 +347,7 @@ export function normalizeLocation(location, options = {}) {
   var hoursToday = null
   var hoursTomorrow = null
   var endDateTime = null
+  var isClosed = false
 
   if (location.pollingHours) {
     if (options.parseHours) {
@@ -359,6 +360,7 @@ export function normalizeLocation(location, options = {}) {
         hoursToday = getHoursToday(hours)
         hoursTomorrow = getHoursTomorrow(hours)
         hours = futureHours(hours)
+        isClosed = Day().isBefore(Day(endDateTime))
       }
     } else {
       if (location.pollingHours) {
@@ -381,7 +383,11 @@ export function normalizeLocation(location, options = {}) {
 
   // Select dropdown text
   var selectText = `${address.line1} ${
-    !hoursToday && !hoursParseFail ? '(Closed today)' : ''
+    !hoursToday && !hoursParseFail
+      ? '(Closed today)'
+      : isClosed
+        ? '(Closed now)'
+        : ''
   }`
 
   if (options.dropOff) {
