@@ -13,18 +13,35 @@ const styles = `
 .huv-switcher {
   margin: 0 2px;
 }
+.huv-select-container {
+  position: relative;
+}
+.huv-select-container::after {
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 0;
+  width: 0; 
+  height: 0; 
+  content: '';
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #425a70;
+  transform: translateX(-12px) translateY(-50%);
+}
 .huv-button {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   vertical-align: middle;
   text-decoration: none;
   transition: box-shadow 80ms ease-in-out;
+  appearance: none;
   -webkit-appearance: none;
   border: none;
   outline: none;
   cursor: pointer;
   background: #fff;
-  color: rgb(66, 90, 112);
+  color: #425a70;
   font-weight: 500;
   line-height: 32px;
   height: 32px;
@@ -90,7 +107,7 @@ const styles = `
 }
 .address-form-auto-complete-example {
   padding: 4px .5rem;
-  font-size: 12px;
+  font-size: 10px;
   color: #596573;
 }
 .report-error {
@@ -104,11 +121,11 @@ const styles = `
 .report-error:hover, .report-error:focus {
   text-decoration: underline;
 }
-.huv-address-form input {
+.huv-container input[type="text"] {
   transition: 0.125s ease-out box-shadow;
 }
-.huv-address-form input:not([disabled]):not([data-disabled]):focus,
-.huv-address-form input:not([disabled]):not([data-disabled]):focus {
+.huv-container input[type="text"]:not([disabled]):not([data-disabled]):focus,
+.huv-container input[type="text"]:not([disabled]):not([data-disabled]):focus {
   outline: none;
   z-index: 2;
   border: 1px solid #579ad9;

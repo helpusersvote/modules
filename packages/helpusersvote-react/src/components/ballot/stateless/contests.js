@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React, { Fragment } from 'react'
 import { getMoreCandidateInfoLink, getPartyColor } from '../utils'
 
@@ -27,7 +28,7 @@ const defaultGeneralElections = [
   }
 ]
 
-export function ElectionCandidates({
+export function Contests({
   state,
   info = {},
   ballot = {},
@@ -35,6 +36,10 @@ export function ElectionCandidates({
   onSelectChoice
 }) {
   const { generals = defaultGeneralElections } = info
+
+  if (!generals) {
+    return null
+  }
 
   return (
     <div className="ballot-content">
@@ -49,7 +54,7 @@ export function ElectionCandidates({
               <span>
                 &nbsp;&middot;&nbsp;
                 <a
-                  className="fw5 link blue underline-hover"
+                  className="fw5 link blue underline-hover pointer"
                   onClick={() => onSelectChoice(contest.office, null)}
                 >
                   Change
@@ -83,59 +88,61 @@ function CandidateDetail({
   onSelectChoice
 }) {
   const isChecked = ballot[contest.office] === candidate.key
-
-  if (ballot[contest.office] && !isChecked) {
-    return null
-  }
+  const isOtherChecked = ballot[contest.office] && !isChecked
 
   return (
-    <div className="ballot-candidate mt1" style={{ padding: '2px 0' }}>
-      <div className="dib" style={{ width: 20 }}>
-        <input
-          type="checkbox"
-          id={`checkbox.${contest.office}.${candidate.name}`}
-          checked={isChecked}
-          style={{ width: 20, height: 20 }}
-          onChange={() =>
-            onSelectChoice(contest.office, isChecked ? null : candidate.key)
-          }
-        />
+    <div
+      className={cx(
+        'ballot-candidate flex justify-between mt1',
+        isOtherChecked && 'o-40'
+      )}
+      style={{ padding: '2px 0' }}
+    >
+      <div>
+        <div className="dib" style={{ width: 28 }}>
+          <input
+            type="checkbox"
+            id={`checkbox.${contest.office}.${candidate.name}`}
+            checked={isChecked}
+            style={{ width: 28, height: 28 }}
+            onChange={() =>
+              onSelectChoice(contest.office, isChecked ? null : candidate.key)
+            }
+          />
+        </div>
+        <label
+          className="f5 pl2 pointer dib v-top"
+          style={{ height: 28, lineHeight: '24px' }}
+          htmlFor={`checkbox.${contest.office}.${candidate.name}`}
+        >
+          <span className="fw5 dib v-mid mr1 ballot-candidate-name">
+            {candidate.names ? (
+              <Fragment>
+                <b>{candidate.names[0]}</b>
+                <br className="dn-ns" />& {candidate.names[1]}
+              </Fragment>
+            ) : (
+              candidate.name
+            )}
+          </span>
+          <CandidateParties parties={candidate.parties} />
+        </label>
       </div>
-      <label
-        className="f6 pl1 pointer dib v-top"
-        style={{ width: 'calc(100% - 20px)', height: 20 }}
-        htmlFor={`checkbox.${contest.office}.${candidate.name}`}
+      <a
+        className="huv-button fw5 fr relative"
+        href={getMoreCandidateInfoLink({
+          href: moreInfoHref,
+          contest,
+          candidate,
+          state
+        })}
+        target="_blank"
+        rel="noopener"
       >
-        <span className="fw5 dib v-mid mr1">
-          {candidate.names ? (
-            <Fragment>
-              <b>{candidate.names[0]}</b>
-              <br className="dn-ns" />& {candidate.names[1]}
-            </Fragment>
-          ) : (
-            candidate.name
-          )}
-        </span>
-        <CandidateParties parties={candidate.parties} />
-        {!ballot[contest.office] && (
-          <a
-            className="ballot-link fw5 fr relative"
-            style={{ top: '.4em' }}
-            href={getMoreCandidateInfoLink({
-              href: moreInfoHref,
-              contest,
-              candidate,
-              state
-            })}
-            target="_blank"
-            rel="noopener"
-          >
-            <span className="dn di-ns">More Info</span> &rarr;
-          </a>
-        )}
-      </label>
+        <span className="dn di-ns">More Info</span> &rarr;
+      </a>
     </div>
   )
 }
 
-export default ElectionCandidates
+export default Contests

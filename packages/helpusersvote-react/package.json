@@ -1,6 +1,6 @@
 {
   "name": "@helpusersvote/react",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "React components to help your users vote",
   "author": "UserMirror, Inc. <huv@usermirror.com",
   "license": "MIT",
@@ -23,7 +23,9 @@
     "@helpusersvote/logic": "^1.0.14",
     "@sentry/browser": "^4.1.1",
     "analytics-event": "^1.0.1",
+    "base-x": "^3.0.4",
     "classnames": "^2.2.6",
+    "clipboard-copy": "^2.0.1",
     "crypto-js": "^3.1.9-1",
     "data-uri-to-buffer": "^2.0.0",
     "dayjs": "^1.7.7",

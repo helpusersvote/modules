@@ -13,11 +13,12 @@
   },
   "scripts": {
     "test": "npm run build",
+    "start": "npm run watch",
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
-    "@helpusersvote/react": "^1.2.0",
+    "@helpusersvote/react": "^1.2.2",
     "domready": "^1.0.8",
     "glob": "^7.1.2",
     "prop-types": "^15.6.2",

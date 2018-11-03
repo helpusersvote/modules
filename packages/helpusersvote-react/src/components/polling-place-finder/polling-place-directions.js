@@ -23,7 +23,10 @@ export function PollingPlaceDirections({
   onClickDirections,
   onSwitchToEarlyVoting
 }) {
-  const address = voterInfo.address || backupAddress
+  const address =
+    voterInfo.address && voterInfo.address.line1
+      ? voterInfo.address
+      : backupAddress
   const state = getState(address.state)
   const earlyVoting = EARLY_VOTING_DATA[state.abbr] || {}
   const pollingPlace = POLLING_PLACE_DATA[state.abbr] || {}
