@@ -26,6 +26,7 @@ class PollingPlaceFinder extends Component {
       onSelectAddress,
       onChangeAddress,
       onClickDirections,
+      onLocationSelectIndex,
       onSwitchToEarlyVoting,
       onSwitchToPollingPlace
     } = this
@@ -36,6 +37,7 @@ class PollingPlaceFinder extends Component {
       didError,
       voterInfo,
       queryParams,
+      locationSelectIndex,
       shouldUseAutocomplete
     } = this.state
 
@@ -101,6 +103,8 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            locationSelectIndex={locationSelectIndex}
+            onLocationSelectIndex={onLocationSelectIndex}
             onSwitchToPollingPlace={onSwitchToPollingPlace}
             children={directionsChildren}
           />
@@ -329,6 +333,9 @@ class PollingPlaceFinder extends Component {
 
     trackPageview(pageview)
   }
+
+  onLocationSelectIndex = locationSelectIndex =>
+    this.setState({ locationSelectIndex })
 }
 
 function getPagePath({ type, to }) {

@@ -8,7 +8,7 @@ export function Switcher({
   onSwitchToPollingPlace
 }) {
   return (
-    <div className="huv-switcher">
+    <div className="huv-switcher mb2">
       <div
         className={cx(
           'huv-switcher-item',

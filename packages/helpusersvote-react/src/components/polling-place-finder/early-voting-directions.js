@@ -11,13 +11,33 @@ import { toAddr } from './utils'
 
 Day.extend(relativeTime)
 
+function EarlyLocationSelect({ earlyLocations, currentValue, onSelect }) {
+  return (
+    <div className="dib huv-select-container huv-select--small">
+      <select
+        className="huv-button"
+        onChange={e => onSelect(parseInt(e.target.value))}
+        style={{ minWidth: 140, height: 27, lineHeight: '27px' }}
+      >
+        {earlyLocations.map((loc, index) => (
+          <option key={index} value={index}>
+            {(loc.selectText || '').trim()}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
 export function EarlyVotingDirections({
+  locationSelectIndex,
   address: backupAddress,
   voterInfo,
   className,
   queryParams,
   useGroupedDates,
   onChangeAddress,
+  onLocationSelectIndex,
   onSwitchToPollingPlace
 }) {
   const address =
@@ -41,7 +61,7 @@ export function EarlyVotingDirections({
     )
   }
 
-  const location = locations[0] || {}
+  const location = locations[parseInt(locationSelectIndex || 0)] || {}
   const userAddr = toAddr(address)
   const pollAddr = toAddr(location.address || {})
 
@@ -68,11 +88,22 @@ export function EarlyVotingDirections({
         </div>
       )}
 
-      <Switcher
-        active="early"
-        earlyVotingTimeLeft={!voterInfo.isClosed && earlyVotingTimeLeft}
-        onSwitchToPollingPlace={onSwitchToPollingPlace}
-      />
+      <div className="flex-ns db-m justify-between">
+        <Switcher
+          active="early"
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToPollingPlace={onSwitchToPollingPlace}
+        />
+
+        {voterInfo.earlyLocations &&
+          voterInfo.earlyLocations.length > 1 && (
+            <EarlyLocationSelect
+              onSelect={onLocationSelectIndex}
+              currentValue={locationSelectIndex}
+              earlyLocations={voterInfo.earlyLocations}
+            />
+          )}
+      </div>
 
       {locations.length && (
         <div className="outdent">
@@ -116,7 +147,13 @@ export function EarlyVotingDirections({
                             {' - '}
                             {location.hoursToday.end}
                           </div>
-                          <div className="fw6 directions-date">Open today</div>
+                          <div className="fw6 directions-date">
+                            {location.isClosed ? (
+                              'Open today'
+                            ) : (
+                              <span className="red fw5">Closed now</span>
+                            )}
+                          </div>
                         </div>
                       )}
                     {!voterInfo.isEarlyVotingOver &&
