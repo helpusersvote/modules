@@ -514,8 +514,10 @@ function parseHours(hours) {
             .split(':')
             .map(i => parseInt(i))
 
-          if (startParts[1] === 'PM') {
-            startHours + 12
+          var startPostfix = (startParts[1] || '').toUpperCase()
+
+          if (startPostfix === 'PM') {
+            startHours += 12
           }
 
           var endParts = endTime.split(' ')
@@ -523,8 +525,10 @@ function parseHours(hours) {
             .split(':')
             .map(i => parseInt(i))
 
-          if (endParts[1] === 'PM') {
-            endHours + 12
+          var endPostfix = (endParts[1] || '').toUpperCase()
+
+          if (endPostfix === 'PM') {
+            endHours += 12
           }
 
           var isoLocalDate = Day(month + ' ' + date + ', 2018').format()
