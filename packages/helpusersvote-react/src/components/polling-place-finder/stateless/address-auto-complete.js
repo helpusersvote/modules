@@ -10,6 +10,8 @@ import {
   toAddr
 } from '../utils'
 
+const AUTOCOMPLETE_DEBOUNCE_MS = 200
+
 export class AddressAutoComplete extends Component {
   state = { activeIndex: -1, inputValue: '', places: [] }
 
@@ -18,6 +20,10 @@ export class AddressAutoComplete extends Component {
 
     this.setState({ inputValue })
 
+    this.onInputValueChange(inputValue)
+  }
+
+  onInputValueChange = _.debounce(inputValue => {
     if (this.props.onAutocompleteValueChange) {
       this.props.onAutocompleteValueChange(inputValue)
     }
@@ -61,7 +67,7 @@ export class AddressAutoComplete extends Component {
       })
 
     return inputValue
-  }
+  }, AUTOCOMPLETE_DEBOUNCE_MS)
 
   onSelect = place => {
     const inputAddress = placeToAddress(place)
