@@ -95,6 +95,7 @@ export function fetchAutocompletePlaces(opts = {}) {
       new Error('huv.gmaps: no autocomplete service found'),
       gclient
     )
+    return Promise.resolve([])
   }
 
   if (!input) {
