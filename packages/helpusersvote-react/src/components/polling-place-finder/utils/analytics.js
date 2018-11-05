@@ -2,6 +2,7 @@ import AEvent from 'analytics-event'
 import { getQueryParam } from './url'
 import { reportError } from './errors'
 import { sendEvents } from './network'
+import { GA_TRACKER } from './settings'
 
 const batch = []
 const EVENT_BATCH_SIZE = 10
@@ -102,12 +103,18 @@ export function gaPage(event) {
   if (campaign.content) payload.campaignContent = campaign.content
   if (campaign.term) payload.campaignKeyword = campaign.term
 
-  ga('send', 'pageview', payload)
+  const trackerAction = getTrackerAction('send')
+
+  ga(trackerAction, 'pageview', payload)
 }
 
 // Analytics utilities
 
 let blockGA = false
+
+function getTrackerAction(action) {
+  return [GA_TRACKER, action].filter(Boolean).join('.')
+}
 
 export function turnOffGA() {
   blockGA = true
