@@ -2,6 +2,8 @@ import cx from 'classnames'
 import React, { Fragment } from 'react'
 import { getMoreCandidateInfoLink, getPartyColor } from '../utils'
 
+const leoSiteHref = 'https://www.usvotefoundation.org/vote/eoddomestic.htm'
+
 function CandidateParties({ parties = [] }) {
   return (
     <Fragment>
@@ -62,19 +64,32 @@ export function Contests({
               </span>
             )}
           </label>
-          {contest.candidates.map(candidate => (
-            <CandidateDetail
-              key={candidate.key}
-              state={state}
-              ballot={ballot}
-              contest={contest}
-              candidate={candidate}
-              moreInfoHref={moreInfoHref}
-              onSelectChoice={onSelectChoice}
-            />
-          ))}
+          {contest.candidates &&
+            contest.candidates.map(candidate => (
+              <CandidateDetail
+                key={candidate.key}
+                state={state}
+                ballot={ballot}
+                contest={contest}
+                candidate={candidate}
+                moreInfoHref={moreInfoHref}
+                onSelectChoice={onSelectChoice}
+              />
+            ))}
         </div>
       ))}
+      <div className="f6 gray mt4">
+        This guide may not be a complete list of candidates on your ballot. For
+        an official list of what will be on your ballot, please{' '}
+        <a
+          className="dib link blue underline-hover pointer"
+          href={leoSiteHref}
+          target="_blank"
+        >
+          contact your local elections office
+        </a>
+        .
+      </div>
     </div>
   )
 }

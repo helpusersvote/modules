@@ -63,6 +63,7 @@ export function StatelessBallot({
         <Legend info={info} onMoreInfoHrefSelect={onMoreInfoHrefSelect} />
         <Contests
           info={info}
+          state={address.state}
           ballot={ballot}
           moreInfoHref={moreInfoHref}
           onSelectChoice={onSelectChoice}
@@ -286,23 +287,41 @@ export class Ballot extends Component {
       return
     }
 
-    const elTop = $ballot.offsetTop
+    let elTop = $ballot.offsetTop
+    let ballotWidth = getNodeWidth($ballot)
+    let floatingHeader = false
 
-    window.addEventListener('scroll', () => {
+    this._resizeHandler = function resizeHandler() {
+      ballotWidth = getNodeWidth($ballot)
+
+      if (floatingHeader) {
+        $header.style = `width: ${ballotWidth}px;`
+      }
+    }
+
+    this._scrollHandler = function scrollHandler() {
       const scrollY = window.scrollY
 
       if (scrollY >= elTop) {
+        floatingHeader = true
+        $header.style = `width: ${ballotWidth}px;`
         $header.classList.add('floating')
         $headerFill.classList.add('visible')
       } else {
+        floatingHeader = false
+        $header.style = ''
         $header.classList.remove('floating')
         $headerFill.classList.remove('visible')
       }
-    })
+    }
+
+    window.addEventListener('resize', this._resizeHandler)
+    window.addEventListener('scroll', this._scrollHandler)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll')
+    window.removeEventListener('resize', this._resizeHandler)
+    window.removeEventListener('scroll', this._scrollHandler)
   }
 
   componentDidCatch(error, info) {
@@ -431,6 +450,18 @@ export class Ballot extends Component {
 
   onCloseModal = () => {
     this.setState({ isModalOpen: false })
+  }
+}
+
+function getNodeWidth(node) {
+  if (!node) {
+    return 800
+  }
+
+  if (typeof node.getBoundingClientRect === 'function') {
+    return node.getBoundingClientRect().width
+  } else {
+    return node.offsetWidth
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getMapImage } from '../utils'
 
-const RESIZE_TIMEOUT_MS = 200
+const RESIZE_TIMEOUT_MS = 100
 
 export class DirectionsMap extends Component {
   render() {
