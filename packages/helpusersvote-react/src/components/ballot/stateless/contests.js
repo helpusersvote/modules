@@ -50,28 +50,26 @@ export function Contests({
       </h3>
       {generals.map(contest => (
         <div key={contest.office} className="ballot-contest no-select">
-          <div className="mb2">
-            <label className="dib ballot-contest-label mb2">
-              {contest.office}
-              {ballot[contest.office] && (
-                <span>
-                  &nbsp;&middot;&nbsp;
-                  <a
-                    className="fw5 link blue underline-hover pointer"
-                    onClick={() => onSelectChoice(contest.office, null)}
-                  >
-                    Change
-                  </a>
-                </span>
-              )}
-            </label>
-            {contest.numberVotingFor > 1 && (
-              <span className="db gray f7">
-                On your ballot, you’ll be able to select up to{' '}
-                {contest.numberVotingFor} candidates to vote for.{' '}
+          <label className="dib ballot-contest-label mb2">
+            {contest.office}
+            {ballot[contest.office] && (
+              <span>
+                &nbsp;&middot;&nbsp;
+                <a
+                  className="fw5 link blue underline-hover pointer"
+                  onClick={() => onSelectChoice(contest.office, null)}
+                >
+                  Change
+                </a>
               </span>
             )}
-          </div>
+          </label>
+          {contest.numberVotingFor > 1 && (
+            <span className="db mb2 gray f7">
+              On your ballot, you’ll be able to select up to{' '}
+              {contest.numberVotingFor} candidates to vote for.{' '}
+            </span>
+          )}
           {contest.candidates &&
             contest.candidates.map(candidate => (
               <CandidateDetail
