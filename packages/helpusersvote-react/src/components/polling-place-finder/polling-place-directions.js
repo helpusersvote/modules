@@ -61,7 +61,7 @@ export function PollingPlaceDirections({
 
   return (
     <div className="pt3 w-100">
-      <div className="mt1 mb2">
+      <div className="mt1 mb2 f7">
         You can vote here {votingDate} from{' '}
         <span className="dib">
           <span className="b">
@@ -87,7 +87,7 @@ export function PollingPlaceDirections({
             <div className="flex-auto-ns">
               <div>
                 <div className="directions-label">
-                  Your Polling Place&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+                  Location&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                   <a
                     className="fw5 link blue underline-hover"
                     href={directionsHref}
@@ -138,7 +138,7 @@ export function PollingPlaceDirections({
           <div className="directions-info dn-ns">
             <div className="mt3-ns">
               <div className="directions-label">
-                Your Address&nbsp;&nbsp;&middot;&nbsp;
+                Your Address&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                 <a
                   className="fw5 link blue underline-hover pointer"
                   onClick={onChangeAddress}

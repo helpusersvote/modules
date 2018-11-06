@@ -90,12 +90,12 @@ export function EarlyVotingDirections({
   return (
     <div className={`pt3 w-100 ${className || ''}`}>
       {!voterInfo.isEarlyVotingOver ? (
-        <div className="mt1 mb2">
+        <div className="mt1 mb2 f7">
           Only <span className="blue fw5">{earlyVotingTimeLeft} left</span> to
           vote early, you can vote early and skip the lines on Election Day:
         </div>
       ) : (
-        <div className="mt1 mb2">
+        <div className="mt1 mb2 f7">
           Early voting has passed, you can find your polling place to vote on
           Election Day:
         </div>
