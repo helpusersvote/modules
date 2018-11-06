@@ -51,7 +51,7 @@ export function EarlyVotingDirections({
 
     return (
       <div className={`pt3 w-100 ${className || ''}`}>
-        <div className="mt1 mb2">
+        <div className="mt1 mb2 f7">
           Early voting has passed, you can find your polling place to vote on
           Election Day:
         </div>
