@@ -1,6 +1,8 @@
+import _ from 'lodash'
+import * as AWS from 'aws-sdk'
 import React, { Component } from 'react'
-import * as AWS from 'aws-sdk';
 import Button from '../polling-place-finder/stateless/button'
+import { reportError } from '../polling-place-finder/utils'
 
 import Step1 from './stateless/steps/step-1'
 import Step2 from './stateless/steps/step-2'
@@ -17,14 +19,15 @@ const doneStep = {
 }
 
 // Initialize Amazon Cognito
-const region = 'us-east-1';
-AWS.config.region = region;
+const region = 'us-east-1'
+AWS.config.region = region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: region + ':349a4488-ffe3-415b-baeb-224c6f6ac3d4',
-});
+  IdentityPoolId: region + ':349a4488-ffe3-415b-baeb-224c6f6ac3d4'
+})
 
 export class PlanMaker extends Component {
   render() {
+    const { location = {}, directionsHref = '' } = this.props
     const {
       email,
       emailSubmitted,
@@ -33,8 +36,12 @@ export class PlanMaker extends Component {
       stepIndex,
       stepValues
     } = this.state
-    const step = steps[stepIndex] || doneStep
 
+    const isDone = stepIndex >= steps.length
+    const isEmailValid = isDone && email && email.length > 3
+    const isPhoneValid = isDone && phone && phone.length > 3
+
+    const step = steps[stepIndex] || doneStep
     const StepComponent = step.component
 
     return (
@@ -50,58 +57,74 @@ export class PlanMaker extends Component {
         <div className="plan-maker-content">
           <StepComponent
             values={stepValues}
+            location={location}
+            directionsHref={directionsHref}
             onSelect={this.onStepSelect(stepIndex)}
           />
         </div>
-        <div className="footer-container">
-          <div className="directions-label">Want a reminder in your email?</div>
-          {emailSubmitted ? (
-            <div>
-              Awesome! We&rsquo;ll remind you at{' '}
-              <strong>{emailSubmitted}</strong>.
+        <div className="footer-container flex-l">
+          <div className="w-50-l pr2-l">
+            <div className="directions-label">
+              Want a reminder in your email?
             </div>
-          ) : (
-            <form
-              onSubmit={this.onReminderSubmit('email')}
-              className="flex justify-between"
-            >
-              <input
-                required
-                type="email"
-                value={email}
-                placeholder="Email address"
-                onChange={this.onInputChange('email')}
-                className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
-              />
-              <Button classes="ml2" style={{ height: 36 }}>
-                Remind
-              </Button>
-            </form>
-          )}
-          <div className="directions-label mt3">Or on your phone?</div>
-          {phoneSubmitted ? (
-            <div>
-              Great! You&rsquo;ll get a text at{' '}
-              <strong>{phoneSubmitted}</strong>.
-            </div>
-          ) : (
-            <form
-              onSubmit={this.onReminderSubmit('phone')}
-              className="flex justify-between"
-            >
-              <input
-                required
-                type="tel"
-                value={phone}
-                placeholder="Phone number"
-                onChange={this.onInputChange('phone')}
-                className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
-              />
-              <Button classes="ml2" style={{ height: 36 }}>
-                Remind
-              </Button>
-            </form>
-          )}
+            {emailSubmitted ? (
+              <div>
+                Awesome! We&rsquo;ll remind you at{' '}
+                <strong>{emailSubmitted}</strong>.
+              </div>
+            ) : (
+              <form
+                onSubmit={this.onReminderSubmit('email')}
+                className="flex justify-between"
+              >
+                <input
+                  required
+                  type="email"
+                  value={email}
+                  placeholder="Email address"
+                  onChange={this.onInputChange('email')}
+                  className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
+                />
+                <Button
+                  disabled={!isEmailValid}
+                  classes="ml2"
+                  style={{ height: 36 }}
+                >
+                  Remind
+                </Button>
+              </form>
+            )}
+          </div>
+          <div className="w-50-l pl2-l">
+            <div className="directions-label mt3 mt0-l">Or on your phone?</div>
+            {phoneSubmitted ? (
+              <div>
+                Great! You&rsquo;ll get a text at{' '}
+                <strong>{phoneSubmitted}</strong>.
+              </div>
+            ) : (
+              <form
+                onSubmit={this.onReminderSubmit('phone')}
+                className="flex justify-between"
+              >
+                <input
+                  required
+                  type="tel"
+                  value={phone}
+                  placeholder="Phone number"
+                  onChange={this.onInputChange('phone')}
+                  className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
+                />
+                <Button
+                  disabled={!isPhoneValid}
+                  classes="ml2"
+                  style={{ height: 36 }}
+                >
+                  Remind
+                </Button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -122,18 +145,27 @@ export class PlanMaker extends Component {
     e.preventDefault()
     e.stopPropagation()
 
-    //retrieve the polling place location and send message
-    if(window && window.pollingPlaces){
-      var lambdaParams = getLambdaParams(key, this.state[key]);
-      var lambda = new AWS.Lambda({region: region, apiVersion: '2015-03-31'});
+    const { location, directionsHref } = this.props
 
-      lambda.invoke(lambdaParams, function(error, data) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log(data.Payload)
+    if (location) {
+      var lambdaParams = getLambdaParams({
+        type: key,
+        value: this.state[key],
+        location,
+        directionsHref
+      })
+      var lambda = new AWS.Lambda({ region: region, apiVersion: '2015-03-31' })
+
+      lambda.invoke(lambdaParams, (err, data) => {
+        if (err) {
+          console.log(err)
+          reportError(err)
+        } else if (data.Payload) {
+          if (data.Payload !== 'ok') {
+            reportError(new Error(`vdo.remindLambda: ${data.Payload}`))
+          }
         }
-      });
+      })
     }
 
     const { [key]: value } = this.state
@@ -160,48 +192,23 @@ export class PlanMaker extends Component {
  * @param {String}
  * @return {Object}
  */
-function getLambdaParams(key, value) { 
-  let pollLocation = window.pollingPlaces;
+function getLambdaParams({ type, value, location, directionsHref }) {
+  const payloadValue = type === 'phone' ? value.replace(/[^0-9]/gi, '') : value
+  const FunctionName =
+    type === 'phone' ? 'sendTextMessage' : 'sendPollingPlaceMessage'
 
   return {
-    FunctionName : key == "phone" ? 'sendTextMessage' : 'sendPollingPlaceMessage',
-    InvocationType : 'RequestResponse',
-    LogType : 'None',
-    Payload : JSON.stringify({
-      method: key,
-      value: key == "phone" ? value.replace(/[^0-9]/gi, '') : value,
-      pollLocation: pollLocation.address.locationName,
-      pollAddress: pollLocation.address.text,
-      body: createMessageBody(key)
+    FunctionName,
+    InvocationType: 'RequestResponse',
+    LogType: 'None',
+    Payload: JSON.stringify({
+      method: type,
+      value: payloadValue,
+      pollLocationName: _.get(location, 'address.locationName'),
+      pollAddress: _.get(location, 'address.text'),
+      directions: directionsHref
     })
-  };
-}
-
-/**
- * Create the message body needed for Lambda functions
- *
- * @param {String}
- * @return {String}
- */
-function createMessageBody(key) { 
-  //initialize the parameters
-  let pollLocation = window.pollingPlaces;
-  let directions = window.directionsURL;
-
-  switch(key) {
-    case "phone":
-        var response = 'Hi, this is Vote.org!\r\n\r\n';
-        response += `Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.\r\n\r\n`;
-        response += `Below is the address which provides directions to get there!\r\n\r\n${pollLocation.address.text}`;
-        return response;
-    default:
-        return `Hi, this is Vote.org!<br><br>
-        Here is your friendly reminder to vote on Election Day (November 6th) at ${pollLocation.address.locationName}.<br>
-        Below is the address and a link for directions to get there!<br><br>
-        ${pollLocation.address.text}<br>
-        <a href='${directions}' target='_blank'>Get Directions</a>`
   }
 }
-
 
 export default PlanMaker
