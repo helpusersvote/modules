@@ -62,8 +62,8 @@ export class PlanMaker extends Component {
             onSelect={this.onStepSelect(stepIndex)}
           />
         </div>
-        <div className="footer-container flex-m">
-          <div className="w-50-m pr2-m">
+        <div className="footer-container flex-ns">
+          <div className="w-50-ns pr2-ns">
             <div className="directions-label">
               Want a reminder in your email?
             </div>
@@ -95,8 +95,8 @@ export class PlanMaker extends Component {
               </form>
             )}
           </div>
-          <div className="w-50-m pl2-m">
-            <div className="directions-label mt3 mt0-m">Or on your phone?</div>
+          <div className="w-50-ns pl2-ns">
+            <div className="directions-label mt3 mt0-ns">Or on your phone?</div>
             {phoneSubmitted ? (
               <div>
                 Great! You&rsquo;ll get a text at{' '}
@@ -171,7 +171,7 @@ export class PlanMaker extends Component {
           console.log(err)
           reportError(err)
         } else if (data.Payload) {
-          if (data.Payload !== 'ok') {
+          if (data.Payload !== '"ok"') {
             reportError(new Error(`vdo.remindLambda: ${data.Payload}`))
           }
         }
