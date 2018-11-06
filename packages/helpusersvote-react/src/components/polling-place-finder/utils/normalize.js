@@ -256,6 +256,19 @@ function normalizeOffice(office) {
 
   if (name) office = name + office.slice(2)
 
+  try {
+    if (office.numberVotingFor) {
+      office.numberVotingFor = parseInt(office.numberVotingFor || 1, 10)
+    }
+
+    if (office.numberElected) {
+      office.numberElected = parseInt(office.numberElected || 1, 10)
+    }
+  } catch (err) {
+    office.numberElected = 1
+    office.numberVotingFor = 1
+  }
+
   return office
 }
 
@@ -309,6 +322,10 @@ function normalizeReferendum(contest) {
   if (contest.referendumBallotResponses) {
     if (contest.referendumBallotResponses.filter(r => r === '').length > 0) {
       contest.referendumBallotResponses = ['Yes', 'No']
+    } else {
+      contest.referendumBallotResponses = contest.referendumBallotResponses.map(
+        r => (r ? r.replace('[ ] ', '') : r)
+      )
     }
   }
 
