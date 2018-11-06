@@ -11,7 +11,8 @@ import LocationAddress from './stateless/location-address'
 import GoogleReportForm from './stateless/google-report-form'
 import { DirectionsHours, DirectionsMap } from './stateless/directions'
 import { ElectionDayNotice } from './stateless/election-day'
-import Switcher from './stateless/switcher.js'
+import Switcher from './stateless/switcher'
+import PlanMaker from '../plan-maker'
 
 export function PollingPlaceDirections({
   children,
@@ -156,6 +157,7 @@ export function PollingPlaceDirections({
           </div>
         </div>
       </div>
+      <PlanMaker location={location} directionsHref={directionsHref} />
       {children}
     </div>
   )
