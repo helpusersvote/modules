@@ -1,6 +1,7 @@
 node_modules
 packages/**/node_modules
 packages/**/dist
+packages/**/package-lock.json
 packages/helpusersvote-react/lib
 .DS_Store
 *.log
