@@ -1,7 +1,7 @@
 const caVoterInfo = {
   kind: 'civicinfo#voterInfoResponse',
   election: {
-    id: '6000',
+    id: '7000',
     name: 'US 2018 Midterm Election',
     electionDay: '2018-11-06',
     ocdDivisionId: 'ocd-division/country:us'

@@ -17,6 +17,9 @@ export function sendEvents(events) {
     return Promise.resolve()
   }
 
+  // Disable Events API
+  return
+
   return fetch(`${EVENTS_API_HOST}/v1/track`, {
     method: 'POST',
     headers: {
@@ -38,7 +41,7 @@ function getDefaultInfoApiRequest() {
     .then(d => d.voterInfo)
 }
 
-const electionId = 6000 // 2018 U.S. Midterms
+const electionId = 7000 // 2020 U.S. General Election
 const googleCivicInfoApiHost =
   process.env.CIVIC_INFO_API_HOST ||
   'https://content.googleapis.com/civicinfo/v2/voterinfo'

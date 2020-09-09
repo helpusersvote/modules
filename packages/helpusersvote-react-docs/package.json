@@ -21,7 +21,11 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.1.2",
     "@helpusersvote/react": "^1.2.4",
-    "babel-core": "^7.0.0-bridge.0"
+    "acorn": "^8.0.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "elliptic": "^6.5.3",
+    "lodash": "^4.17.20",
+    "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
